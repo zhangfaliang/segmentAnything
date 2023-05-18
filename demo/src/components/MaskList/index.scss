@@ -1,0 +1,46 @@
+.imgList_wrapper {
+  width: 100%;
+  .img_item_wrapper {
+    width: 300px;
+    height: auto;
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    .img_item {
+      width: 300px;
+      height: auto;
+      padding: 0;
+    }
+
+    .img_item_btn {
+      height: 50px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .img_item_tag {
+        color: #c41d7f;
+        background: #fff0f6;
+        border-color: #ffadd2;
+        font-size: 14px;
+        padding: 10px;
+      }
+      .img_item_use,
+      .img_item_del {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        color: #fff;
+        height: 30px;
+        width: 100px;
+        background-color: #008334;
+        user-select: none;
+        cursor: pointer;
+      }
+      .img_item_del {
+        color: #fff;
+        background-color: rgb(171, 28, 42);
+      }
+    }
+  }
+}

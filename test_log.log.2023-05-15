@@ -1,0 +1,74 @@
+[INFO] 2023-05-15 08:56:23,891 [start.py:28, <module>] begin service
+begin service
+[INFO] 2023-05-15 08:56:23,899 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-15 09:26:05,023 [start.py:28, <module>] begin service
+begin service
+[INFO] 2023-05-15 09:26:05,031 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-15 12:52:57,546 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-15 12:52:57,555 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-15 12:59:01,498 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-15 12:59:01,508 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-15 13:56:11,240 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-15 13:56:11,250 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-15 13:56:15,651 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-15 13:56:15,659 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[ERROR] 2023-05-16 09:03:39,057 [app.py:1744, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/asgiref/sync.py", line 240, in __call__
+    return call_result.result()
+  File "/usr/lib64/python3.9/concurrent/futures/_base.py", line 439, in result
+    return self.__get_result()
+  File "/usr/lib64/python3.9/concurrent/futures/_base.py", line 391, in __get_result
+    raise self._exception
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/asgiref/sync.py", line 306, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+  File "/home/ec2-user/segment-anything/start.py", line 133, in save_image
+    img_bytes = base64.b64decode(imgData)
+  File "/usr/lib64/python3.9/base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/asgiref/sync.py", line 240, in __call__
+    return call_result.result()
+  File "/usr/lib64/python3.9/concurrent/futures/_base.py", line 439, in result
+    return self.__get_result()
+  File "/usr/lib64/python3.9/concurrent/futures/_base.py", line 391, in __get_result
+    raise self._exception
+  File "/home/ec2-user/segment-anything/venv/lib64/python3.9/site-packages/asgiref/sync.py", line 306, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+  File "/home/ec2-user/segment-anything/start.py", line 133, in save_image
+    img_bytes = base64.b64decode(imgData)
+  File "/usr/lib64/python3.9/base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding

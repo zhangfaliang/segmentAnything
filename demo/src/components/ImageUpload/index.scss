@@ -1,0 +1,28 @@
+.imageUploading_wrapper {
+  display: flex;
+  flex-direction: column;
+  .upload__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .upload__image_btn {
+      height: 40px;
+      padding: 0 10px;
+      color: #008334;
+      border-radius: 5px;
+      border: #008334 1px solid;
+    }
+  }
+  .imageUp_loading_true {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    padding-top: 400px;
+    justify-content: center;
+    z-index: 200;
+    background-color: rgba(194, 194, 194, 0.7);
+  }
+}

@@ -1,0 +1,26 @@
+.hover_and_click_wrapper {
+  margin-top: 20px;
+  display: flex;
+  border: #008334 1px solid;
+  color: #008334;
+  border-radius: 5px;
+  padding: 10px;
+  flex-direction: column;
+  .hover_and_click_operation {
+    .hover_and_click_btn {
+      display: flex;
+    }
+    .hover_and_click_desc {
+      font-size: 12px;
+      padding: 5px;
+    }
+  }
+}
+.hover_and_click_maskList_wrapper {
+  color: #008334;
+  .hover_and_click_maskList {
+  }
+}
+.active_border {
+  border: #008334 1px solid !important;
+}

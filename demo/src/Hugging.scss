@@ -1,0 +1,14 @@
+.hugging_wrapper_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  .hugging_img {
+    width: 30%;
+    height: auto;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+}
