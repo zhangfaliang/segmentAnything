@@ -73,3 +73,9 @@ Traceback (most recent call last):
   File "/usr/lib64/python3.9/base64.py", line 87, in b64decode
     return binascii.a2b_base64(s)
 binascii.Error: Invalid base64-encoded string: number of data characters (654985) cannot be 1 more than a multiple of 4
+[INFO] 2023-05-19 13:35:35,044 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 13:56:12,461 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 13:56:12,464 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000

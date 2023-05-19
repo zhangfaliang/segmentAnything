@@ -16,14 +16,15 @@ wheels/
 *.pth
 *.pkl
 *.npy
+*.log
 # *.ts
 model_ts*.txt
 
 onnx models
-# *.onnx
-# *****.onnx
-# **.jpg
-# *.jpeg
+*.onnx
+*****.onnx
+**.jpg
+*.jpeg
 
 
 # ipython/jupyter notebooks
