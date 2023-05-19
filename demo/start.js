@@ -4,16 +4,16 @@ const history = require("connect-history-api-fallback");
 
 const app = express();
 
-// app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "dist")));
 //添加 connect-history-api-fallback 中间件
 
-// app.use(
-//   history({
-//     disableDotRule: true,
-//     verbose: true,
-//     index: "/",
-//   })
-// );
+app.use(
+  history({
+    disableDotRule: true,
+    verbose: true,
+    index: "/",
+  })
+);
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
