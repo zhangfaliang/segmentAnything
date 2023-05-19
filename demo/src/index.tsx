@@ -29,6 +29,6 @@ const routers = createBrowserRouter([
 
 root.render(
   <AppContextProvider>
-    <RouterProvider router={routers} />
+    <SAM />
   </AppContextProvider>
 );

@@ -4,7 +4,6 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 import os
-os.environ['TORCH_BACKEND'] = 'cpu'
 import torch
 
 from segment_anything import sam_model_registry
@@ -15,6 +14,11 @@ import warnings
 
 import torch
 
+if torch.cuda.is_available():
+    os.environ['TORCH_BACKEND'] = 'gpu'
+else:
+    os.environ['TORCH_BACKEND'] = 'cpu'
+    
 try:
     import onnxruntime  # type: ignore
 
