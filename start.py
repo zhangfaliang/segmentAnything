@@ -209,9 +209,9 @@ def traverse_folder():
 
 if __name__ == '__main__':
     
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    # app.run(debug=True, port=5000, host='0.0.0.0')
     # logging.info("process_is_alive_noneed_begin")
-    # serve(app, host='0.0.0.0', port=5000, threads=30)  # WAITRESS!
+    serve(app, host='0.0.0.0', port=5000, threads=30)  # WAITRESS!
     # logging.info("try check and start app, end")
 
 
