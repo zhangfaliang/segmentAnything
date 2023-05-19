@@ -3,7 +3,7 @@
 //"";
 let host =
   process.env.NODE_ENV === "production"
-    ? "https://sam.test.doublefs.com"
+    ? "https://sam.doublefs.com"
     : "http://localhost:5000";
 
 export const postData = ({ url, data }: any) => {
