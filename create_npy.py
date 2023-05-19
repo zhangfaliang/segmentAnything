@@ -4,12 +4,18 @@ import cv2
 from segment_anything import sam_model_registry, SamPredictor
 from segment_anything.utils.onnx import SamOnnxModel
 import onnxruntime
+import  torch
 
 async def process_image(image_path, save_path):
+   
+
     checkpoint = "sam_vit_h_4b8939.pth"
     model_type = "vit_h"
     ort_session = onnxruntime.InferenceSession('sam_onnx_example.onnx')
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
+    str = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    sam.to(device=str)
+    print('使用的是',str)
     predictor = SamPredictor(sam)
     
     image = cv2.imread(image_path)

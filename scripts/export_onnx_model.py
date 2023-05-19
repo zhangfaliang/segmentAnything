@@ -5,6 +5,12 @@
 # LICENSE file in the root directory of this source tree.
 import os
 import torch
+if torch.cuda.is_available():
+    os.environ['TORCH_BACKEND'] = 'cuda'
+    print('使用的是 cuda')
+else:
+    os.environ['TORCH_BACKEND'] = 'cpu'
+    print('使用的是 cpu')
 
 from segment_anything import sam_model_registry
 from segment_anything.utils.onnx import SamOnnxModel
@@ -12,12 +18,12 @@ from segment_anything.utils.onnx import SamOnnxModel
 import argparse
 import warnings
 
-import torch
+# os.environ['TORCH_BACKEND'] = 'cpu'
+# str = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-if torch.cuda.is_available():
-    os.environ['TORCH_BACKEND'] = 'gpu'
-else:
-    os.environ['TORCH_BACKEND'] = 'cpu'
+
+   
+
     
 try:
     import onnxruntime  # type: ignore

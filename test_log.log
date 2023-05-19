@@ -87,3 +87,515 @@ Serving on http://0.0.0.0:5000
 begin service
 [INFO] 2023-05-20 01:41:26,080 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
 Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 02:02:21,836 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:02:21,839 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 02:04:28,322 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:04:28,325 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 02:11:54,014 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:11:54,016 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[ERROR] 2023-05-20 02:12:03,453 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/asgiref/sync.py", line 240, in __call__
+    return call_result.result()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/asgiref/sync.py", line 306, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+  File "/Users/shinyzhang/work/segmentanything/start.py", line 144, in save_image
+    await process_image('demo/src/assets/data/'+imgName, 'demo/src/assets/data/'+new_filename+'_embedding.npy')
+  File "/Users/shinyzhang/work/segmentanything/create_npy.py", line 11, in process_image
+    sam.to(device=device)
+UnboundLocalError: local variable 'sam' referenced before assignment
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/asgiref/sync.py", line 240, in __call__
+    return call_result.result()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/Users/shinyzhang/miniconda3/envs/segment/lib/python3.10/site-packages/asgiref/sync.py", line 306, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+  File "/Users/shinyzhang/work/segmentanything/start.py", line 144, in save_image
+    await process_image('demo/src/assets/data/'+imgName, 'demo/src/assets/data/'+new_filename+'_embedding.npy')
+  File "/Users/shinyzhang/work/segmentanything/create_npy.py", line 11, in process_image
+    sam.to(device=device)
+UnboundLocalError: local variable 'sam' referenced before assignment
+[INFO] 2023-05-20 02:16:49,505 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:16:49,557 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:16:49,557 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:16:49,557 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:16:50,440 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:16:50,443 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:16:50,452 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:17:00,883 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:17:00] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:17:00] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:17:06,413 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:17:06] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:17:06] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:17:06,439 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:17:06] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+127.0.0.1 - - [20/May/2023 02:17:06] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+[INFO] 2023-05-20 02:19:07,152 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:19:07,367 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:19:08,344 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:19:08,348 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:19:08,355 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:19:16,526 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+[INFO] 2023-05-20 02:19:16,731 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:19:17,673 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:19:17,676 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:19:17,683 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:19:53,480 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+[INFO] 2023-05-20 02:19:53,743 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:19:54,720 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:19:54,724 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:19:54,729 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:20:03,916 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:20:04,137 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:20:05,083 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:20:05,087 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:20:05,094 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:20:06,116 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:20:06,317 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:20:07,272 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:20:07,275 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:20:07,281 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:20:08,306 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:20:08,505 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:20:09,481 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:20:09,486 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:20:09,492 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:20:16,521 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:20:16,531 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:20:16,531 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:20:16,531 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:20:17,430 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:20:17,433 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:20:17,440 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:20:22,244 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:20:22] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:20:22] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:20:27,882 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:20:27] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:20:27] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:20:27,906 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:20:27] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+127.0.0.1 - - [20/May/2023 02:20:27] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+[INFO] 2023-05-20 02:21:42,042 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:21:42,258 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:21:43,147 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:21:43,151 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:21:43,158 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:22:00,545 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+[INFO] 2023-05-20 02:22:00,748 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:22:01,592 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:22:01,595 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:22:01,601 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:22:07,710 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+[INFO] 2023-05-20 02:22:07,934 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:22:08,848 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:22:08,852 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:22:08,858 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:22:12,942 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:22:13,159 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:22:14,055 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:22:14,059 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:22:14,068 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:22:18,851 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:22:18,861 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:22:18,861 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:22:18,861 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:22:19,795 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:22:19,798 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:22:19,805 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:22:21,535 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:22:21] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:22:21] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:22:24,668 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:22:24] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:22:24] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:22:49,086 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:22:49] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+127.0.0.1 - - [20/May/2023 02:22:49] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+[INFO] 2023-05-20 02:23:48,500 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+[INFO] 2023-05-20 02:23:48,767 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:23:50,568 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:23:50,573 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:23:50,580 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:23:53,951 [start.py:31, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:23:53,969 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:23:53,969 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:23:53,970 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:23:54,861 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:23:54,865 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:23:54,871 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:23:55,833 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:23:55] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:23:55] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:23:59,447 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:23:59] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:23:59] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:24:23,350 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:24:23] "POST /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:24:23] "POST /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:25:19,301 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:25:19,537 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:25:20,537 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:25:20,542 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:25:20,549 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:25:48,179 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:25:48,393 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:25:49,345 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:25:49,350 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:25:49,359 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:28:27,693 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:28:27,897 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:28:28,834 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:28:28,837 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:28:28,843 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:28:35,555 [start.py:31, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:28:35,565 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:28:35,565 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:28:35,565 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:28:36,461 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:28:36,465 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:28:36,471 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:28:46,244 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:46] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:46] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:49,020 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:49] "OPTIONS /delete HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:49] "OPTIONS /delete HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:49,029 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:49] "POST /delete HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:49] "POST /delete HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:49,037 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:49] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:49] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:49,886 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:49] "OPTIONS /delete HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:49] "OPTIONS /delete HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:49,898 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:49] "POST /delete HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:49] "POST /delete HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:49,906 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:49] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:49] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:28:53,862 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:28:53] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:28:53] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:29:19,399 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:29:19] "POST /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:29:19] "POST /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:29:38,533 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:29:38,754 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:29:39,754 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:29:39,759 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:29:39,765 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:29:43,833 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:29:44,063 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:29:45,087 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:29:45,091 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:29:45,097 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:29:59,412 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+[INFO] 2023-05-20 02:29:59,612 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:30:00,518 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:30:00,522 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:30:00,528 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:30:08,031 [start.py:31, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:30:08,041 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:30:08,041 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:30:08,041 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:30:08,888 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:30:08,892 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:30:08,898 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:30:12,812 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:30:12] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:30:12] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:30:16,298 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:30:16] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:30:16] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:30:46,968 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:30:46] "POST /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:30:46] "POST /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:31:46,881 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:31:47,115 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:31:48,358 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:31:48,363 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:31:48,370 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:31:52,470 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/create_npy.py', reloading
+[INFO] 2023-05-20 02:31:52,667 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:31:53,670 [start.py:31, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:31:53,675 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:31:53,681 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:32:01,857 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+[INFO] 2023-05-20 02:32:02,086 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:32:02,980 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:32:02,985 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:32:02,992 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:32:09,115 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+[INFO] 2023-05-20 02:32:09,357 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:32:10,233 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:32:10,236 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:32:10,242 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:32:58,147 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/onnx.py', reloading
+[INFO] 2023-05-20 02:32:58,356 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:32:59,272 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:32:59,276 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:32:59,282 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:33:25,810 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:33:26,022 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:33:26,936 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:33:26,940 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:33:26,946 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:33:30,983 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:33:30,992 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.102:5000
+[INFO] 2023-05-20 02:33:30,992 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-20 02:33:30,993 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:33:31,853 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:33:31,857 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:33:31,863 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:33:34,226 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:33:34] "GET /api/files HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:33:34] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:33:38,326 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:33:38] "OPTIONS /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:33:38] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:34:04,401 [_internal.py:186, _log] 127.0.0.1 - - [20/May/2023 02:34:04] "POST /save_image HTTP/1.1" 200 -
+127.0.0.1 - - [20/May/2023 02:34:04] "POST /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-20 02:35:25,915 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:35:26,163 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:35:27,148 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:35:27,152 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:35:27,159 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:35:54,764 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/scripts/export_onnx_model.py', reloading
+[INFO] 2023-05-20 02:35:54,981 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:35:55,902 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-20 02:35:55,906 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-20 02:35:55,912 [_internal.py:186, _log]  * Debugger PIN: 716-286-582
+ * Debugger PIN: 716-286-582
+[INFO] 2023-05-20 02:36:16,324 [_internal.py:186, _log]  * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+ * Detected change in '/Users/shinyzhang/work/segmentanything/start.py', reloading
+[INFO] 2023-05-20 02:36:16,538 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-20 02:36:17,422 [start.py:30, <module>] begin service
+begin service
