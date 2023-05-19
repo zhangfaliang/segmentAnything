@@ -1,11 +1,12 @@
 // const host = "https://sam.test.doublefs.com";
 // https://sam.test.doublefs.com
 //"";
-let host = "https://sam.doublefs.com";
-//   process.env.NODE_ENV === "production"
-//     ? "https://sam.doublefs.com"
-//     : "http://localhost:5000";
-// host = "http://samui.doublefs.com";
+let host =
+  process.env.NODE_ENV === "production"
+    ? "https://sam.doublefs.com"
+    : "http://localhost:5000";
+host = "https://sam.doublefs.com";
+
 export const postData = ({ url, data }: any) => {
   const processUrl = `${host}${url}`;
   return fetch(processUrl, {
