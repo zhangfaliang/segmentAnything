@@ -5,6 +5,7 @@ from segment_anything import sam_model_registry, SamPredictor
 from segment_anything.utils.onnx import SamOnnxModel
 
 import onnxruntime
+import  torch
 
 # python scripts/export_onnx_model.py --checkpoint sam_vit_h_4b8939.pth --model-type vit_h --output sam_rt_onnx_quantized_example.onnx
 # python scripts/export_onnx_model.py --checkpoint sam_vit_h_4b8939.pth --model-type vit_h --output sam_3d_onnx_quantized_example.onnx
@@ -40,8 +41,9 @@ model_type = "vit_h"
 
 ort_session = onnxruntime.InferenceSession('sam_onnx_example.onnx')
 sam = sam_model_registry[model_type](checkpoint=checkpoint)
+DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+sam.to(device=DEVICE)
 
-# sam.to(device='cuda')
 predictor = SamPredictor(sam)
 image = cv2.imread('./demo/src/assets/data/rt.jpeg')
 predictor.set_image(image)
