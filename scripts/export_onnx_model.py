@@ -119,6 +119,9 @@ def run_export(
 ):
     print("Loading model...")
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
+    str = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    sam.to(device=str)
+    print('使用的是',str)
 
     onnx_model = SamOnnxModel(
         model=sam,
