@@ -5,8 +5,7 @@ let host =
   process.env.NODE_ENV === "production"
     ? "https://sam.doublefs.com"
     : "http://localhost:5000";
-host = "https://sam.doublefs.com";
-
+// host = "http://localhost:5000";
 export const postData = ({ url, data }: any) => {
   const processUrl = `${host}${url}`;
   return fetch(processUrl, {

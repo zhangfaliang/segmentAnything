@@ -83,3 +83,7 @@ Serving on http://0.0.0.0:5000
 begin service
 [INFO] 2023-05-19 17:16:54,710 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
 Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 01:41:26,070 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 01:41:26,080 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
