@@ -15,7 +15,7 @@ async def process_image(image_path, save_path):
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     sam.to(device)
-    print('使用的是',"cpu")
+    print('使用的是',device)
     predictor = SamPredictor(sam)
     
     image = cv2.imread(image_path)
