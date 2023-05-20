@@ -34,7 +34,9 @@ class SamOnnxModel(nn.Module):
         use_stability_score: bool = False,
         return_extra_metrics: bool = False,
     ) -> None:
-        super().__init__()
+        # super().__init__()
+        super(SamOnnxModel, self).__init__()
+        self.positional_encoding_gaussian_matrix = torch.tensor(...)  
         self.mask_decoder = model.mask_decoder
         self.model = model
         self.img_size = model.image_encoder.img_size
