@@ -7,7 +7,12 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-
+# if torch.cuda.is_available():
+#     os.environ['TORCH_BACKEND'] = 'cuda'
+#     print('使用的是 cuda')
+# else:
+#     os.environ['TORCH_BACKEND'] = 'cpu'
+#     print('使用的是 cpu')
 from typing import Tuple
 
 from ..modeling import Sam

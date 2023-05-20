@@ -5,14 +5,14 @@
 # LICENSE file in the root directory of this source tree.
 import os
 import torch
-# if torch.cuda.is_available():
-#     os.environ['TORCH_BACKEND'] = 'cuda'
-#     print('使用的是 cuda')
-# else:
-#     os.environ['TORCH_BACKEND'] = 'cpu'
-#     print('使用的是 cpu')
+if torch.cuda.is_available():
+    os.environ['TORCH_BACKEND'] = 'cuda'
+    print('使用的是 cuda')
+else:
+    os.environ['TORCH_BACKEND'] = 'cpu'
+    print('使用的是 cpu')
 
-os.environ['TORCH_BACKEND'] = 'cuda'
+# os.environ['TORCH_BACKEND'] = 'cuda'
 
 from segment_anything import sam_model_registry
 from segment_anything.utils.onnx import SamOnnxModel

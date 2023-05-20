@@ -41,9 +41,9 @@ model_type = "vit_h"
 
 ort_session = onnxruntime.InferenceSession('sam_onnx_example.onnx')
 sam = sam_model_registry[model_type](checkpoint=checkpoint)
-str = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-sam.to(device=str)
-print('使用的是',str)
+# str = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# sam.to(device=str)
+# print('使用的是',str)
 
 
 predictor = SamPredictor(sam)
