@@ -106,7 +106,18 @@ export function ImageUpload({
             )} */}
             <button
               style={isDragging ? { color: "red" } : undefined}
-              onClick={onImageUpload}
+              onClick={(e: any) => {
+                const parentEle: any = document.getElementById("useImgWrapper");
+                const maskPointers: any =
+                  document.querySelectorAll(".maskPointer");
+                if (parentEle && maskPointers) {
+                  maskPointers.forEach((maskPointer: any) => {
+                    parentEle.removeChild(maskPointer);
+                  });
+                }
+                return;
+                onImageUpload();
+              }}
               {...dragProps}
               className="upload__image_btn"
             >

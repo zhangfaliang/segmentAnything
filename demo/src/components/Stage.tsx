@@ -23,6 +23,7 @@ const Stage = () => {
     const newImage: any = image;
 
     const parentEle: any = document.getElementById("useImgWrapper");
+
     // 获取图片的宽度和高度
     const imageWidth = newImage.width;
     // 设置 Canvas 的宽度和高度为图片的宽度和高度
@@ -42,6 +43,7 @@ const Stage = () => {
       dotEle.style.borderRadius = "50%";
       dotEle.style.backgroundColor = "green";
       dotEle.style.zIndex = "100";
+      dotEle.className = "maskPointer";
       parentEle.appendChild(dotEle);
     } else {
       let el = event.target;
@@ -57,6 +59,7 @@ const Stage = () => {
       dotEle.style.borderRadius = "50%";
       dotEle.style.zIndex = "100";
       dotEle.style.backgroundColor = "red";
+      dotEle.className = "maskPointer";
       parentEle.appendChild(dotEle);
     }
   };
