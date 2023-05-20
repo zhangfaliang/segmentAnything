@@ -54,8 +54,12 @@ class SamOnnxModel(nn.Module):
         return transformed_size
 
     def _embed_points(self, point_coords: torch.Tensor, point_labels: torch.Tensor) -> torch.Tensor:
+         
+      
         point_coords = point_coords + 0.5
         point_coords = point_coords / self.img_size
+        if not point_coords.device == self.positional_encoding_gaussian_matrix.device:
+          point_coords = point_coords.to(self.positional_encoding_gaussian_matrix.device)
         point_embedding = self.model.prompt_encoder.pe_layer._pe_encoding(point_coords)
         point_labels = point_labels.unsqueeze(-1).expand_as(point_embedding)
 
