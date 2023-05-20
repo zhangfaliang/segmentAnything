@@ -115,7 +115,6 @@ export function ImageUpload({
                     parentEle.removeChild(maskPointer);
                   });
                 }
-                return;
                 onImageUpload();
               }}
               {...dragProps}
