@@ -73,6 +73,7 @@ Traceback (most recent call last):
   File "/usr/lib64/python3.9/base64.py", line 87, in b64decode
     return binascii.a2b_base64(s)
 binascii.Error: Invalid base64-encoded string: number of data characters (654985) cannot be 1 more than a multiple of 4
+<<<<<<< Updated upstream
 [INFO] 2023-05-19 13:35:35,044 [start.py:30, <module>] begin service
 begin service
 [INFO] 2023-05-19 13:56:12,461 [start.py:30, <module>] begin service
@@ -83,6 +84,7 @@ Serving on http://0.0.0.0:5000
 begin service
 [INFO] 2023-05-19 17:16:54,710 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
 Serving on http://0.0.0.0:5000
+<<<<<<< Updated upstream
 [INFO] 2023-05-20 01:41:26,070 [start.py:30, <module>] begin service
 begin service
 [INFO] 2023-05-20 01:41:26,080 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
@@ -599,3 +601,443 @@ begin service
  * Restarting with stat
 [INFO] 2023-05-20 02:36:17,422 [start.py:30, <module>] begin service
 begin service
+=======
+=======
+[INFO] 2023-05-18 12:35:46,802 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-18 12:35:46,810 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-18 12:44:19,479 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-18 12:44:19,487 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-18 12:46:17,372 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-18 12:46:17,380 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[ERROR] 2023-05-19 03:28:21,716 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+[INFO] 2023-05-19 03:30:05,562 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 03:30:05,570 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[ERROR] 2023-05-19 03:30:44,288 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+[INFO] 2023-05-19 03:34:16,410 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 03:34:16,418 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[ERROR] 2023-05-19 03:37:07,860 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+[ERROR] 2023-05-19 03:37:28,194 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+[ERROR] 2023-05-19 03:38:36,952 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1553, in ensure_sync
+    return self.async_to_sync(func)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1574, in async_to_sync
+    raise RuntimeError(
+RuntimeError: Install Flask with the 'async' extra in order to use async views.
+[INFO] 2023-05-19 03:42:36,675 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 03:42:36,685 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.4.226:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.4.226:5000
+[INFO] 2023-05-19 03:42:36,685 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-19 03:42:36,686 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-19 03:42:38,202 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-19 03:42:38,209 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-19 03:42:38,210 [_internal.py:186, _log]  * Debugger PIN: 111-800-613
+ * Debugger PIN: 111-800-613
+[INFO] 2023-05-19 03:42:57,628 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:42:57] "GET /api/files HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:42:57] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:02,909 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:43:02] "OPTIONS /save_image HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:43:02] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:03,119 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:43:03] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+172.30.1.254 - - [19/May/2023 03:43:03] "[35m[1mPOST /save_image HTTP/1.1[0m" 500 -
+[INFO] 2023-05-19 03:43:04,083 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:43:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:43:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:04,163 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:43:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:43:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:04,173 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:43:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:43:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:34,085 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:43:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:43:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:34,166 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:43:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:43:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:43:34,176 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:43:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:43:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:04,088 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:44:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:44:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:04,170 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:44:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:44:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:04,179 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:44:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:44:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:21,946 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 03:44:21,954 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.4.226:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.4.226:5000
+[INFO] 2023-05-19 03:44:21,954 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-19 03:44:21,955 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-19 03:44:23,471 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-19 03:44:23,478 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-19 03:44:23,478 [_internal.py:186, _log]  * Debugger PIN: 111-800-613
+ * Debugger PIN: 111-800-613
+[INFO] 2023-05-19 03:44:34,091 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:44:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:44:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:34,173 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:44:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:44:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:34,182 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:44:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:44:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:37,862 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:44:37] "GET /api/files HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:44:37] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:44:48,811 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:44:48] "OPTIONS /save_image HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:44:48] "OPTIONS /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:04,093 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:45:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:45:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:04,176 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:45:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:45:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:04,186 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:45:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:45:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:34,096 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:45:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:45:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:34,180 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:45:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:45:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:34,190 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:45:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:45:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:45:50,294 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:45:50] "POST /save_image HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:45:50] "POST /save_image HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:04,098 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:46:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:46:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:04,182 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:46:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:46:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:04,192 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:46:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:46:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:12,189 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:46:12] "GET /api/files HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:46:12] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:34,100 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:46:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:46:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:34,185 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:46:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:46:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:46:34,195 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:46:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:46:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:04,103 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:47:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:47:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:04,186 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:47:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:47:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:04,198 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:47:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:47:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:13,717 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:47:13] "GET /api/files HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:47:13] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:34,103 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:47:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:47:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:34,189 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:47:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:47:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:47:34,201 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:47:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:47:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:04,103 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:48:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:48:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:04,192 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:48:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:48:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:04,205 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:48:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:48:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:34,104 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:48:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:48:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:34,195 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:48:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:48:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:34,208 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:48:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:48:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:48:57,688 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:48:57] "GET /api/files HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:48:57] "GET /api/files HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:49:04,106 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:49:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:49:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:49:04,198 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:49:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:49:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:49:04,209 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:49:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:49:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:49:34,108 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:49:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:49:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:49:34,201 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:49:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:49:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:49:34,212 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:49:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:49:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:50:04,110 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:50:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:50:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:50:04,202 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:50:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:50:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:50:04,213 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:50:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:50:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:50:34,113 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:50:34] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:50:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:50:34,205 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:50:34] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:50:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:50:34,216 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:50:34] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:50:34] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:51:04,113 [_internal.py:186, _log] 172.30.0.114 - - [19/May/2023 03:51:04] "GET / HTTP/1.1" 200 -
+172.30.0.114 - - [19/May/2023 03:51:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:51:04,208 [_internal.py:186, _log] 172.30.2.231 - - [19/May/2023 03:51:04] "GET / HTTP/1.1" 200 -
+172.30.2.231 - - [19/May/2023 03:51:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:51:04,219 [_internal.py:186, _log] 172.30.1.254 - - [19/May/2023 03:51:04] "GET / HTTP/1.1" 200 -
+172.30.1.254 - - [19/May/2023 03:51:04] "GET / HTTP/1.1" 200 -
+[INFO] 2023-05-19 03:51:18,800 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 03:51:18,808 [_internal.py:186, _log] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.4.226:5000
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.4.226:5000
+[INFO] 2023-05-19 03:51:18,808 [_internal.py:186, _log] [33mPress CTRL+C to quit[0m
+[33mPress CTRL+C to quit[0m
+[INFO] 2023-05-19 03:51:18,809 [_internal.py:186, _log]  * Restarting with stat
+ * Restarting with stat
+[INFO] 2023-05-19 03:51:20,328 [start.py:30, <module>] begin service
+begin service
+[WARNING] 2023-05-19 03:51:20,335 [_internal.py:186, _log]  * Debugger is active!
+ * Debugger is active!
+[INFO] 2023-05-19 03:51:20,335 [_internal.py:186, _log]  * Debugger PIN: 111-800-613
+ * Debugger PIN: 111-800-613
+[INFO] 2023-05-19 03:51:40,462 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 03:51:40,470 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-19 05:54:19,241 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 05:54:19,249 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[ERROR] 2023-05-19 08:38:24,993 [app.py:1414, log_exception] Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/asgiref/sync.py", line 240, in __call__
+    return call_result.result()
+  File "/opt/conda/envs/sam/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/opt/conda/envs/sam/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/asgiref/sync.py", line 306, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+  File "/home/ec2-user/segmentanything/start.py", line 133, in save_image
+    img_bytes = base64.b64decode(imgData)
+  File "/opt/conda/envs/sam/lib/python3.10/base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+Exception on /save_image [POST]
+Traceback (most recent call last):
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/asgiref/sync.py", line 240, in __call__
+    return call_result.result()
+  File "/opt/conda/envs/sam/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/opt/conda/envs/sam/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/opt/conda/envs/sam/lib/python3.10/site-packages/asgiref/sync.py", line 306, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+  File "/home/ec2-user/segmentanything/start.py", line 133, in save_image
+    img_bytes = base64.b64decode(imgData)
+  File "/opt/conda/envs/sam/lib/python3.10/base64.py", line 87, in b64decode
+    return binascii.a2b_base64(s)
+binascii.Error: Incorrect padding
+>>>>>>> Stashed changes
+[INFO] 2023-05-19 10:06:51,741 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 10:06:51,749 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-19 11:54:52,183 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-19 11:54:52,191 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+>>>>>>> Stashed changes
