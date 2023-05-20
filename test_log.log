@@ -1041,3 +1041,7 @@ begin service
 [INFO] 2023-05-19 11:54:52,191 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
 Serving on http://0.0.0.0:5000
 >>>>>>> Stashed changes
+[INFO] 2023-05-20 02:57:24,963 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 02:57:24,971 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
