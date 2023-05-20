@@ -15,6 +15,11 @@ wheels/
 demo/model/*.onnx
 
 # pytorch/python/numpy formats
+*.png
+*.jpg
+*.jpeg
+*.onnx
+*.npy
 *.pth
 *.pkl
 *.npy
