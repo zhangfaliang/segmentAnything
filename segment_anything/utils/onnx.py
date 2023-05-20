@@ -7,12 +7,7 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-# if torch.cuda.is_available():
-#     os.environ['TORCH_BACKEND'] = 'cuda'
-#     print('使用的是 cuda')
-# else:
-#     os.environ['TORCH_BACKEND'] = 'cpu'
-#     print('使用的是 cpu')
+
 from typing import Tuple
 
 from ..modeling import Sam
@@ -34,9 +29,7 @@ class SamOnnxModel(nn.Module):
         use_stability_score: bool = False,
         return_extra_metrics: bool = False,
     ) -> None:
-        # super().__init__()
-        super(SamOnnxModel, self).__init__()
-        self.positional_encoding_gaussian_matrix = torch.tensor(...)  
+        super().__init__()
         self.mask_decoder = model.mask_decoder
         self.model = model
         self.img_size = model.image_encoder.img_size
@@ -56,12 +49,8 @@ class SamOnnxModel(nn.Module):
         return transformed_size
 
     def _embed_points(self, point_coords: torch.Tensor, point_labels: torch.Tensor) -> torch.Tensor:
-         
-      
         point_coords = point_coords + 0.5
         point_coords = point_coords / self.img_size
-        if not point_coords.device == self.positional_encoding_gaussian_matrix.device:
-          point_coords = point_coords.to(self.positional_encoding_gaussian_matrix.device)
         point_embedding = self.model.prompt_encoder.pe_layer._pe_encoding(point_coords)
         point_labels = point_labels.unsqueeze(-1).expand_as(point_embedding)
 
