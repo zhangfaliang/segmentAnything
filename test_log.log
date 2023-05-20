@@ -1053,7 +1053,25 @@ Serving on http://0.0.0.0:5000
 begin service
 [INFO] 2023-05-20 03:44:49,623 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
 Serving on http://0.0.0.0:5000
+<<<<<<< Updated upstream
 [INFO] 2023-05-20 13:42:11,027 [start.py:30, <module>] begin service
 begin service
 [INFO] 2023-05-20 13:42:11,030 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+=======
+[INFO] 2023-05-20 05:25:50,130 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 05:25:50,138 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 05:34:29,632 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 05:34:29,640 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 05:37:13,271 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 05:37:13,279 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+Serving on http://0.0.0.0:5000
+[INFO] 2023-05-20 05:40:01,186 [start.py:30, <module>] begin service
+begin service
+[INFO] 2023-05-20 05:40:01,194 [wasyncore.py:486, log_info] Serving on http://0.0.0.0:5000
+>>>>>>> Stashed changes
 Serving on http://0.0.0.0:5000
