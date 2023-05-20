@@ -5,10 +5,10 @@ from diffusers import StableDiffusionInpaintPipeline
 from PIL import Image
 from segment_anything import SamPredictor, sam_model_registry
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 sam_checkpoint = "sam_vit_h_4b8939.pth"
 model_type = "vit_h"
 sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 sam.to(device)
 predictor = SamPredictor(sam)
 
