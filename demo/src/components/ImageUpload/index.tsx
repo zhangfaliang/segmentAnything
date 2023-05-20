@@ -48,7 +48,6 @@ export function ImageUpload({
     const { imgURL, npyURL, onnxURL } = data;
     const url = new URL(imgURL, location.origin);
     loadFile({ imgURL: url, npyURL, onnxURL, data });
-    setLoading(false);
   };
 
   const onChange = (imageList: any, addUpdateIndex: any) => {
