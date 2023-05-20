@@ -11,6 +11,8 @@ _ext
 build/
 dist/
 wheels/
+*.log
+demo/model/*.onnx
 
 # pytorch/python/numpy formats
 *.pth
