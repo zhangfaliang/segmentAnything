@@ -6,7 +6,7 @@
 import os
 import torch
 if torch.cuda.is_available():
-    os.environ['TORCH_BACKEND'] = 'cuda'
+    os.environ['TORCH_BACKEND'] = "cpu"
     print('使用的是 cuda')
 else:
     os.environ['TORCH_BACKEND'] = 'cpu'
@@ -122,7 +122,7 @@ def run_export(
     print("Loading model...")
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
     str = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    sam.to(device=str)
+    sam.to(device="cpu")
     print('使用的是',str)
 
     onnx_model = SamOnnxModel(
