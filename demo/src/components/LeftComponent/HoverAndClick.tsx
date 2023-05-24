@@ -30,10 +30,10 @@ const HoverAndClick = () => {
               fill={fillColor}
             ></path>
           </svg>
-          <span className="font-bold ">Hover &amp; Click</span>
+          <span className="font-bold ">使用点击方式生成mask</span>
         </div>
         <p className="hover_and_click_desc">
-          Click an object one or more times. Shift-click to remove regions.
+          左击击一个对象一次或多次。右击键单击以删除区域。
         </p>
         <div className="flex flex-col gap-3 py-3 pl-3 text-sm bg-gray-200 cursor-pointer rounded-xl bg-gradient-to-r from-gray-200 to-blue-400/30 background-animate false">
           <button className="flex opacity-70">
@@ -75,7 +75,7 @@ const HoverAndClick = () => {
                 stroke-width="2"
               ></rect>
             </svg>
-            <span className="pl-2 opacity-70 font-bold false">Multi-mask</span>
+            <span className="pl-2 opacity-70 font-bold false">遮罩列表</span>
           </button>
           <button onClick={addCutOutObject} className="flex false ">
             <svg
@@ -90,7 +90,7 @@ const HoverAndClick = () => {
                 fill={fillColor}
               ></path>
             </svg>
-            <span className="pl-2 opacity-70">Cut out object</span>
+            <span className="pl-2 opacity-70">保存mask</span>
           </button>
         </div>
       </div>

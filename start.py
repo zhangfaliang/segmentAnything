@@ -34,6 +34,8 @@ DEPLOY_PORT = 8889
 
 
 API_URL ='https://api-inference.huggingface.co/models/mattmdjaga/segformer_b2_clothes'
+Api_Key = 'RLAt4y5ZRKp6ED4FwUhTN6Qg'
+        #kw3sctYmvGtQadoBFP6y8waR
 
 headers = {"Authorization": "Bearer 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"}
 # logging.info("begin service")
@@ -126,18 +128,50 @@ async def save_image():
     if request_counter > 0:
          return jsonify({ 'code':-1,'status': 'error', 'message': '有用户在使用稍后再上传','data':{} })
     request_counter += 1
+    # Untitled API Key (2023-05-22 21:24:44)
+    # kw3sctYmvGtQadoBFP6y8waR
     try:
         imgData = request.json['imgData']
         imgName = request.json['imgName']
         # 将base64格式的图片内容解码为bytes
-        img_bytes = base64.b64decode(imgData)
+        imgName = re.sub(r'\.(png|jpeg|gif|bmp|tiff)$', '.jpg', imgName)
+        # img_bytes = base64.b64decode(imgData)
         # 确定图片保存的文件路径
         save_path = os.path.join('demo', 'src', 'assets', 'data', imgName)
         new_filename = re.sub(r'\.\w+$', '', imgName)
         # 将图片保存到磁盘
-        with open(save_path, 'wb') as f:
-            f.write(img_bytes)
-        print(imgName,'保存成功')
+        # with open(save_path, 'wb') as f:
+        #     f.write(img_bytes)
+        # print(imgName,'保存成功')
+        # print(imgName,'处理背景图片')
+      
+        response =  requests.post(
+            'https://api.remove.bg/v1.0/removebg',
+            # files={'image_file': open(save_path, 'rb')},
+            data={
+                "image_file_b64": imgData,
+                'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
+                'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
+                'type_level': '1',#["none", "latest", "1", "2"]:
+                'format': "jpg",#["jpg", "zip", "png", "auto"]:
+                # 'roi': "rgba", #["rgba", "alpha"]:
+                'crop': True , #true  false
+                'crop_margin': None,
+                'scale': 'original'  ,#'original'  
+                'position': 'original'  , #'original'
+                'channels': 'rgba',#'rgba'  alpha
+                'add_shadow': True, #true  false
+                'semitransparency': True #true  false
+                },
+            headers={'X-Api-Key': Api_Key},
+        )
+        if response.status_code == requests.codes.ok:
+             with open(save_path, 'wb') as f:
+                  f.write(response.content)
+                  print(imgName,'保存成功')
+                  print(imgName,'处理背景图片')
+        else:
+            print("Error:", response.status_code, response.text)
 
         print('npy生成中 ....')
         # 返回保存成功的信息

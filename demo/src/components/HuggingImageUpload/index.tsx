@@ -96,7 +96,7 @@ export function HuggingImageUpload({
               {...dragProps}
               className="upload__image_btn"
             >
-              Click or Drop here
+              上传图片
             </button>
             {showToImgList && (
               <a
@@ -105,7 +105,7 @@ export function HuggingImageUpload({
                 {...dragProps}
                 className="upload__image_btn"
               >
-                to imageList
+                图片列表页
               </a>
             )}
           </div>

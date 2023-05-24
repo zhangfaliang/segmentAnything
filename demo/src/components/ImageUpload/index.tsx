@@ -120,7 +120,7 @@ export function ImageUpload({
               {...dragProps}
               className="upload__image_btn"
             >
-              Click or Drop here
+              上传图片
             </button>
             {showToImgList && (
               <button
@@ -129,7 +129,7 @@ export function ImageUpload({
                 {...dragProps}
                 className="upload__image_btn"
               >
-                to imageList
+                图片列表页
               </button>
             )}
           </div>

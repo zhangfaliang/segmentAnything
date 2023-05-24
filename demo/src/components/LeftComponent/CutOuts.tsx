@@ -47,11 +47,11 @@ const CutOuts = () => {
           ></path>
         </svg>
         <span onClick={clickOpenCut} className="pl-2 font-bold false">
-          Cut-Outs
+          抠图
         </span>
         {showMaskImgList && (
           <button onClick={handleCloseCut} className="ml-auto font-bold">
-            Close
+            关闭
           </button>
         )}
       </div>

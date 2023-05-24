@@ -8,7 +8,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "./hooks/createContext";
 import { ToolProps } from "./helpers/Interfaces";
 import * as _ from "underscore";
-import DrawImg from "./DrawImg";
+// import DrawImg from "./DrawImg";
 import "./Tool.css";
 
 const processMask = ({ base64Url }: any) => {
@@ -141,6 +141,12 @@ const Tool = ({ handleMouseMove }: ToolProps) => {
           src={maskImg.src}
           className={`${maskImageClasses} target_img`}
         ></img>
+      )}
+      {image && (
+        <a className="down_img_btn" href={image.src} download>
+          {" "}
+          下载白底图片(可用于webui img2img)
+        </a>
       )}
     </div>
   );
