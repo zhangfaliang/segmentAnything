@@ -1,6 +1,6 @@
 # Requires "requests" to be installed (see python-requests.org)
-import requests
-import os
+# import requests
+# import os
 
 # img_file_path（图片文件路径）：源图片文件的路径。
 
@@ -37,35 +37,56 @@ import os
 
 
 
-save_path = os.path.join('demo', 'src', 'assets', 'data', '5.17.1.jpg')
-response = requests.post(
-    'https://api.remove.bg/v1.0/removebg',
-    files={'image_file': open(save_path, 'rb')},
-    data={
-        "image_file_b64": "",
-        'size': 'auto',
-        "format": "png",
-        'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
-        'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
-        'type_level': '1',#["none", "latest", "1", "2"]:
-        'format': "jpg",#["jpg", "zip", "png", "auto"]:
-        # 'roi': "rgba", #["rgba", "alpha"]:
-        'crop': True , #true  false
-        'crop_margin': None,
-        'scale': 'original'  ,#'original'  
-        'position': 'original'  , #'original'
-        'channels': 'rgba',#'rgba'  alpha
-        'add_shadow': True, #true  false
-        'semitransparency': True #true  false
-        },
-    headers={'X-Api-Key': 'RLAt4y5ZRKp6ED4FwUhTN6Qg'},
-)#RLAt4y5ZRKp6ED4FwUhTN6Qg
-#kw3sctYmvGtQadoBFP6y8waR
-if response.status_code == requests.codes.ok:
-    with open('no-bg.png', 'wb') as out:
-        out.write(response.content)
-else:
-    print("Error:", response.status_code, response.text)
+# save_path = os.path.join('demo', 'src', 'assets', 'data', '5.17.1.jpg')
+# response = requests.post(
+#     'https://api.remove.bg/v1.0/removebg',
+#     files={'image_file': open(save_path, 'rb')},
+#     data={
+#         "image_file_b64": "",
+#         'size': 'auto',
+#         "format": "png",
+#         'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
+#         'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
+#         'type_level': '1',#["none", "latest", "1", "2"]:
+#         'format': "jpg",#["jpg", "zip", "png", "auto"]:
+#         # 'roi': "rgba", #["rgba", "alpha"]:
+#         'crop': True , #true  false
+#         'crop_margin': None,
+#         'scale': 'original'  ,#'original'  
+#         'position': 'original'  , #'original'
+#         'channels': 'rgba',#'rgba'  alpha
+#         'add_shadow': True, #true  false
+#         'semitransparency': True #true  false
+#         },
+#     headers={'X-Api-Key': 'RLAt4y5ZRKp6ED4FwUhTN6Qg'},
+# )#RLAt4y5ZRKp6ED4FwUhTN6Qg
+# #kw3sctYmvGtQadoBFP6y8waR
+# if response.status_code == requests.codes.ok:
+#     with open('no-bg.png', 'wb') as out:
+#         out.write(response.content)
+# else:
+#     print("Error:", response.status_code, response.text)
+
+from rembg import remove
+import cv2
+
+input_path = 'input.png'
+output_path = 'output.jpg'
+
+input = cv2.imread(input_path)
+output = remove(input)
+cv2.imwrite(output_path, output)
+
+# from rembg import remove
+
+# input_path = 'input.jpeg'
+# output_path = 'output.jpeg'
+
+# with open(input_path, 'rb') as i:
+#     with open(output_path, 'wb') as o:
+#         input = i.read()
+#         output = remove(input)
+#         o.write(output)
 
 
 

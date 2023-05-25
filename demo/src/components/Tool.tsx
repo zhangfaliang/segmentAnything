@@ -8,6 +8,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "./hooks/createContext";
 import { ToolProps } from "./helpers/Interfaces";
 import * as _ from "underscore";
+import CropImg from "./CropImg";
 // import DrawImg from "./DrawImg";
 import "./Tool.css";
 
@@ -55,6 +56,7 @@ const Tool = ({ handleMouseMove }: ToolProps) => {
   const {
     image: [image],
     maskImg: [maskImg, setMaskImg],
+    startUpMask: [startUpMask, setStartUpMask],
   } = useContext(AppContext)!;
 
   // Determine if we should shrink or grow the images to match the
@@ -98,42 +100,7 @@ const Tool = ({ handleMouseMove }: ToolProps) => {
     <div className="wrapper">
       {image && (
         <div id="useImgWrapper" className="img-wrapper">
-          <img
-            // onMouseMove={handleMouseMove}
-            // onMouseOut={() => _.defer(() => setMaskImg(null))}
-            // onTouchStart={handleMouseMove}
-            onClick={handleMouseMove}
-            onContextMenu={(event) => {
-              event.preventDefault();
-              handleMouseMove({ ...event, clickType: "right" });
-            }}
-            src={image.src}
-            className={`target_img`}
-            id="use_image"
-          ></img>
-
-          {/* <canvas
-            id="draw_image"
-            className={`canvas-image0-classes target_img`}
-            onClick={(event) => {
-              handleMouseMove({ ...event, isCanvas: true });
-            }}
-            onContextMenu={(event) => {
-              event.preventDefault();
-              handleMouseMove({ ...event, clickType: "right", isCanvas: true });
-            }}
-          ></canvas> */}
-          {/* <canvas
-            id="dot_image"
-            className={`canvas-dot-image target_img`}
-          ></canvas>*/}
-
-          {/* <canvas
-            id="mask_image"
-            className={`canvas-mask-image target_img`}
-          ></canvas>
-
-          <DrawImg imgUrl={image.src} maskImg={maskImg} /> */}
+          <CropImg handleMouseMove={handleMouseMove} />
         </div>
       )}
       {maskImg && (

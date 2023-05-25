@@ -5,7 +5,7 @@ import AppContextProvider from "./components/hooks/context";
 import SAM from "./SAM";
 import Hugging from "./Hugging";
 import HuggingImageList from "./components/HuggingImageList";
-
+import "react-image-crop/dist/ReactCrop.css";
 import ErrorPage from "./error-page";
 
 const container = document.getElementById("root");
