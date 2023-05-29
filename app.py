@@ -67,15 +67,15 @@
 # else:
 #     print("Error:", response.status_code, response.text)
 
-from rembg import remove
-import cv2
+# from rembg import remove
+# import cv2
 
-input_path = 'input.png'
-output_path = 'output.jpg'
+# input_path = 'input.png'
+# output_path = 'output.jpg'
 
-input = cv2.imread(input_path)
-output = remove(input)
-cv2.imwrite(output_path, output)
+# input = cv2.imread(input_path)
+# output = remove(input)
+# cv2.imwrite(output_path, output)
 
 # from rembg import remove
 
@@ -89,4 +89,103 @@ cv2.imwrite(output_path, output)
 #         o.write(output)
 
 
+import requests
+import io
+import json
+from PIL import Image
 
+image = Image.open('cat-1.png')
+
+
+# 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
+background = Image.new('RGBA', image.size, (255, 255, 255))
+
+# 将原始图片粘贴到新的背景图像上
+background.paste(image, (0, 0), image)
+
+# 保存带有白色背景的图片
+background.save('output.png')
+
+# 保存带有白色背景的图片
+
+
+# image_path = '20230526-171107.jpg'
+# # 从图像文件中读取字节流
+# with open(image_path, 'rb') as f:
+#     image_data = f.read()
+
+# # 创建 BytesIO 对象
+# image_file_object = io.BytesIO(image_data)
+
+# # 将 BytesIO 对象重置到初始位置
+# image_file_object.seek(0)
+
+# # 构建请求的数据
+# files = {
+#     'image_file': (image_path, image_file_object, 'image/jpeg'),
+# }
+
+# # 发送 POST 请求
+# r = requests.post('https://clipdrop-api.co/remove-background/v1',
+#                   files=files,
+#                   headers={
+#                     #  'Accept': 'image/jpeg',
+#                      'x-api-key': '91704e981147fe58c8e0df5662d7d1ba18bfc11c18ff85a0000ec61aaea575565d543e3a2450b872245630c387ea83a4'})
+
+# print(r.headers)
+# if (r.ok):
+#   with open(image_path, 'wb') as f:
+#     f.write(r.content)
+# else:
+#   r.raise_for_status()
+
+
+# image_path = 'WechatIMG310.png'
+# # 从图像文件中读取字节流
+# with open(image_path, 'rb') as f:
+#     image_data = f.read()
+
+# # 创建 BytesIO 对象
+# image_file_object = io.BytesIO(image_data)
+
+# # 将 BytesIO 对象重置到初始位置
+# image_file_object.seek(0)
+# # 高清
+# r = requests.post('https://clipdrop-api.co/super-resolution/v1',
+#   files = {
+#     'image_file': (image_path, image_file_object, 'image/jpeg'),
+#     },
+#   data = { 'upscale': 4 },
+#   headers = { 'x-api-key': '91704e981147fe58c8e0df5662d7d1ba18bfc11c18ff85a0000ec61aaea575565d543e3a2450b872245630c387ea83a4'}
+# )
+# if (r.ok):
+#   with open('WechatIMG310-1.jpeg', 'wb') as f:
+#     f.write(r.content)
+# else:
+#   r.raise_for_status()
+
+## 去文字
+
+# image_path = 'testImg/md.jpg'
+# # 从图像文件中读取字节流
+# with open(image_path, 'rb') as f:
+#     image_data = f.read()
+
+# # 创建 BytesIO 对象
+# image_file_object = io.BytesIO(image_data)
+
+# # 将 BytesIO 对象重置到初始位置
+# image_file_object.seek(0)
+
+# r = requests.post('https://clipdrop-api.co/remove-text/v1',
+#   files = {
+#     'image_file': ('image.jpg', image_file_object, 'image/jpeg')
+#     },
+#   headers = { 'x-api-key': '91704e981147fe58c8e0df5662d7d1ba18bfc11c18ff85a0000ec61aaea575565d543e3a2450b872245630c387ea83a4'}
+# )
+
+# if (r.ok):
+#     with open('output.jpeg', 'wb') as f:
+#      f.write(r.content)
+# else:
+  # r.raise_for_status()

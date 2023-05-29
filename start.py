@@ -16,6 +16,9 @@ import requests
 from waitress import serve
 import logging.handlers
 from prometheus_flask_exporter import PrometheusMetrics
+import os
+import io
+
 
 LOG_FILE = "test_log.log"
 log_format = "[%(levelname)s] %(asctime)s [%(filename)s:%(lineno)d, %(funcName)s] %(message)s"
@@ -143,7 +146,31 @@ async def save_image():
         with open(save_path, 'wb') as f:
             f.write(img_bytes)
         print(imgName,'保存成功')
-        print(imgName,'处理背景图片')
+        
+        # 从图像文件中读取字节流
+        print(save_path,'处理背景图片')
+        with open(save_path, 'rb') as f:
+            image_data = f.read()
+        # 创建 BytesIO 对象
+        image_file_object = io.BytesIO(image_data)
+        # 将 BytesIO 对象重置到初始位置
+        image_file_object.seek(0)
+        # 构建请求的数据
+        files = {
+            'image_file': (save_path, image_file_object, 'image/jpeg'),
+        }
+        # 发送 POST 请求
+        r = requests.post('https://clipdrop-api.co/remove-background/v1',
+                          files=files,
+                          headers={
+                            #  'Accept': 'image/jpeg',
+                            'x-api-key': '91704e981147fe58c8e0df5662d7d1ba18bfc11c18ff85a0000ec61aaea575565d543e3a2450b872245630c387ea83a4'})
+        print(r.headers)
+        if (r.ok):
+          with open(save_path, 'wb') as f:
+            f.write(r.content)
+        else:
+            r.raise_for_status()
       
         # response =  requests.post(
         #     'https://api.remove.bg/v1.0/removebg',

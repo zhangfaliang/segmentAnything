@@ -86,7 +86,7 @@ export function ImageUpload({
   } = useContext(AppContext)!;
   const [images, setImages] = useState([]);
   let [color, setColor] = useState("#2e432c");
-  const maxNumber = 69;
+  const maxNumber = 5;
   const uploadImg = async ({ imageList }: any) => {
     const { data_url, file } = imageList[0];
     if (file.size / 1024 > maxSize * 1024) {
