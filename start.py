@@ -139,7 +139,7 @@ async def save_image():
         imgData = request.json['imgData']
         imgName = request.json['imgName']
         # 将base64格式的图片内容解码为bytes
-        imgName = re.sub(r'\.(png|jpeg|gif|bmp|tiff)$', '.png', imgName)
+        imgName = re.sub(r'\.(png|jpeg|gif|bmp|tiff|jpg|webp)$', '.png', imgName)
         img_bytes = base64.b64decode(imgData)
         # 确定图片保存的文件路径
         save_path = os.path.join('demo', 'src', 'assets', 'data', imgName)
