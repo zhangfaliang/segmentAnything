@@ -246,7 +246,11 @@ const App = () => {
       />
 
       <div className="app_right">
-        {image ? <Stage /> : <ImageList loadFile={loadFile} />}
+        {image ? (
+          <Stage loadFile={loadFile} />
+        ) : (
+          <ImageList loadFile={loadFile} />
+        )}
       </div>
     </div>
   );

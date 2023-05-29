@@ -52,11 +52,11 @@ const processMask = ({ base64Url }: any) => {
   }
 };
 
-const Tool = ({ handleMouseMove }: ToolProps) => {
+const Tool = ({ handleMouseMove, loadFile }: any) => {
   const {
     image: [image],
     maskImg: [maskImg, setMaskImg],
-    startUpMask: [startUpMask, setStartUpMask],
+    processImgType: [processImgType, setProcessImgType],
   } = useContext(AppContext)!;
 
   // Determine if we should shrink or grow the images to match the
@@ -100,20 +100,8 @@ const Tool = ({ handleMouseMove }: ToolProps) => {
     <div className="wrapper">
       {image && (
         <div id="useImgWrapper" className="img-wrapper">
-          <CropImg handleMouseMove={handleMouseMove} />
+          <CropImg handleMouseMove={handleMouseMove} loadFile={loadFile} />
         </div>
-      )}
-      {maskImg && (
-        <img
-          src={maskImg.src}
-          className={`${maskImageClasses} target_img`}
-        ></img>
-      )}
-      {image && (
-        <a className="down_img_btn" href={image.src} download>
-          {" "}
-          下载白底图片(可用于webui img2img)
-        </a>
       )}
     </div>
   );

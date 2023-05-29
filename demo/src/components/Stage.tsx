@@ -10,7 +10,7 @@ import Tool from "./Tool";
 import { modelInputProps } from "./helpers/Interfaces";
 import AppContext from "./hooks/createContext";
 
-const Stage = () => {
+const Stage = ({ loadFile }: any) => {
   const {
     clicks: [, setClicks],
     image: [image],
@@ -83,7 +83,7 @@ const Stage = () => {
   return (
     <div>
       <div>
-        <Tool handleMouseMove={handleMouseMove} />
+        <Tool loadFile={loadFile} handleMouseMove={handleMouseMove} />
       </div>
     </div>
   );

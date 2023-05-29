@@ -74,12 +74,12 @@ export function ImageUpload({
       // canvas.toBlob(function (blob) {
       //   resolve(blob);
       // }, type || "image/png");
+
       resolve(canvas.toDataURL(type || "image/jpg"));
     });
   };
   const {
     image: [, setImage],
-    startUpMask: [startUpMask, setStartUpMask],
     maskImg: [, setMaskImg],
     previousMask: [, setPreviousMask],
     mergedMask: [, setMergedMask],
@@ -106,10 +106,8 @@ export function ImageUpload({
       const img = await readImg(file);
       try {
         const base64URL: any = await compressImg(img, file.type, 1000, 1000);
-        console.log("base64URL", base64URL);
         const newImg = new Image();
         newImg.src = base64URL;
-
         newImg.onload = () => {
           const { height, width, samScale } = handleImageScale(newImg);
           newImg.width = width;
@@ -130,39 +128,33 @@ export function ImageUpload({
           theme: "light",
         });
       }
-      // const reader = new FileReader();
-      // reader.readAsDataURL(blob);
-      // reader.onload = function (result) {
-      //   debugger;
-      // };
-      // reader.onerror = function (error) {};
     }
 
-    // setLoading(true);
-    // const { data, code, message } =
-    //   (await uploadData({
-    //     url: uploadURL,
-    //     data: {
-    //       imgData: data_url.replace("data:image/jpeg;base64,", ""),
-    //       imgName: file.name, //file.name,
-    //       size: file.size,
-    //     },
-    //   })) || {};
+    setLoading(true);
+    const { data, code, message } =
+      (await uploadData({
+        url: uploadURL,
+        data: {
+          imgData: data_url.replace("data:image/jpeg;base64,", ""),
+          imgName: file.name, //file.name,
+          size: file.size,
+        },
+      })) || {};
 
-    // if (code === -1) {
-    //   toast(`🔐--${message}`, {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     theme: "light",
-    //   });
-    // }
-    // const { imgURL, npyURL, onnxURL } = data;
-    // const url = new URL(imgURL, location.origin);
-    // loadFile({ imgURL: url, npyURL, onnxURL, data });
+    if (code === -1) {
+      toast(`🔐--${message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+    }
+    const { imgURL, npyURL, onnxURL } = data;
+    const url = new URL(imgURL, location.origin);
+    loadFile({ imgURL: url, npyURL, onnxURL, data });
   };
 
   const onChange = (imageList: any, addUpdateIndex: any) => {

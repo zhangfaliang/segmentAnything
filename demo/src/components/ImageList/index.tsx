@@ -29,13 +29,16 @@ const ImageList = ({ loadFile = (params: any) => {} }) => {
             /.(png|jpg|jpeg|webp|gif)/,
             ""
           );
+
           let reg = new RegExp(`${fileName}`, "g");
           if (!isEmpty(onnx_paths)) {
             onnx = onnx_paths.find((item: any) => reg.test(item)) || "";
           }
+          console.log(item, reg.test(item), reg, "fileNamefileName");
           if (!isEmpty(npy_paths)) {
-            npy = npy_paths.find((item: any) => reg.test(item)) || "";
+            npy = npy_paths.find((item: any) => reg.test(item) || "");
           }
+
           if (npy && onnx) {
             imgDataList.push({
               imgURL: item.replace("demo/src", ""),
@@ -69,11 +72,9 @@ const ImageList = ({ loadFile = (params: any) => {} }) => {
     // loadFile({ imgURL, npyURL, onnxURL });
   };
   const clickUser = ({ imgURL, npyURL, onnxURL }: any) => {
-    maskImg: [, setMaskImg];
     setMaskImg(null);
     setPreviousMask("");
     setMergedMask("");
-
     const url = new URL(imgURL, location.origin);
     loadFile({ imgURL: url, npyURL, onnxURL });
   };

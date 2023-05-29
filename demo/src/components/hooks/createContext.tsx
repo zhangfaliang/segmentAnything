@@ -37,7 +37,7 @@ interface contextProps {
     setHuggingImgList: (e: any) => void
   ];
   mergedMask: [mergedMask: Array<any>, setMergedMask: (e: any) => void];
-  startUpMask: [startUpMask: boolean, setStartUpMask: (e: any) => void];
+  processImgType: [processImgType: string, setProcessImgType: (e: any) => void];
 }
 
 const AppContext = createContext<contextProps | null>(null);

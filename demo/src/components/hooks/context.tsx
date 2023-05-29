@@ -22,7 +22,7 @@ const AppContextProvider = (props: {
   const [huggingImage, setHuggingImage] = useState<any>([]);
   const [huggingImgList, setHuggingImgList] = useState<any>([]);
   const [mergedMask, setMergedMask] = useState<any>(null);
-  const [startUpMask, setStartUpMask] = useState<any>(false);
+  const [processImgType, setProcessImgType] = useState<any>("mask");
 
   return (
     <AppContext.Provider
@@ -38,7 +38,7 @@ const AppContextProvider = (props: {
         maskList: [maskList, setMaskList],
         huggingImgList: [huggingImgList, setHuggingImgList],
         mergedMask: [mergedMask, setMergedMask],
-        startUpMask: [startUpMask, setStartUpMask],
+        processImgType: [processImgType, setProcessImgType],
       }}
     >
       {props.children}
