@@ -135,7 +135,10 @@ export function ImageUpload({
       (await uploadData({
         url: uploadURL,
         data: {
-          imgData: data_url.replace("data:image/jpeg;base64,", ""),
+          imgData: data_url.replace(
+            /data:image\/(jpeg|png|webp|jpg);base64/,
+            ""
+          ),
           imgName: file.name, //file.name,
           size: file.size,
         },

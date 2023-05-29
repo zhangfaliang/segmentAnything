@@ -18,6 +18,8 @@ import logging.handlers
 from prometheus_flask_exporter import PrometheusMetrics
 import os
 import io
+from PIL import Image
+
 
 
 LOG_FILE = "test_log.log"
@@ -137,7 +139,7 @@ async def save_image():
         imgData = request.json['imgData']
         imgName = request.json['imgName']
         # 将base64格式的图片内容解码为bytes
-        imgName = re.sub(r'\.(png|jpeg|gif|bmp|tiff)$', '.jpg', imgName)
+        imgName = re.sub(r'\.(png|jpeg|gif|bmp|tiff)$', '.png', imgName)
         img_bytes = base64.b64decode(imgData)
         # 确定图片保存的文件路径
         save_path = os.path.join('demo', 'src', 'assets', 'data', imgName)
@@ -171,6 +173,15 @@ async def save_image():
             f.write(r.content)
         else:
             r.raise_for_status()
+
+        image = Image.open(save_path)
+        # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
+        background = Image.new('RGBA', image.size, (255, 255, 255))
+        # 将原始图片粘贴到新的背景图像上
+        background.paste(image, (0, 0), image)
+        # 保存带有白色背景的图片
+        background.save(save_path)
+        print(save_path,'处理背景图片成功')
       
         # response =  requests.post(
         #     'https://api.remove.bg/v1.0/removebg',
