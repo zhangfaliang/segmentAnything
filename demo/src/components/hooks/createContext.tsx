@@ -38,6 +38,14 @@ interface contextProps {
   ];
   mergedMask: [mergedMask: Array<any>, setMergedMask: (e: any) => void];
   processImgType: [processImgType: string, setProcessImgType: (e: any) => void];
+  localUpLoadImgData: [
+    localUpLoadImgData: any | null,
+    setLocalUpLoadImgData: (e: any | null) => void
+  ];
+  globalLoadFile: [
+    globalLoadFile: any,
+    setGlobalLoadFileLoadFile: (e: any | null) => void
+  ];
 }
 
 const AppContext = createContext<contextProps | null>(null);

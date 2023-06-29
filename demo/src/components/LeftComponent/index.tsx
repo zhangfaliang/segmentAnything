@@ -1,13 +1,9 @@
 import React, { useContext } from "react";
-import ImageUpload from "../ImageUpload";
-import HoverAndClick from "./HoverAndClick";
-import CutOuts from "./CutOuts";
 import AppContext from "../hooks/createContext";
-const LeftComponent = ({
-  setLoading = (params: any) => {},
-  loading,
-  loadFile = (params: any) => {},
-}: any) => {
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Button from "@mui/material/Button";
+
+const LeftComponent = ({}: any) => {
   const {
     maskImgList: [maskImgList, setMaskImgList],
     maskImg: [maskImg],
@@ -16,13 +12,15 @@ const LeftComponent = ({
   return (
     <div className="app_left">
       <div className="app_left_content">
-        <ImageUpload
-          setLoading={setLoading}
-          loading={loading}
-          loadFile={loadFile}
-        />
-        {!showMaskImgList && <HoverAndClick />}
-        <CutOuts />
+        <Button variant="contained" style={{ height: "40px", width: "80%" }}>
+          <CloudUploadIcon
+            style={{
+              display: "block",
+              marginRight: "3px",
+            }}
+          ></CloudUploadIcon>
+          上传照片
+        </Button>
       </div>
     </div>
   );

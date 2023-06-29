@@ -1,9 +1,3 @@
-// Copyright (c) Meta Platforms, Inc. and affiliates.
-// All rights reserved.
-
-// This source code is licensed under the license found in the
-// LICENSE file in the root directory of this source tree.
-
 import { InferenceSession, Tensor } from "onnxruntime-web";
 import React, { useContext, useEffect, useState } from "react";
 import "./assets/scss/App.scss";
@@ -13,13 +7,15 @@ import { onnxMaskToImage } from "./components/helpers/maskUtils";
 import { modelData } from "./components/helpers/onnxModelAPI";
 import Stage from "./components/Stage";
 import AppContext from "./components/hooks/createContext";
-import ImageList from "./components/ImageList";
-import LeftComponent from "./components/LeftComponent";
+
+// import LeftComponent from "./components/LeftComponent/index.next";
+// import LeftComponent from "./components/LeftComponent";
+
 const ort = require("onnxruntime-web");
 /* @ts-ignore */
 import npyjs from "npyjs";
 
-const App = () => {
+const App = ({ isList = false, isUpload = false, isCrop = false }: any) => {
   const {
     clicks: [clicks],
     image: [image, setImage],
@@ -27,7 +23,9 @@ const App = () => {
     loading: [loading, setLoading],
     previousMask: [previousMask, setPreviousMask],
     mergedMask: [mergedMask, setMergedMask],
+    localUpLoadImgData: [localUpLoadImgData],
   } = useContext(AppContext)!;
+
   const [model, setModel] = useState<InferenceSession | null>(null); // ONNX model
   const [tensor, setTensor] = useState<Tensor | null>(null); // Image embedding tensor
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
@@ -113,19 +111,7 @@ const App = () => {
 
     return mergedMask;
   };
-  const removeMask = (mask: any, width: any, height: any, x: any, y: any) => {
-    const startIndex = y * width + x;
-    const updatedMask = new Uint8ClampedArray(mask.length);
 
-    for (let i = 0; i < height; i++) {
-      for (let j = 0; j < width; j++) {
-        const index = i * width + j;
-        updatedMask[startIndex + index] = 0;
-      }
-    }
-
-    return updatedMask;
-  };
   const removeIntersectingMasks = (
     previousMask: any,
     currentMask: any,
@@ -156,14 +142,6 @@ const App = () => {
 
     return removedMask;
   };
-
-  // 这段代码是一个异步函数，用于运行一个ONNX模型。
-  //首先检查模型、输入数据和模型比例是否都不为空，
-  // 如果为空则返回。如果不为空，则调用onnxModelAPI.tsx文件中的modelData()
-  // 函数来将输入数据转换为模型所需的格式。然后运行SAM ONNX模型，并等待结果。
-  // 结果中的输出是一个数组，使用maskUtils.tsx中的onnxMaskToImage()
-  // 函数将其转换为HTML图像，并将其设置为MaskImg的状态。
-  //最后，如果发生错误，则将其记录到控制台中。
 
   const runONNX = async () => {
     try {
@@ -204,10 +182,8 @@ const App = () => {
           );
           // 将合并后的掩码转换为图像，并设置为 mergedMask 状态
           setMergedMask(mask);
-
           // 将最新的输出掩码设置为 maskImg 状态
           setMaskImg(mask);
-
           // 更新上次的掩码为最新的输出掩码
           setPreviousMask(mergedOutput);
           // setPreviousMask(mergedOutput);
@@ -239,19 +215,7 @@ const App = () => {
 
   return (
     <div className="app_wrapper">
-      <LeftComponent
-        setLoading={setLoading}
-        loading={loading}
-        loadFile={loadFile}
-      />
-
-      <div className="app_right">
-        {image ? (
-          <Stage loadFile={loadFile} />
-        ) : (
-          <ImageList loadFile={loadFile} />
-        )}
-      </div>
+      <div className="app_right">{image && <Stage loadFile={loadFile} />}</div>
     </div>
   );
 };

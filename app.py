@@ -391,7 +391,7 @@ import requests
 import io
 
  
-image_path = 'test.jpg'
+image_path = '20230608-120759.jpeg'
 # 从图像文件中读取字节流
 with open(image_path, 'rb') as f:
     image_data = f.read()
@@ -406,10 +406,10 @@ r = requests.post('https://clipdrop-api.co/super-resolution/v1',
     'image_file': ('car.jpg', image_file_object, 'image/jpeg'),
     },
   data = { 'upscale': 4 },
-  headers = { 'x-api-key': '91704e981147fe58c8e0df5662d7d1ba18bfc11c18ff85a0000ec61aaea575565d543e3a2450b872245630c387ea83a4'}
+  headers = { 'x-api-key': '3cd84362657491f071e72adca9ca976f157be0a079d164c41235718b37181b92a60c1eab1b7d00fdb2830103361b1cc2'}
 )
 if (r.ok):
-  with open('output.jpeg', 'wb') as f:
+  with open('20230608-120759out.jpeg', 'wb') as f:
     f.write(r.content)
 else:
   r.raise_for_status()

@@ -52,11 +52,12 @@ const processMask = ({ base64Url }: any) => {
   }
 };
 
-const Tool = ({ handleMouseMove, loadFile }: any) => {
+const Tool = ({ handleMouseMove }: any) => {
   const {
     image: [image],
     maskImg: [maskImg, setMaskImg],
     processImgType: [processImgType, setProcessImgType],
+    globalLoadFile: [globalLoadFile],
   } = useContext(AppContext)!;
 
   // Determine if we should shrink or grow the images to match the
@@ -100,7 +101,7 @@ const Tool = ({ handleMouseMove, loadFile }: any) => {
     <div className="wrapper">
       {image && (
         <div id="useImgWrapper" className="img-wrapper">
-          <CropImg handleMouseMove={handleMouseMove} loadFile={loadFile} />
+          <CropImg handleMouseMove={handleMouseMove} />
         </div>
       )}
     </div>

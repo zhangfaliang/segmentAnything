@@ -23,7 +23,12 @@ const AppContextProvider = (props: {
   const [huggingImgList, setHuggingImgList] = useState<any>([]);
   const [mergedMask, setMergedMask] = useState<any>(null);
   const [processImgType, setProcessImgType] = useState<any>("mask");
-
+  const [localUpLoadImgData, setLocalUpLoadImgData] = useState<any | null>(
+    null
+  );
+  const [globalLoadFile, setGlobalLoadFileLoadFile] = useState<any | null>(
+    () => {}
+  );
   return (
     <AppContext.Provider
       value={{
@@ -39,6 +44,8 @@ const AppContextProvider = (props: {
         huggingImgList: [huggingImgList, setHuggingImgList],
         mergedMask: [mergedMask, setMergedMask],
         processImgType: [processImgType, setProcessImgType],
+        localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
+        globalLoadFile: [globalLoadFile, setGlobalLoadFileLoadFile],
       }}
     >
       {props.children}

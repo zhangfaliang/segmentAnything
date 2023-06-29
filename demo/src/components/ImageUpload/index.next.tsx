@@ -1,15 +1,19 @@
-import ImageUploading from "react-images-uploading";
+import "./index.scss";
 import React, { useState, useContext, CSSProperties, useEffect } from "react";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import FileUpload from "react-material-file-upload";
 import "./index.scss";
 import { uploadData } from "../../../request/index";
 import AppContext from "../hooks/createContext";
 import { ToastContainer, toast } from "react-toastify";
 import { isArray } from "lodash";
 import { handleImageScale } from "../../components/helpers/scaleHelper";
-
+import ImageUploading from "react-images-uploading";
+import Button from "@mui/material/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const maxSize = 5;
-export function ImageUpload({
+const maxNumber = 5;
+
+export default function App({
   loadFile,
   setLoading,
   loading,
@@ -36,7 +40,6 @@ export function ImageUpload({
       };
     });
   };
-
   /**
    * 压缩图片
    *@param img 被压缩的img对象
@@ -83,12 +86,12 @@ export function ImageUpload({
     maskImg: [, setMaskImg],
     previousMask: [, setPreviousMask],
     mergedMask: [, setMergedMask],
+    localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
   } = useContext(AppContext)!;
-  const [images, setImages] = useState([]);
-  let [color, setColor] = useState("#2e432c");
-  const maxNumber = 5;
+  const [images, setImages] = useState<File[]>([]);
+
   const uploadImg = async ({ imageList }: any) => {
-    const { data_url, file } = imageList[0];
+    const { data_url, file }: any = imageList[0];
     if (file.size / 1024 > maxSize * 1024) {
       toast(`🔥--图片不能大于 ${maxSize} MB`, {
         position: "top-center",
@@ -101,7 +104,6 @@ export function ImageUpload({
       });
       return;
     }
-
     if (file) {
       const img = await readImg(file);
       try {
@@ -129,39 +131,39 @@ export function ImageUpload({
         });
       }
     }
+    setLocalUpLoadImgData({ data_url, imgName: file.name, size: file.size });
+    //       size: file.size, });
+    // const { data, code, message } =
+    //   (await uploadData({
+    //     url: uploadURL,
+    //     data: {
+    //       imgData: data_url.replace(
+    //         /data:image\/(jpeg|png|webp|jpg);base64/,
+    //         ""
+    //       ),
+    //       imgName: file.name, //file.name,
+    //       size: file.size,
+    //     },
+    //   })) || {};
 
-    setLoading(true);
-    const { data, code, message } =
-      (await uploadData({
-        url: uploadURL,
-        data: {
-          imgData: data_url.replace(
-            /data:image\/(jpeg|png|webp|jpg);base64/,
-            ""
-          ),
-          imgName: file.name, //file.name,
-          size: file.size,
-        },
-      })) || {};
-
-    if (code === -1) {
-      toast(`🔐--${message}`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-      });
-    }
-    const { imgURL, npyURL, onnxURL } = data;
-    const url = new URL(imgURL, location.origin);
-    loadFile({ imgURL: url, npyURL, onnxURL, data });
+    // if (code === -1) {
+    //   toast(`🔐--${message}`, {
+    //     position: "top-center",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     theme: "light",
+    //   });
+    // }
+    // const { imgURL, npyURL, onnxURL } = data;
+    // const url = new URL(imgURL, location.origin);
+    // loadFile({ imgURL: url, npyURL, onnxURL, data });
   };
+  const [files, setFiles] = useState<File[]>([]);
 
-  const onChange = (imageList: any, addUpdateIndex: any) => {
-    // data for submit
+  const onChange = (imageList: any) => {
     setImages(imageList);
     if (imageList?.length) {
       uploadImg({ imageList });
@@ -175,25 +177,13 @@ export function ImageUpload({
   const clickToImageList = () => {
     setImage(null);
   };
-  return (
-    <div className="imageUploading_wrapper">
-      <ToastContainer />
-      {loading && (
-        <div className="imageUp_loading_true">
-          <PacmanLoader
-            size={40}
-            color={color}
-            loading={loading}
-            cssOverride={override}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-            speedMultiplier={1}
-          />
-        </div>
-      )}
 
+  return !localUpLoadImgData ? (
+    <div className="App">
+      <h1>请上传图片</h1>
+      <p>支持格式：jpg、png、jpeg、webp</p>
       <ImageUploading
-        // multiple
+        multiple={false}
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
@@ -209,12 +199,7 @@ export function ImageUpload({
           dragProps,
         }) => (
           <div className="upload__image-wrapper">
-            {/* {images?.length ? (
-              <button onClick={onImageRemoveAll}>Remove all images</button>
-            ) : (
-             
-            )} */}
-            <button
+            <div
               style={isDragging ? { color: "red" } : undefined}
               onClick={(e: any) => {
                 const parentEle: any = document.getElementById("useImgWrapper");
@@ -230,22 +215,27 @@ export function ImageUpload({
               {...dragProps}
               className="upload__image_btn"
             >
-              上传图片
-            </button>
-            {showToImgList && (
-              <button
-                style={isDragging ? { color: "red" } : undefined}
-                onClick={clickToImageList}
-                {...dragProps}
-                className="upload__image_btn"
+              <CloudUploadIcon
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  display: "block",
+                  marginRight: "20px",
+                }}
+              />
+              or
+              <Button
+                variant="contained"
+                style={{
+                  marginLeft: "20px",
+                }}
               >
-                图片列表页
-              </button>
-            )}
+                上传照片
+              </Button>
+            </div>
           </div>
         )}
       </ImageUploading>
     </div>
-  );
+  ) : null;
 }
-export default ImageUpload;

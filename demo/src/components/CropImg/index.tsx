@@ -33,11 +33,7 @@ function centerAspectCrop(
   );
 }
 
-const CropImg = ({
-  handleMouseMove,
-  uploadURL = "/save_image",
-  loadFile = () => {},
-}: any) => {
+const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   const [imgSrc, setImgSrc] = useState("");
   const previewCanvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -58,6 +54,7 @@ const CropImg = ({
     loading: [loading, setLoading],
     previousMask: [, setPreviousMask],
     mergedMask: [, setMergedMask],
+    globalLoadFile: [globalLoadFile],
   } = useContext(AppContext)!;
 
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
@@ -121,7 +118,7 @@ const CropImg = ({
     };
     const { imgURL, npyURL, onnxURL } = data;
     const url = new URL(imgURL, location.origin);
-    loadFile({ imgURL: url, npyURL, onnxURL, data });
+    globalLoadFile({ imgURL: url, npyURL, onnxURL, data });
 
     // previewCanvasRef.current.toBlob((blob) => {
     //   if (!blob) {

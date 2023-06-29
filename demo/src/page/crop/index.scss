@@ -1,0 +1,32 @@
+.crop_wrapper_content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+}
+.crop_btn_group_wrapper {
+  padding: 10px 0;
+  display: flex;
+  button {
+    margin-left: 10px;
+  }
+}
+.box {
+  display: inline-block;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.img-preview {
+  width: 300px;
+  height: auto;
+}
+.cropper_input_wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 400px;
+  padding-left: 20px;
+}
