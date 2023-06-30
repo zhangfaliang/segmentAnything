@@ -32,9 +32,9 @@ export const postData = ({ url, data, isNodeServer }: any) => {
       return { error: error };
     });
 };
-export const getData = ({ url }: any) => {
-  const processUrl = ` ${host}${url}`;
-  console.log(process.env.NODE_ENV);
+export const getData = ({ url, isNodeServer }: any) => {
+  const processHost = isNodeServer ? nodeHost : host;
+  const processUrl = `${processHost}${url}`;
 
   return fetch(processUrl, {
     // body: JSON.stringify(data), // must match 'Content-Type' header
