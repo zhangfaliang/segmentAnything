@@ -1,11 +1,8 @@
 import "./index.scss";
 import React, { useState, useContext, CSSProperties, useEffect } from "react";
-import FileUpload from "react-material-file-upload";
 import "./index.scss";
-import { uploadData } from "../../../request/index";
 import AppContext from "../hooks/createContext";
 import { ToastContainer, toast } from "react-toastify";
-import { isArray } from "lodash";
 import { handleImageScale } from "../../components/helpers/scaleHelper";
 import ImageUploading from "react-images-uploading";
 import Button from "@mui/material/Button";
@@ -13,13 +10,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const maxSize = 5;
 const maxNumber = 5;
 
-export default function App({
-  loadFile,
-  setLoading,
-  loading,
-  showToImgList = true,
-  uploadURL = "/save_image",
-}: any) {
+export default function App({ loadFile }: any) {
   // 压缩前将file转换成img对象
   const readImg = (file: any) => {
     return new Promise((resolve, reject) => {

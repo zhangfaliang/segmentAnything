@@ -9,7 +9,8 @@
     "start": "yarn run start-dev",
     "test": "yarn run start-model-test",
     "start-dev": "webpack serve --config=configs/webpack/dev.js",
-    "prod": "yarn run clean-dist && webpack --config=configs/webpack/prod.js && mv dist/*.wasm dist/js && node start.js"
+    "prod": "yarn run clean-dist && webpack --config=configs/webpack/prod.js && mv dist/*.wasm dist/js && node start.js",
+    "dev:prod": "yarn run clean-dist && webpack --config=configs/webpack/prod.js && mv dist/*.wasm dist/js && node start.js"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
@@ -62,8 +63,10 @@
     "@reach/router": "^1.3.4",
     "@types/lodash": "^4.14.194",
     "blueimp-load-image": "^5.16.0",
+    "body-parser": "^1.20.2",
     "classnames": "^2.3.2",
     "connect-history-api-fallback": "^2.0.0",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",

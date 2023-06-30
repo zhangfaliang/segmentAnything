@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { useNavigate, Link } from "react-router-dom";
 import LeftComponent from "../../components/LeftComponent/index.next";
 import AppContext from "../../components/hooks/createContext";
@@ -36,7 +37,7 @@ function ResponsiveAppBar() {
     clicks: [clicks],
     image: [, setImage],
     maskImg: [, setMaskImg],
-    loading: [, setLoading],
+    loading: [loading, setLoading],
     previousMask: [previousMask, setPreviousMask],
     mergedMask: [, setMergedMask],
     globalLoadFile: [, setGlobalLoadFileLoadFile],
@@ -403,6 +404,19 @@ function ResponsiveAppBar() {
         </Container>
       </AppBar>
       <LeftComponent openLeft={openLeft} setOpenLeft={setOpenLeft} />
+      {loading && (
+        <div className="imageUp_loading_true">
+          <PacmanLoader
+            size={40}
+            color={"#36d7b7"}
+            loading={loading}
+            // cssOverride={override}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+            speedMultiplier={1}
+          />
+        </div>
+      )}
     </>
   );
 }

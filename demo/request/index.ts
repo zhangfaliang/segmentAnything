@@ -1,13 +1,19 @@
 // const host = "https://sam.test.doublefs.com";
-// https://sam.test.doublefs.com
+// https://sam.doublefs.com
 //"";
 let host =
   process.env.NODE_ENV === "production"
     ? "https://sam.doublefs.com"
     : "http://localhost:5000";
+let nodeHost =
+  process.env.NODE_ENV === "production"
+    ? "https://sam.doublefs.com"
+    : "http://localhost:9090";
 // host = "http://localhost:5000";
-export const postData = ({ url, data }: any) => {
-  const processUrl = `${host}${url}`;
+export const postData = ({ url, data, isNodeServer }: any) => {
+  const processHost = isNodeServer ? nodeHost : host;
+  const processUrl = `${processHost}${url}`;
+
   return fetch(processUrl, {
     body: JSON.stringify(data), // must match 'Cont
     headers: {

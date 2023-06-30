@@ -13,9 +13,15 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import BlurLinearIcon from "@mui/icons-material/BlurLinear";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { postData } from "../../../request/index";
+
 export const Crop = () => {
   const {
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
+    loading: [loading, setLoading],
   } = useContext(AppContext)!;
   const [cropData, setCropData]: any = useState();
   const [cropper, setCropper]: any = useState();
@@ -90,16 +96,69 @@ export const Crop = () => {
     setLocalUpLoadImgData(null);
     setCropData(null);
   };
+  const handleRemoveBg = async () => {
+    setLoading(true);
+    const { data, code, message } =
+      (await postData({
+        url: "/remove_background",
+        data: {
+          imgData: (cropData || localUpLoadImgData.data_url).replace(
+            /data:image\/(jpeg|png|jpg|gif);base64,/,
+            ""
+          ),
+          imgName: localUpLoadImgData.imgName, //file.name,
+          size: localUpLoadImgData.size,
+        },
+      })) || {};
+
+    setLocalUpLoadImgData({
+      data_url: "",
+      imgName: `${localUpLoadImgData.imgName}_${new Date().getTime()}`,
+      size: "",
+    });
+    // 更改页面图片内容
+    setLoading(false);
+  };
+  const handleGenerate = async () => {
+    const { data, code, message } =
+      (await postData({
+        url: "/generate/mask",
+        isNodeServer: true,
+        data: {
+          imgData: (cropData || localUpLoadImgData.data_url).replace(
+            /data:image\/(jpeg|png|jpg|gif);base64,/,
+            ""
+          ),
+          imgName: localUpLoadImgData.imgName, //file.name,
+          size: localUpLoadImgData.size,
+        },
+      })) || {};
+    if (code === -1) {
+      toast.error(`🔐--${message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+    // const { imgURL, npyURL, onnxURL } = data;
+    // const url = new URL(imgURL, location.origin);
+    // (window as any).loadFile({ imgURL: url, npyURL, onnxURL, data });
+  };
 
   return localUpLoadImgData ? (
     <>
-      {" "}
+      <ToastContainer />
       <div className="crop_btn_group_wrapper">
         <Button variant="contained" onClick={handleRestUpload}>
           <AddAPhotoIcon />
           重新上传
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={handleRemoveBg}>
           <BlurLinearIcon
             style={{
               marginRight: "5px",
@@ -115,7 +174,7 @@ export const Crop = () => {
           />{" "}
           裁剪
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={handleGenerate}>
           <AddTaskIcon
             style={{
               marginRight: "5px",
