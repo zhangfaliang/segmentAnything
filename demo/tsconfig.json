@@ -19,6 +19,12 @@
     "outDir": "./dist/",
     "sourceMap": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src",
+    "request/nodeAPI.js"
+  ],
   "exclude": ["node_modules"]
 }

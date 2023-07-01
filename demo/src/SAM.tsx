@@ -15,7 +15,7 @@ const ort = require("onnxruntime-web");
 /* @ts-ignore */
 import npyjs from "npyjs";
 
-const App = ({ isList = false, isUpload = false, isCrop = false }: any) => {
+const App = ({}: any) => {
   const {
     clicks: [clicks],
     image: [image, setImage],

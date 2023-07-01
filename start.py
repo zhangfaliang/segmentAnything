@@ -11,7 +11,6 @@ import asyncio
 from create_npy import process_image
 import subprocess
 import requests
-
 import requests
 from waitress import serve
 import logging.handlers
@@ -19,6 +18,12 @@ from prometheus_flask_exporter import PrometheusMetrics
 import os
 import io
 from PIL import Image
+import types
+
+maskApiTask = types.SimpleNamespace(
+  done=False,
+)
+
 
 
 
@@ -35,7 +40,6 @@ logging.getLogger().addHandler(time_hdls)
 logging.info("begin service")
 
 DEPLOY_PORT = 8889
-
 
 
 API_URL ='https://api-inference.huggingface.co/models/mattmdjaga/segformer_b2_clothes'
@@ -57,7 +61,6 @@ app.config['THREADS_PER_PAGE'] = 6
 app.config['PROCESS_PER_CPU'] = 4
 metrics = PrometheusMetrics(app)
 CORS(app)
-request_counter = 0
 @app.route('/hugging_delete', methods=['POST'])
 def hugging_delete():
     img_path = request.json['img_path']
@@ -129,13 +132,13 @@ def delete_files():
 @app.route('/save_image', methods=['POST'])
 async def save_image():
     # 获取前端传递的参数
-    global request_counter
-    if request_counter > 0:
+    if  maskApiTask.done == True :
          return jsonify({ 'code':-1,'status': 'error', 'message': '有用户在使用稍后再上传','data':{} })
-    request_counter += 1
+    
     # Untitled API Key (2023-05-22 21:24:44)
     # kw3sctYmvGtQadoBFP6y8waR
     try:
+        maskApiTask.done == False
         imgData = request.json['imgData']
         imgName = request.json['imgName']
         # 将base64格式的图片内容解码为bytes
@@ -227,14 +230,14 @@ async def save_image():
         else:
             print(f"命令执行完毕：{output.decode('utf-8')}")
       # --output 
+        maskApiTask.done = False           
         return jsonify({'status': 'success', 'message': 'Image saved successfully','data':{
                 'imgURL':'/assets/data/'+imgName,
                 'npyURL':'/assets/data/'+new_filename+'_embedding.npy',
                 'onnxURL':'/model/sam_'+new_filename+'_onnx_quantized_example.onnx'
             }})
     finally:
-            request_counter -= 1
-           
+      maskApiTask.done = False                    
 @app.route('/api/files')
 def get_onnx_files():
     onnx_path = 'demo/model'  # 指定文件夹路径

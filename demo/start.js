@@ -34,8 +34,13 @@ app.get("/assets/data/*", async (req, res, next) => {
  */
 app.post("/generate/mask", async (req, res, next) => {
   try {
-    const taskLength = queue.taskList.length;
+    let taskLength = queue.taskList.length;
+    console.log(
+      `新任务添加 ，当前任务数为${taskLength},你的任务是第${taskLength + 1}个`
+    );
+
     if (taskLength >= 5) {
+      console.log(`任务数大于5，稍后再试`);
       res.send({
         code: -1,
         message: "任务数大于5，稍后再试",
@@ -45,22 +50,25 @@ app.post("/generate/mask", async (req, res, next) => {
       });
       return;
     }
+    queue.task({
+      data: {
+        size: req.body.size,
+        imgName: req.body.imgName,
+        imgData: req.body.imgData,
+      },
+      callback: (data) => {},
+    });
+    taskLength = queue.taskList.length;
+
     if (!queue.isStart && taskLength > 0) {
       queue.start();
-    } else {
-      queue.task({
-        data: {
-          size: req.body.size,
-          imgName: req.body.imgName,
-          imgData: req.body.imgData,
-        },
-      });
     }
+    console.log(`当前任务数为${taskLength - 1},你的任务是第${taskLength}个`);
     res.send({
       code: 0,
       message: "",
       data: {
-        desc: `当前任务数为${taskLength},你的任务是第${taskLength + 1}个`,
+        desc: `当前任务数为${taskLength - 1},你的任务是第${taskLength}个`,
       },
     });
   } catch (error) {
