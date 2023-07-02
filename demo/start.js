@@ -63,12 +63,14 @@ app.post("/generate/mask", async (req, res, next) => {
     if (!queue.isStart && taskLength > 0) {
       queue.start();
     }
-    console.log(`当前任务数为${taskLength - 1},你的任务是第${taskLength}个`);
+    let newTaskLength = taskLength - 1;
+    newTaskLength = newTaskLength >= 0 ? newTaskLength : 0;
+    console.log(`当前任务数为${newTaskLength},你的任务是第${taskLength}个`);
     res.send({
       code: 0,
       message: "",
       data: {
-        desc: `当前任务数为${taskLength - 1},你的任务是第${taskLength}个`,
+        desc: `当前任务数为${newTaskLength},你的任务是第${taskLength}个`,
       },
     });
   } catch (error) {
@@ -88,8 +90,8 @@ app.get("/get/maskTask", async (req, res, next) => {
       code: 0,
       message: "success",
       data: {
-        desc: `${queue?.taskList?.length}任务数为在执行`,
-        queueNumber: queue?.taskList?.length,
+        desc: `${queue?.delayArr?.length}任务数为在执行`,
+        queueNumber: queue?.delayArr?.length,
       },
     });
   } catch (error) {
