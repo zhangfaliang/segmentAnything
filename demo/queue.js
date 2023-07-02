@@ -18,16 +18,14 @@ class Queue {
     this.isStart = true;
     let i = 0;
 
-    while (i < this.taskList.length) {
-      const { data, url, callback } = this.taskList[i];
+    while (this.taskList.length) {
+      const { data, url, callback } = this.taskList.shift();
       console.log("任务启动");
-      // await delay(4000);
+      console.log(data?.imgName);
+      // await delay(20000);
       const resData = await postData({ data, url });
-      // callback && callback(resData);
+      callback && callback(resData);
       console.log("任务完成");
-      this.taskList[i].done = true;
-      this.taskList.slice(i, 1);
-      this.taskList.length = this.taskList.length - 1;
     }
     this.isStart = false;
   };

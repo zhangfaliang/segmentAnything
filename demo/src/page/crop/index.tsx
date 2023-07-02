@@ -12,7 +12,6 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import BlurLinearIcon from "@mui/icons-material/BlurLinear";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -129,7 +128,10 @@ export const Crop = () => {
             /data:image\/(jpeg|png|jpg|gif);base64,/,
             ""
           ),
-          imgName: localUpLoadImgData.imgName, //file.name,
+          imgName: localUpLoadImgData.imgName.replace(
+            /(\.png|\.jpg|\.jpeg|\.webp)$/,
+            `@_@${new Date().getTime()}$1`
+          ), //file.name,
           size: localUpLoadImgData.size,
         },
       })) || {};
@@ -158,14 +160,7 @@ export const Crop = () => {
           <AddAPhotoIcon />
           重新上传
         </Button>
-        <Button variant="contained" onClick={handleRemoveBg}>
-          <BlurLinearIcon
-            style={{
-              marginRight: "5px",
-            }}
-          />{" "}
-          去掉背景
-        </Button>
+
         <Button variant="contained" onClick={handleCrop}>
           <CropIcon
             style={{

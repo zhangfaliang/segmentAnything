@@ -3,8 +3,6 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
-import InfoIcon from "@mui/icons-material/Info";
 import { isEmpty, get } from "lodash";
 import { getData } from "../../../request/index";
 import { postData } from "../../../request/index";
@@ -50,19 +48,33 @@ export default function TitlebarImageList({}: any) {
           }
 
           if (npy && onnx) {
+            const imgURL = item.replace("demo/src", "");
+            const order = get(
+              imgURL.match(/@_@(\d+)\.(jpg|png|jpeg|webp)/),
+              "1",
+              0
+            );
+            console.log(imgURL, "itemitemitem");
+
             imgDataList.push({
-              imgURL: item.replace("demo/src", ""),
+              imgURL,
               npyURL: npy.replace("demo/src", ""),
               onnxURL: onnx.replace("demo", ""),
               img: item.replace("demo/src", ""),
               title: item,
-              author: "@shiny",
+              author: "@halara",
               // rows: 2,
               // cols: 2,
               featured: true,
+              order: order,
             });
           }
+          imgDataList.sort((a: any, b: any) => {
+            return b.order - a.order;
+          });
           if (!isEmpty(imgDataList)) {
+            imgDataList.map((item: any) => {});
+
             setImgList(imgDataList);
             if (imgDataList.length >= 2) {
               setDeleteFlag(true);
@@ -111,7 +123,7 @@ export default function TitlebarImageList({}: any) {
       <ImageList
         sx={{
           width: "100%",
-          height: "calc(100vh - 200px)",
+          height: "auto",
           overflowY: "scroll",
         }}
         rowHeight={"auto"}
@@ -145,12 +157,12 @@ export default function TitlebarImageList({}: any) {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    clickDele(item);
+                    deleteFlag && clickDele(item);
                   }}
                   sx={{ color: "rgba(255, 255, 255, 0.54)" }}
                   aria-label={`info about ${item.title}`}
                 >
-                  <DeleteIcon>删除</DeleteIcon>
+                  {deleteFlag && <DeleteIcon>删除</DeleteIcon>}
                 </IconButton>
               }
             />

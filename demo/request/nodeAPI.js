@@ -5,7 +5,7 @@ let host =
 
 const postData = ({ url, data }) => {
   const processUrl = `${host}${url}`;
-  console.log(`请求地址为：${processUrl}`, data);
+  console.log(`请求地址为：${processUrl}`);
   return fetch(processUrl, {
     body: JSON.stringify(data), // must match 'Cont
     headers: {
