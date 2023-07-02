@@ -56,9 +56,17 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   .btn {
     margin-left: 10px;
+  }
+  .no_mask_data_test {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

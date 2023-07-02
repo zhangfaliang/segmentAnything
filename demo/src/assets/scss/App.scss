@@ -25,5 +25,12 @@
   .app_right {
     padding: 0 15px;
     flex: 1;
+    .MuiImageList-root {
+      .MuiImageListItem-root {
+        max-height: 400px !important;
+        width: auto !important;
+        overflow: hidden;
+      }
+    }
   }
 }

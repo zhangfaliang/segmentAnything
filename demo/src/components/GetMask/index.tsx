@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { get } from "lodash";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
+import Typography from "@mui/material/Typography";
+
 import "./index.scss";
 
 const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
@@ -91,31 +94,39 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
       )}
       {!image && (
         <div className="no_mask_data">
-          <Button
-            variant="contained"
-            style={{ height: "40px", width: "180px" }}
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            <ListAltIcon />
-            选择图片
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
-              navigate("/upload");
-            }}
-            style={{ height: "40px", marginLeft: "20px", width: "180px" }}
-          >
-            <CloudUploadIcon
-              style={{
-                display: "block",
-                marginRight: "3px",
+          <div className="no_mask_data_test">
+            <TextSnippetIcon />
+            <Typography variant="h5" gutterBottom>
+              无mask数据，可以去列表选择或者重新上传
+            </Typography>
+          </div>
+          <div>
+            <Button
+              variant="contained"
+              style={{ height: "40px", width: "180px" }}
+              onClick={() => {
+                navigate("/");
               }}
-            ></CloudUploadIcon>
-            上传照片
-          </Button>
+            >
+              <ListAltIcon />
+              选择图片
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                navigate("/upload");
+              }}
+              style={{ height: "40px", marginLeft: "20px", width: "180px" }}
+            >
+              <CloudUploadIcon
+                style={{
+                  display: "block",
+                  marginRight: "3px",
+                }}
+              ></CloudUploadIcon>
+              上传照片
+            </Button>
+          </div>
         </div>
       )}
 

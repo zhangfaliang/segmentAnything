@@ -9,6 +9,7 @@ class Queue {
   constructor() {
     this.taskList = [];
     this.isStart = false;
+    this.delayArr = [];
   }
   task = ({ data, url = "/save_image", callback }) => {
     this.taskList.push({ data, url, done: false, callback });
@@ -16,15 +17,16 @@ class Queue {
   };
   start = async () => {
     this.isStart = true;
-    let i = 0;
 
     while (this.taskList.length) {
+      this.delayArr = this.taskList.splice(0);
       const { data, url, callback } = this.taskList.shift();
       console.log("任务启动");
       console.log(data?.imgName);
       // await delay(20000);
       const resData = await postData({ data, url });
       callback && callback(resData);
+      this.delayArr.shift();
       console.log("任务完成");
     }
     this.isStart = false;

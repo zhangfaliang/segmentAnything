@@ -34,7 +34,7 @@ app.get("/assets/data/*", async (req, res, next) => {
  */
 app.post("/generate/mask", async (req, res, next) => {
   try {
-    let taskLength = queue.taskList.length;
+    let taskLength = queue.delayArr.length;
     console.log(
       `新任务添加 ，当前任务数为${taskLength},你的任务是第${taskLength + 1}个`
     );
@@ -58,7 +58,7 @@ app.post("/generate/mask", async (req, res, next) => {
       },
       callback: (data) => {},
     });
-    taskLength = queue.taskList.length;
+    taskLength = queue.delayArr.length;
 
     if (!queue.isStart && taskLength > 0) {
       queue.start();
