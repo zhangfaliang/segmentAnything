@@ -1,7 +1,7 @@
 let host =
   process.env.NODE_ENV === "production"
     ? "https://sam.doublefs.com"
-    : "http://172.20.10.2:5000";
+    : "https://sam.doublefs.com";
 
 const postData = ({ url, data }) => {
   const processUrl = `${host}${url}`;
