@@ -221,7 +221,7 @@ export default function App({ loadFile }: any) {
                   marginLeft: "20px",
                 }}
               >
-                上传照片
+                上传图片
               </Button>
             </div>
           </div>

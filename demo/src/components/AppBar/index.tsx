@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import PacmanLoader from "react-spinners/PacmanLoader";
-import { useNavigate, Link } from "react-router-dom";
+// import PacmanLoader from "react-spinners/PacmanLoader";
+import PacmanLoader from "../../components/Loading/index";
+import { useNavigate } from "react-router-dom";
 import LeftComponent from "../../components/LeftComponent/index.next";
 import AppContext from "../../components/hooks/createContext";
 import { InferenceSession, Tensor } from "onnxruntime-web";
@@ -73,8 +74,6 @@ function ResponsiveAppBar() {
 
   const loadFile = async ({ imgURL, npyURL, onnxURL }: any) => {
     setLoading(true);
-
-    return;
     try {
       const img = new Image();
       img.src = imgURL.href;
@@ -406,15 +405,7 @@ function ResponsiveAppBar() {
       <LeftComponent openLeft={openLeft} setOpenLeft={setOpenLeft} />
       {loading && (
         <div className="imageUp_loading_true">
-          <PacmanLoader
-            size={40}
-            color={"#36d7b7"}
-            loading={loading}
-            // cssOverride={override}
-            aria-label="Loading Spinner"
-            data-testid="loader"
-            speedMultiplier={1}
-          />
+          <PacmanLoader />
         </div>
       )}
     </>

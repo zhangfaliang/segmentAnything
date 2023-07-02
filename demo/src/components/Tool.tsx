@@ -1,16 +1,9 @@
-// Copyright (c) Meta Platforms, Inc. and affiliates.
-// All rights reserved.
-
-// This source code is licensed under the license found in the
-// LICENSE file in the root directory of this source tree.
-
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "./hooks/createContext";
-import { ToolProps } from "./helpers/Interfaces";
 import * as _ from "underscore";
-import CropImg from "./CropImg";
-// import DrawImg from "./DrawImg";
-import "./Tool.css";
+import GetMask from "./GetMask";
+
+import "./Tool.scss";
 
 const processMask = ({ base64Url }: any) => {
   // 创建一个 Image 对象
@@ -56,13 +49,8 @@ const Tool = ({ handleMouseMove }: any) => {
   const {
     image: [image],
     maskImg: [maskImg, setMaskImg],
-    processImgType: [processImgType, setProcessImgType],
-    globalLoadFile: [globalLoadFile],
   } = useContext(AppContext)!;
 
-  // Determine if we should shrink or grow the images to match the
-  // width or the height of the page and setup a ResizeObserver to
-  // monitor changes in the size of the page
   const [shouldFitToWidth, setShouldFitToWidth] = useState(true);
 
   const [nextMaskImg, setNextMaskImg] = useState("");
@@ -94,16 +82,11 @@ const Tool = ({ handleMouseMove }: any) => {
     }
   }, [maskImg?.src]);
 
-  // Render the image and the predicted mask image on top
-  const maskImageClasses = `absolute opacity-40 pointer-events-none`;
-
   return (
     <div className="wrapper">
-      {image && (
-        <div id="useImgWrapper" className="img-wrapper">
-          <CropImg handleMouseMove={handleMouseMove} />
-        </div>
-      )}
+      <div id="useImgWrapper" className="img-wrapper">
+        <GetMask handleMouseMove={handleMouseMove} />
+      </div>
     </div>
   );
 };

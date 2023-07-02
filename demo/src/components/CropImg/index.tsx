@@ -12,7 +12,9 @@ import { useDebounceEffect } from "./useDebounceEffect";
 import "./index.scss";
 import { uploadData } from "../../../request/index";
 import { handleImageScale } from "../../components/helpers/scaleHelper";
-
+import Button from "@mui/material/Button";
+import AddTaskIcon from "@mui/icons-material/AddTask";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 function centerAspectCrop(
   mediaWidth: number,
   mediaHeight: number,
@@ -55,6 +57,8 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     previousMask: [, setPreviousMask],
     mergedMask: [, setMergedMask],
     globalLoadFile: [globalLoadFile],
+    maskImgList: [maskImgList, setMaskImgList],
+    showMaskImgList: [, setShowMaskImgList],
   } = useContext(AppContext)!;
 
   function onSelectFile(e: React.ChangeEvent<HTMLInputElement>) {
@@ -119,25 +123,6 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     const { imgURL, npyURL, onnxURL } = data;
     const url = new URL(imgURL, location.origin);
     globalLoadFile({ imgURL: url, npyURL, onnxURL, data });
-
-    // previewCanvasRef.current.toBlob((blob) => {
-    //   if (!blob) {
-    //     throw new Error("Failed to create blob");
-    //   }
-
-    //   if (blobUrlRef.current) {
-    //     console.log(URL.revokeObjectURL(blobUrlRef.current), "revokeObjectURL");
-
-    //     URL.revokeObjectURL(blobUrlRef.current);
-    //   }
-
-    //   URL.createObjectURL(blob);
-    //   console.log(URL.revokeObjectURL(blobUrlRef.current), "revokeObjectURL");
-
-    // blobUrlRef.current = URL.createObjectURL(blob);
-    // hiddenAnchorRef.current!.href = blobUrlRef.current;
-    // hiddenAnchorRef.current!.click();
-    // });
   }
 
   useDebounceEffect(
@@ -166,11 +151,6 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setAspect(undefined);
   }, []);
 
-  // useEffect(() => {
-  //   setAspect(16 / 9);
-  //   setCrop(centerAspectCrop(cropWidth, cropHeight, 16 / 9));
-  // }, [cropWidth, cropHeight]);
-
   const handleOperate = ({ type }: any) => {
     const parentEle: any = document.getElementById("useImgWrapper");
     const maskPointers: any = document.querySelectorAll(".maskPointer");
@@ -193,10 +173,32 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setCropWidth(value);
   };
   const maskImageClasses = `absolute opacity-40 pointer-events-none`;
-
+  const addCutOutObject = () => {
+    setMaskImgList([...maskImgList, maskImg?.src]);
+    setShowMaskImgList(true);
+  };
   return (
     image && (
       <div className="use_img_operate_wrapper">
+        <div className="crop_btn_group_wrapper">
+          <Button variant="contained" onClick={addCutOutObject}>
+            <PlaylistAddIcon />
+            添加到mask列表
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              handleOperate({ type: "getImg" });
+            }}
+          >
+            <AddTaskIcon
+              style={{
+                marginRight: "5px",
+              }}
+            />{" "}
+            获取白底图片
+          </Button>
+        </div>
         <div>
           {processImgType === "crop" && (
             <ReactCrop

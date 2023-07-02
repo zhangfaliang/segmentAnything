@@ -9,10 +9,12 @@
 }
 .crop_btn_group_wrapper {
   padding: 10px 0;
+  height: 60px;
   display: flex;
   button {
-    margin-left: 10px;
+    margin-right: 10px;
   }
+  box-sizing: border-box;
 }
 .box {
   display: inline-block;

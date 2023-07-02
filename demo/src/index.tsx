@@ -82,7 +82,7 @@ const router = createBrowserRouter([
             <LeftComponent />
           </div>
           <div className="app_right">
-            <Stage />;
+            <Stage />
           </div>
         </div>
       </div>

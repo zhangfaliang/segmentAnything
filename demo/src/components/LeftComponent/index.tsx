@@ -100,7 +100,7 @@ const LeftComponent = ({}: any) => {
               marginRight: "3px",
             }}
           ></CloudUploadIcon>
-          上传照片
+          上传图片
         </Button>
         <Box mt={4} sx={{ width: "100%" }}>
           <Typography variant="button" display="block" gutterBottom>

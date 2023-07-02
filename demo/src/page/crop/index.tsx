@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Cropper from "./next.index";
 import "cropperjs/dist/cropper.css";
 import "./index.scss";
