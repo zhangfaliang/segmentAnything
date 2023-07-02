@@ -1,6 +1,7 @@
 .use_img_operate_wrapper {
   display: flex;
   jusetify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
   .use_img_operate {
     display: flex;
@@ -52,4 +53,18 @@
   .use_img_mask {
     top: 0;
   }
+}
+
+.mask_wrapper {
+  display: flex;
+}
+.hover_and_click_maskList {
+  padding: 15px;
+  margin-left: 25px;
+  width: 300px;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.1);
 }

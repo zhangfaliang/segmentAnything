@@ -6,6 +6,7 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { useNavigate } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import { get } from "lodash";
 import "./index.scss";
 
 const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
@@ -18,7 +19,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     previousMask: [, setPreviousMask],
     mergedMask: [, setMergedMask],
     maskImgList: [maskImgList, setMaskImgList],
-    showMaskImgList: [, setShowMaskImgList],
+    showMaskImgList: [showMaskImgList, setShowMaskImgList],
   } = useContext(AppContext)!;
   const navigate = useNavigate();
 
@@ -37,8 +38,10 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setMaskImgList([...maskImgList, maskImg?.src]);
     setShowMaskImgList(true);
   };
+  console.log(maskImgList, "maskImgList");
+
   return (
-    <div>
+    <div className="mask_wrapper">
       {image && (
         <div className="use_img_operate_wrapper">
           <div className="crop_btn_group_wrapper">
@@ -113,6 +116,16 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
             ></CloudUploadIcon>
             上传照片
           </Button>
+        </div>
+      )}
+
+      {showMaskImgList && (
+        <div className="hover_and_click_maskList">
+          <div>mask 列表 </div>
+          {!!get(maskImgList, "length") &&
+            maskImgList?.map((item) => {
+              return <img src={item} alt="" />;
+            })}
         </div>
       )}
     </div>

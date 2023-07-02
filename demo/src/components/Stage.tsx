@@ -37,7 +37,7 @@ const Stage = ({ loadFile }: any) => {
       const dotEle = document.createElement("div");
       dotEle.style.position = "absolute";
       dotEle.style.left = `${x - 5}px`;
-      dotEle.style.top = `${y - 5}px`;
+      dotEle.style.top = `${y + 58}px`;
       dotEle.style.width = "10px";
       dotEle.style.height = "10px";
       dotEle.style.borderRadius = "50%";
@@ -53,7 +53,7 @@ const Stage = ({ loadFile }: any) => {
       const dotEle = document.createElement("div");
       dotEle.style.position = "absolute";
       dotEle.style.left = `${x - 5}px`;
-      dotEle.style.top = `${y - 5}px`;
+      dotEle.style.top = `${y + 58}px`;
       dotEle.style.width = "10px";
       dotEle.style.height = "10px";
       dotEle.style.borderRadius = "50%";
