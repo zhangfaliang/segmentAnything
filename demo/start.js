@@ -132,6 +132,6 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-app.listen(9090, () => {
-  console.log("监听端口：9090");
+app.listen(8080, () => {
+  console.log("监听端口：8080");
 });
