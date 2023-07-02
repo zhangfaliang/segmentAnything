@@ -183,7 +183,7 @@ export const Crop = () => {
           autoCropArea={1}
           autoCrop={autoCrop}
           modal={true}
-          style={{ height: "auto", width: "70%" }}
+          style={{ height: "calc(100vh - 200px)", width: "auto" }}
           initialAspectRatio={1 / 1.16}
           src={cropData || localUpLoadImgData.data_url}
           viewMode={2}

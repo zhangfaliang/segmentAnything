@@ -49,6 +49,7 @@
   }
 }
 .use_img_mask_wrapper {
+  height: calc(100vh - 120px);
   position: relative;
   .use_img_mask {
     top: 0;
@@ -57,12 +58,13 @@
 
 .mask_wrapper {
   display: flex;
+  justify-content: space-between;
 }
 .hover_and_click_maskList {
   padding: 15px;
   margin-left: 25px;
   width: 300px;
-  height: auto;
+  min-height: calc(100vh - 200px);
   display: flex;
   justify-content: flex-start;
   flex-direction: column;

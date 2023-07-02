@@ -119,15 +119,13 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
         </div>
       )}
 
-      {showMaskImgList && (
-        <div className="hover_and_click_maskList">
-          <div>mask 列表 </div>
-          {!!get(maskImgList, "length") &&
-            maskImgList?.map((item) => {
-              return <img src={item} alt="" />;
-            })}
-        </div>
-      )}
+      <div className="hover_and_click_maskList">
+        <div>mask 列表 </div>
+        {!!get(maskImgList, "length") &&
+          maskImgList?.map((item) => {
+            return <img src={item} alt="" />;
+          })}
+      </div>
     </div>
   );
 };
