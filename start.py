@@ -155,65 +155,65 @@ async def save_image():
         # 从图像文件中读取字节流
         print(save_path,'处理背景图片')
         #636cc69f7b4dc1f857bcf9675ffb88490c7cd3721b4ac8cfba5a813faedfe13102d6f08f923bc1af9c29c92d30085ba1
-        # with open(save_path, 'rb') as f:
-        #     image_data = f.read()
-        # # 创建 BytesIO 对象
-        # image_file_object = io.BytesIO(image_data)
-        # # 将 BytesIO 对象重置到初始位置
-        # image_file_object.seek(0)
-        # # 构建请求的数据
-        # files = {
-        #     'image_file': (save_path, image_file_object, 'image/jpeg'),
-        # }
-        # # 发送 POST 请求
-        # r = requests.post('https://clipdrop-api.co/remove-background/v1',
-        #                   files=files,
-        #                   headers={
-        #                     #  'Accept': 'image/jpeg',
-        #                     'x-api-key': '3cd84362657491f071e72adca9ca976f157be0a079d164c41235718b37181b92a60c1eab1b7d00fdb2830103361b1cc2'})
-        # print(r.headers)
-        # if (r.ok):
-        #   with open(save_path, 'wb') as f:
-        #     f.write(r.content)
-        # else:
-        #     r.raise_for_status()
+        with open(save_path, 'rb') as f:
+            image_data = f.read()
+        # 创建 BytesIO 对象
+        image_file_object = io.BytesIO(image_data)
+        # 将 BytesIO 对象重置到初始位置
+        image_file_object.seek(0)
+        # 构建请求的数据
+        files = {
+            'image_file': (save_path, image_file_object, 'image/jpeg'),
+        }
+        # 发送 POST 请求
+        r = requests.post('https://clipdrop-api.co/remove-background/v1',
+                          files=files,
+                          headers={
+                            #  'Accept': 'image/jpeg',
+                            'x-api-key': '636cc69f7b4dc1f857bcf9675ffb88490c7cd3721b4ac8cfba5a813faedfe13102d6f08f923bc1af9c29c92d30085ba1'})
+        print(r.headers)
+        if (r.ok):
+          with open(save_path, 'wb') as f:
+            f.write(r.content)
+        else:
+            r.raise_for_status()
 
-        # image = Image.open(save_path)
-        # # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
-        # background = Image.new('RGBA', image.size, (255, 255, 255))
-        # # 将原始图片粘贴到新的背景图像上
-        # background.paste(image, (0, 0), image)
-        # # 保存带有白色背景的图片
-        # background.save(save_path)
-        # print(save_path,'处理背景图片成功')
+        image = Image.open(save_path)
+        # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
+        background = Image.new('RGBA', image.size, (255, 255, 255))
+        # 将原始图片粘贴到新的背景图像上
+        background.paste(image, (0, 0), image)
+        # 保存带有白色背景的图片
+        background.save(save_path)
+        print(save_path,'处理背景图片成功')
       
-        # response =  requests.post(
-        #     'https://api.remove.bg/v1.0/removebg',
-        #     # files={'image_file': open(save_path, 'rb')},
-        #     data={
-        #         "image_file_b64": imgData,
-        #         'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
-        #         'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
-        #         'type_level': '1',#["none", "latest", "1", "2"]:
-        #         'format': "jpg",#["jpg", "zip", "png", "auto"]:
-        #         # 'roi': "rgba", #["rgba", "alpha"]:
-        #         'crop': True , #true  false
-        #         'crop_margin': None,
-        #         'scale': 'original'  ,#'original'  
-        #         'position': 'original'  , #'original'
-        #         'channels': 'rgba',#'rgba'  alpha
-        #         'add_shadow': True, #true  false
-        #         'semitransparency': True #true  false
-        #         },
-        #     headers={'X-Api-Key': Api_Key},
-        # )
-        # if response.status_code == requests.codes.ok:
-        #      with open(save_path, 'wb') as f:
-        #           f.write(response.content)
-        #           print(imgName,'保存成功')
-        #           print(imgName,'处理背景图片')
-        # else:
-        #     print("Error:", response.status_code, response.text)
+        response =  requests.post(
+            'https://api.remove.bg/v1.0/removebg',
+            # files={'image_file': open(save_path, 'rb')},
+            data={
+                "image_file_b64": imgData,
+                'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
+                'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
+                'type_level': '1',#["none", "latest", "1", "2"]:
+                'format': "jpg",#["jpg", "zip", "png", "auto"]:
+                # 'roi': "rgba", #["rgba", "alpha"]:
+                'crop': True , #true  false
+                'crop_margin': None,
+                'scale': 'original'  ,#'original'  
+                'position': 'original'  , #'original'
+                'channels': 'rgba',#'rgba'  alpha
+                'add_shadow': True, #true  false
+                'semitransparency': True #true  false
+                },
+            headers={'X-Api-Key': Api_Key},
+        )
+        if response.status_code == requests.codes.ok:
+             with open(save_path, 'wb') as f:
+                  f.write(response.content)
+                  print(imgName,'保存成功')
+                  print(imgName,'处理背景图片')
+        else:
+            print("Error:", response.status_code, response.text)
 
         print('npy生成中 ....')
         # 返回保存成功的信息
