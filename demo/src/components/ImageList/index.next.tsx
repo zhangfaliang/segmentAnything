@@ -68,7 +68,7 @@ export default function TitlebarImageList({}: any) {
               img: item.replace("demo/src", ""),
               title: item,
               author: "@halara",
-              rows: 8,
+              // rows: 8,
               // cols: 2,
               featured: true,
               order: order,
@@ -131,6 +131,7 @@ export default function TitlebarImageList({}: any) {
           sx={{
             width: "100%",
             overflow: "scroll",
+            height: clientHeight,
           }}
           cols={3}
           rowHeight={imgRowHeight}
