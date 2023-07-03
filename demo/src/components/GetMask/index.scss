@@ -50,6 +50,9 @@
 }
 .use_img_mask_wrapper {
   height: calc(100vh - 120px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
   position: relative;
   .use_img_mask {
     top: 0;
@@ -59,6 +62,11 @@
 .mask_wrapper {
   display: flex;
   justify-content: space-between;
+}
+.mask_img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 .hover_and_click_maskList {
   padding: 15px;

@@ -32,12 +32,12 @@ const Stage = ({ loadFile }: any) => {
     if (event?.clickType !== "right") {
       let el = event.target;
       const rect = el.getBoundingClientRect();
-      let x = event.clientX - rect.left;
-      let y = event.clientY - rect.top;
+      let x = event.clientX - 251;
+      let y = event.clientY - 83;
       const dotEle = document.createElement("div");
       dotEle.style.position = "absolute";
-      dotEle.style.left = `${x - 5}px`;
-      dotEle.style.top = `${y + 58}px`;
+      dotEle.style.left = `${x}px`;
+      dotEle.style.top = `${y}px`;
       dotEle.style.width = "10px";
       dotEle.style.height = "10px";
       dotEle.style.borderRadius = "50%";
@@ -48,12 +48,12 @@ const Stage = ({ loadFile }: any) => {
     } else {
       let el = event.target;
       const rect = el.getBoundingClientRect();
-      let x = event.clientX - rect.left;
-      let y = event.clientY - rect.top;
+      let x = event.clientX - 251;
+      let y = event.clientY - 83;
       const dotEle = document.createElement("div");
       dotEle.style.position = "absolute";
-      dotEle.style.left = `${x - 5}px`;
-      dotEle.style.top = `${y + 58}px`;
+      dotEle.style.left = `${x}px`;
+      dotEle.style.top = `${y}px`;
       dotEle.style.width = "10px";
       dotEle.style.height = "10px";
       dotEle.style.borderRadius = "50%";

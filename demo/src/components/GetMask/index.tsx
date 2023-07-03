@@ -62,27 +62,27 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
 
   return (
     <div className="mask_wrapper">
-      {image && (
-        <div className="use_img_operate_wrapper">
-          <ToastContainer />
-          <div className="crop_btn_group_wrapper">
-            <Button variant="contained" onClick={addCutOutObject}>
-              <PlaylistAddIcon />
-              添加到mask列表
-            </Button>
-            <Button variant="contained">
-              <AddTaskIcon
-                style={{
-                  marginRight: "5px",
-                }}
-              />{" "}
-              <a href={image.src} download>
-                {" "}
-                获取白底图片(可用于webui img2img)
-              </a>
-            </Button>
-          </div>
-          <div>
+      <div className="mask_img">
+        {image && (
+          <div className="use_img_operate_wrapper">
+            <ToastContainer />
+            <div className="crop_btn_group_wrapper">
+              <Button variant="contained" onClick={addCutOutObject}>
+                <PlaylistAddIcon />
+                添加到mask列表
+              </Button>
+              <Button variant="contained">
+                <AddTaskIcon
+                  style={{
+                    marginRight: "5px",
+                  }}
+                />{" "}
+                <a href={image.src} download>
+                  {" "}
+                  获取白底图片(可用于webui img2img)
+                </a>
+              </Button>
+            </div>
             <div className="use_img_mask_wrapper">
               <img
                 ref={imgRef}
@@ -108,8 +108,9 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
               )}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
       {!image && (
         <div className="no_mask_data">
           <div className="no_mask_data_test">
