@@ -72,15 +72,6 @@ export const Crop = () => {
     cropper.crop();
     setAutoCrop(true);
     cropper.autoCrop = true;
-    cropper.setData({
-      x: 0,
-      y: 0,
-      width: 1000,
-      height: 1160,
-      rotate: 0,
-      scaleX: 1,
-      scaleY: 1,
-    });
   };
   const onCrop = (e: any) => {
     const processValueWidth = Number(`${e.detail.width}`.replace(/^0/, ""));
