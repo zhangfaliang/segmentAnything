@@ -62,9 +62,9 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
 
   return (
     <div className="mask_wrapper">
-      <ToastContainer />
       {image && (
         <div className="use_img_operate_wrapper">
+          <ToastContainer />
           <div className="crop_btn_group_wrapper">
             <Button variant="contained" onClick={addCutOutObject}>
               <PlaylistAddIcon />
