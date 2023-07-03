@@ -270,6 +270,7 @@ def get_onnx_files():
       
 @app.route('/')
 def ok():
+    print('status Ok')
     return {'status': 'ok'}
 @app.route('/api/img_folder')
 def traverse_folder():
