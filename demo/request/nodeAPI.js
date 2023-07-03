@@ -1,3 +1,4 @@
+var fetch = require("fetch");
 let host =
   process.env.NODE_ENV === "production"
     ? "https://sam.doublefs.com"
