@@ -44,7 +44,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   const maskImageClasses = `absolute opacity-40 pointer-events-none`;
   const addCutOutObject = () => {
     if (!maskImg?.src) {
-      toast(`🔥  点击图片任意任意位置可以获取mask`, {
+      toast(`🔥  点击图片任意位置可以获取mask`, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,

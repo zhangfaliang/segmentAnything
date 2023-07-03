@@ -7,8 +7,8 @@ let host =
     : "http://localhost:5000";
 let nodeHost =
   process.env.NODE_ENV === "production"
-    ? "https://samui.doublefs.com"
-    : "https://samui.doublefs.com";
+    ? "https:///samui.doublefs.com"
+    : "http://10.1.0.104:9090";
 // host = "http://localhost:5000";
 export const postData = ({ url, data, isNodeServer }: any) => {
   const processHost = isNodeServer ? nodeHost : host;

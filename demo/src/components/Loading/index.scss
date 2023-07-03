@@ -1,14 +1,14 @@
 .global_loading_wrapper {
   position: absolute;
   display: flex;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
-  top: 0;
+  height: 50vh;
+  width: 50vw;
   justify-content: center;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
   align-items: center;
+  margin: 0 auto;
   z-index: 9999;
   background: rgba($color: #000000, $alpha: 1);
 }

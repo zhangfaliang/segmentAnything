@@ -91,15 +91,6 @@ export const Crop = () => {
     // cropper.crop();
     setAutoCrop(false);
     cropper.autoCrop = false;
-    cropper.setData({
-      x: 0,
-      y: 0,
-      width: 1000,
-      height: 1160,
-      rotate: 0,
-      scaleX: 1,
-      scaleY: 1,
-    });
     setLocalUpLoadImgData(null);
     setCropData(null);
   };
@@ -127,6 +118,21 @@ export const Crop = () => {
     setLoading(false);
   };
   const handleGenerate = async () => {
+    console.log(values?.height, "cropData");
+    if (values?.height) {
+      toast.error(`已选择裁剪区域，请先处理裁剪`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
+    return;
     const { data, code, message } =
       (await postData({
         url: "/generate/mask",
@@ -155,65 +161,67 @@ export const Crop = () => {
         theme: "colored",
       });
     }
-    // const { imgURL, npyURL, onnxURL } = data;
-    // const url = new URL(imgURL, location.origin);
-    // (window as any).loadFile({ imgURL: url, npyURL, onnxURL, data });
   };
 
   return localUpLoadImgData ? (
     <>
       <ToastContainer />
-      <div className="crop_btn_group_wrapper">
-        <Button variant="contained" onClick={handleRestUpload}>
-          <AddAPhotoIcon />
-          重新上传
-        </Button>
-
-        <Button variant="contained" onClick={handleCrop}>
-          <CropIcon
-            style={{
-              marginRight: "5px",
-            }}
-          />{" "}
-          裁剪
-        </Button>
-        <Button variant="contained" onClick={handleGenerate}>
-          <AddTaskIcon
-            style={{
-              marginRight: "5px",
-            }}
-          />{" "}
-          生成mask
-        </Button>
-      </div>
       <div className="crop_wrapper_content">
-        <Cropper
-          autoCropArea={1}
-          autoCrop={autoCrop}
-          modal={true}
-          style={{ height: "calc(100vh - 200px)", width: "auto" }}
-          initialAspectRatio={1 / 1.16}
-          src={cropData || localUpLoadImgData.data_url}
-          viewMode={2}
-          background={true}
-          responsive={false}
-          guides={true}
-          center={true}
-          data={values}
-          minContainerWidth={0}
-          minContainerHeight={0}
-          highlight={true}
-          rotatable={false}
-          scalable={false}
-          zoomable={false}
-          crop={onCrop}
-          movable={true}
-          setCropper={setCropper}
-          cropper={cropper}
-          checkCrossOrigin={true}
-        />
+        <div className="crop_wrapper_content_center">
+          <div className="crop_btn_group_wrapper">
+            <Button variant="contained" onClick={handleRestUpload}>
+              <AddAPhotoIcon />
+              重新上传
+            </Button>
 
-        <Box sx={{ width: 400, paddingLeft: 5 }}>
+            <Button variant="contained" onClick={handleCrop}>
+              <CropIcon
+                style={{
+                  marginRight: "5px",
+                }}
+              />{" "}
+              裁剪
+            </Button>
+            <Button variant="contained" onClick={handleGenerate}>
+              <AddTaskIcon
+                style={{
+                  marginRight: "5px",
+                }}
+              />{" "}
+              生成mask
+            </Button>
+          </div>
+          <Cropper
+            className="crop_wrapper_content_left"
+            autoCropArea={1}
+            autoCrop={autoCrop}
+            modal={true}
+            style={{ height: "auto", width: "100%" }}
+            initialAspectRatio={1 / 1.16}
+            src={cropData || localUpLoadImgData.data_url}
+            viewMode={2}
+            background={false}
+            responsive={false}
+            guides={true}
+            center={true}
+            data={values}
+            minContainerWidth={0}
+            minContainerHeight={0}
+            highlight={true}
+            rotatable={false}
+            scalable={false}
+            zoomable={false}
+            crop={onCrop}
+            movable={true}
+            setCropper={setCropper}
+            cropper={cropper}
+            checkCrossOrigin={true}
+          />
+        </div>
+        <Box
+          className="crop_wrapper_content_right"
+          sx={{ width: 400, paddingLeft: 5 }}
+        >
           <Grid container spacing={1}>
             <Grid item xs={12} md={12}>
               <Button variant="contained" onClick={handleAutoFullParams}>

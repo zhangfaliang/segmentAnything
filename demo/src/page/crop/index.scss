@@ -4,12 +4,31 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
+  display: flex;
+}
+.crop_wrapper_content_center {
+  flex: 1;
+  display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
+}
+.crop_wrapper_content_right {
+  padding-top: 80px;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.1);
+}
+.crop_wrapper_content_left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 .crop_btn_group_wrapper {
   padding: 10px 0;
   height: 60px;
+  width: 100%;
+  justify-content: center;
   display: flex;
   button {
     margin-right: 10px;

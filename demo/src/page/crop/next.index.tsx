@@ -65,13 +65,7 @@ const ReactCropper = ({ ...props }) => {
     setCropper,
     ...rest
   } = props;
-  const defaultOptions: ReactCropperDefaultOptions = {
-    scaleY,
-    scaleX,
-    enable,
-    zoomTo,
-    rotateTo,
-  };
+
   /**
    * Invoke zoomTo method when cropper is set and zoomTo prop changes
    */

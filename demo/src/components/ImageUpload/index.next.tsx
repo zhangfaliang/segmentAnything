@@ -152,21 +152,12 @@ export default function App({ loadFile }: any) {
     // const url = new URL(imgURL, location.origin);
     // loadFile({ imgURL: url, npyURL, onnxURL, data });
   };
-  const [files, setFiles] = useState<File[]>([]);
 
   const onChange = (imageList: any) => {
     setImages(imageList);
     if (imageList?.length) {
       uploadImg({ imageList });
     }
-  };
-  const override: CSSProperties = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "red",
-  };
-  const clickToImageList = () => {
-    setImage(null);
   };
 
   return !localUpLoadImgData ? (
