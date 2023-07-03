@@ -122,21 +122,22 @@ export default function TitlebarImageList({}: any) {
       <DeleteImgModal open={open} setOpen={setOpen} handleYes={handleDelete} />
       <ImageList
         sx={{
-          width: "100%",
-          height: "auto",
           overflowY: "scroll",
+          width: "100%",
+          height: 300 * 1.16,
         }}
-        rowHeight={"auto"}
+        classes="imgList_item_wrapper"
+        rowHeight={300 * 1.16}
         cols={6}
         gap={16}
       >
         {imgList.map((item: any) => (
           <ImageListItem
             key={item.img}
-            classes="imgList_item_wrapper"
             onClick={() => clickUser(item)}
             style={{
               cursor: "pointer",
+              width: "300px",
             }}
           >
             <img
