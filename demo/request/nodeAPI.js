@@ -1,4 +1,4 @@
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 let host =
   process.env.NODE_ENV === "production"
     ? "http://localhost:5000"
