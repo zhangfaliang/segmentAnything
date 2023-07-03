@@ -130,9 +130,9 @@ export const Crop = () => {
         progress: undefined,
         theme: "colored",
       });
+      return;
     }
 
-    return;
     const { data, code, message } =
       (await postData({
         url: "/generate/mask",
