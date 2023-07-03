@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 let host =
   process.env.NODE_ENV === "production"
     ? "http://localhost:5000"
-    : "http://localhost:5000";
+    : "http://10.1.0.104:9090";
 
 const postData = ({ url, data }) => {
   const processUrl = `${host}${url}`;

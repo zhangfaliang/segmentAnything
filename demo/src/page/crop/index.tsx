@@ -92,6 +92,18 @@ export const Crop = () => {
     setValues(data);
   };
   const handleRestUpload = () => {
+    // cropper.crop();
+    setAutoCrop(false);
+    cropper.autoCrop = false;
+    cropper.setData({
+      x: 0,
+      y: 0,
+      width: 1000,
+      height: 1160,
+      rotate: 0,
+      scaleX: 1,
+      scaleY: 1,
+    });
     setLocalUpLoadImgData(null);
     setCropData(null);
   };
