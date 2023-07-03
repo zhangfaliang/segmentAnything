@@ -130,7 +130,7 @@ export default function TitlebarImageList({}: any) {
           className="imgList_item_wrapper"
           sx={{
             width: "100%",
-            height: clientHeight,
+            overflow: "scroll",
           }}
           cols={3}
           rowHeight={imgRowHeight}
@@ -142,13 +142,13 @@ export default function TitlebarImageList({}: any) {
               onClick={() => clickUser(item)}
               style={{
                 cursor: "pointer",
-                height: "auto",
+                height: imgRowHeight,
               }}
             >
               <img
                 style={{
                   cursor: "pointer",
-                  height: "auto",
+                  height: imgRowHeight,
                 }}
                 src={`${item.img}?w=248&fit=crop&auto=format`}
                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
