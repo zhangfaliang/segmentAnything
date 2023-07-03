@@ -14,15 +14,18 @@ export default function TitlebarImageList({}: any) {
   const {
     loading: [, setLoading],
     maskImg: [, setMaskImg],
-    previousMask: [previousMask, setPreviousMask],
-    mergedMask: [mergedMask, setMergedMask],
-    globalLoadFile: [globalLoadFile, setGlobalLoadFileLoadFile],
+    previousMask: [, setPreviousMask],
+    mergedMask: [, setMergedMask],
   } = useContext(AppContext)!;
 
   const [imgList, setImgList] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(true);
   const [open, setOpen]: any = React.useState(false);
   const [deleteData, setDeleteData]: any = React.useState({});
+  const [imgRowHeight, setImgRowHeight]: any = React.useState(0);
+  useEffect(() => {
+    setImgRowHeight(((document.body.clientWidth - 260) / 6) * 1.16);
+  }, []);
 
   const getImgList = async () => {
     const res = await getData({ url: "/api/files" });
@@ -54,7 +57,6 @@ export default function TitlebarImageList({}: any) {
               "1",
               0
             );
-            console.log(imgURL, "itemitemitem");
 
             imgDataList.push({
               imgURL,
@@ -63,7 +65,7 @@ export default function TitlebarImageList({}: any) {
               img: item.replace("demo/src", ""),
               title: item,
               author: "@halara",
-              // rows: 2,
+              rows: 8,
               // cols: 2,
               featured: true,
               order: order,
@@ -118,58 +120,56 @@ export default function TitlebarImageList({}: any) {
   const [files, setFiles]: any = useState([]);
 
   return (
-    <>
+    <div className="img_list_wrapper">
       <DeleteImgModal open={open} setOpen={setOpen} handleYes={handleDelete} />
-      <ImageList
-        sx={{
-          overflowY: "scroll",
-          width: "100%",
-          height: 300 * 1.16,
-        }}
-        classes="imgList_item_wrapper"
-        rowHeight={300 * 1.16}
-        cols={6}
-        gap={16}
-      >
-        {imgList.map((item: any) => (
-          <ImageListItem
-            key={item.img}
-            onClick={() => clickUser(item)}
-            style={{
-              cursor: "pointer",
-              width: "300px",
-            }}
-          >
-            <img
+      {!!imgRowHeight && (
+        <ImageList
+          sx={{ width: "100%", height: "100%" }}
+          cols={6}
+          rowHeight={imgRowHeight}
+          gap={16}
+        >
+          {imgList.map((item: any) => (
+            <ImageListItem
+              key={item.img}
+              onClick={() => clickUser(item)}
               style={{
                 cursor: "pointer",
+                height: imgRowHeight,
               }}
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-              // className="lazyload"
-            />
-            <ImageListItemBar
-              // title={item.title}
-              subtitle={item.author}
-              actionIcon={
-                <IconButton
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    deleteFlag && clickDele(item);
-                  }}
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${item.title}`}
-                >
-                  {deleteFlag && <DeleteIcon>删除</DeleteIcon>}
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </>
+            >
+              <img
+                style={{
+                  cursor: "pointer",
+                  height: imgRowHeight,
+                }}
+                src={`${item.img}?w=248&fit=crop&auto=format`}
+                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.title}
+                loading="lazy"
+                className="lazyload"
+              />
+              <ImageListItemBar
+                title={item.title}
+                subtitle={item.author}
+                actionIcon={
+                  <IconButton
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      deleteFlag && clickDele(item);
+                    }}
+                    sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                    aria-label={`info about ${item.title}`}
+                  >
+                    {deleteFlag && <DeleteIcon>删除</DeleteIcon>}
+                  </IconButton>
+                }
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      )}
+    </div>
   );
 }
