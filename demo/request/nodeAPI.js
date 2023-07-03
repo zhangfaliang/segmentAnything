@@ -1,8 +1,8 @@
 // const fetch = require("node-fetch");
 let host =
   process.env.NODE_ENV === "production"
-    ? "https://sam.doublefs.com"
-    : "https://sam.doublefs.com";
+    ? "http://localhost:5000"
+    : "http://localhost:5000";
 
 const postData = ({ url, data }) => {
   const processUrl = `${host}${url}`;
