@@ -23,8 +23,11 @@ export default function TitlebarImageList({}: any) {
   const [open, setOpen]: any = React.useState(false);
   const [deleteData, setDeleteData]: any = React.useState({});
   const [imgRowHeight, setImgRowHeight]: any = React.useState(0);
+  const [clientHeight, setClientHeight]: any = React.useState(0);
+
   useEffect(() => {
-    setImgRowHeight(((document.body.clientWidth - 260) / 6) * 1.16);
+    setImgRowHeight(((document.body.clientWidth - 260) / 1) * 1.16);
+    setClientHeight(document.body.clientHeight);
   }, []);
 
   const getImgList = async () => {
@@ -124,10 +127,14 @@ export default function TitlebarImageList({}: any) {
       <DeleteImgModal open={open} setOpen={setOpen} handleYes={handleDelete} />
       {!!imgRowHeight && (
         <ImageList
-          sx={{ width: "100%", height: "100%" }}
-          cols={6}
+          className="imgList_item_wrapper"
+          sx={{
+            width: "100%",
+            height: clientHeight,
+          }}
+          cols={3}
           rowHeight={imgRowHeight}
-          gap={16}
+          gap={20}
         >
           {imgList.map((item: any) => (
             <ImageListItem
@@ -135,19 +142,19 @@ export default function TitlebarImageList({}: any) {
               onClick={() => clickUser(item)}
               style={{
                 cursor: "pointer",
-                height: imgRowHeight,
+                height: "auto",
               }}
             >
               <img
                 style={{
                   cursor: "pointer",
-                  height: imgRowHeight,
+                  height: "auto",
                 }}
                 src={`${item.img}?w=248&fit=crop&auto=format`}
                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
-                className="lazyload"
+                // className="lazyload"
               />
               <ImageListItemBar
                 title={item.title}
