@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Cropper from "./next.index";
 import "cropperjs/dist/cropper.css";
 import "./index.scss";
@@ -35,7 +35,12 @@ export const Crop = () => {
     scaleX: 1,
     scaleY: 1,
   });
-
+  useEffect(() => {
+    return () => {
+      setLocalUpLoadImgData(null);
+      setCropData(null);
+    };
+  }, []);
   const handleChange = (prop: any) => (event: any) => {
     if (event.target.value < 0) return;
     const processValue = `${event.target.value}`.replace(/^0/, "");

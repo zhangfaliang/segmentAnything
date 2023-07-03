@@ -9,6 +9,8 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import { get } from "lodash";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import Typography from "@mui/material/Typography";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./index.scss";
 
@@ -34,10 +36,26 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
 
   useEffect(() => {
     setAspect(undefined);
+    return () => {
+      setMaskImgList([]);
+    };
   }, []);
 
   const maskImageClasses = `absolute opacity-40 pointer-events-none`;
   const addCutOutObject = () => {
+    debugger;
+    if (!maskImg?.src) {
+      toast(`🔥  点击图片任意任意位置可以获取mask`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+      return;
+    }
     setMaskImgList([...maskImgList, maskImg?.src]);
     setShowMaskImgList(true);
   };
@@ -45,6 +63,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
 
   return (
     <div className="mask_wrapper">
+      <ToastContainer />
       {image && (
         <div className="use_img_operate_wrapper">
           <div className="crop_btn_group_wrapper">
