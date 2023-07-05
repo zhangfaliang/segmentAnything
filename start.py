@@ -187,33 +187,33 @@ async def save_image():
         background.save(save_path)
         print(save_path,'处理背景图片成功')
       
-        response =  requests.post(
-            'https://api.remove.bg/v1.0/removebg',
-            # files={'image_file': open(save_path, 'rb')},
-            data={
-                "image_file_b64": imgData,
-                'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
-                'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
-                'type_level': '1',#["none", "latest", "1", "2"]:
-                'format': "jpg",#["jpg", "zip", "png", "auto"]:
-                # 'roi': "rgba", #["rgba", "alpha"]:
-                'crop': True , #true  false
-                'crop_margin': None,
-                'scale': 'original'  ,#'original'  
-                'position': 'original'  , #'original'
-                'channels': 'rgba',#'rgba'  alpha
-                'add_shadow': True, #true  false
-                'semitransparency': True #true  false
-                },
-            headers={'X-Api-Key': Api_Key},
-        )
-        if response.status_code == requests.codes.ok:
-             with open(save_path, 'wb') as f:
-                  f.write(response.content)
-                  print(imgName,'保存成功')
-                  print(imgName,'处理背景图片')
-        else:
-            print("Error:", response.status_code, response.text)
+        # response =  requests.post(
+        #     'https://api.remove.bg/v1.0/removebg',
+        #     # files={'image_file': open(save_path, 'rb')},
+        #     data={
+        #         "image_file_b64": imgData,
+        #         'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
+        #         'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
+        #         'type_level': '1',#["none", "latest", "1", "2"]:
+        #         'format': "jpg",#["jpg", "zip", "png", "auto"]:
+        #         # 'roi': "rgba", #["rgba", "alpha"]:
+        #         'crop': True , #true  false
+        #         'crop_margin': None,
+        #         'scale': 'original'  ,#'original'  
+        #         'position': 'original'  , #'original'
+        #         'channels': 'rgba',#'rgba'  alpha
+        #         'add_shadow': True, #true  false
+        #         'semitransparency': True #true  false
+        #         },
+        #     headers={'X-Api-Key': Api_Key},
+        # )
+        # if response.status_code == requests.codes.ok:
+        #      with open(save_path, 'wb') as f:
+        #           f.write(response.content)
+        #           print(imgName,'保存成功')
+        #           print(imgName,'处理背景图片')
+        # else:
+        #     print("Error:", response.status_code, response.text)
 
         print('npy生成中 ....')
         # 返回保存成功的信息
