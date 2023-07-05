@@ -10,7 +10,7 @@
     "test": "yarn run start-model-test",
     "start-dev": "webpack serve --config=configs/webpack/dev.js",
     "prod": "yarn run clean-dist && webpack --config=configs/webpack/prod.js && mv dist/*.wasm dist/js && node start.js",
-    "dev:prod": "yarn run clean-dist && webpack --config=configs/webpack/prod.js && mv dist/*.wasm dist/js && node start.js"
+    "start:node": "node dev_start.js"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",

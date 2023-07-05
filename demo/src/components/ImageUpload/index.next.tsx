@@ -1,8 +1,8 @@
 import "./index.scss";
-import React, { useState, useContext, CSSProperties, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./index.scss";
 import AppContext from "../hooks/createContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { handleImageScale } from "../../components/helpers/scaleHelper";
 import ImageUploading from "react-images-uploading";
 import Button from "@mui/material/Button";
