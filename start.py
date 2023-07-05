@@ -29,15 +29,15 @@ maskApiTask = types.SimpleNamespace(
 
 LOG_FILE = "test_log.log"
 log_format = "[%(levelname)s] %(asctime)s [%(filename)s:%(lineno)d, %(funcName)s] %(message)s"
-logging.basicConfig(filename=LOG_FILE,
-                    filemode="a",
-                    format=log_format,
-                    level=logging.INFO)
-time_hdls = logging.handlers.TimedRotatingFileHandler(
-  LOG_FILE, when='D', interval=1, backupCount=7)
-logging.getLogger().addHandler(time_hdls)
+# logging.basicConfig(filename=LOG_FILE,
+#                     filemode="a",
+#                     format=log_format,
+#                     level=logging.INFO)
+# time_hdls = logging.handlers.TimedRotatingFileHandler(
+#   LOG_FILE, when='D', interval=1, backupCount=7)
+# logging.getLogger().addHandler(time_hdls)
 
-logging.info("begin service")
+# logging.info("begin service")
 
 DEPLOY_PORT = 8889
 
@@ -286,9 +286,9 @@ def traverse_folder():
 
 if __name__ == '__main__':
     
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    # app.run(debug=True, port=5000, host='0.0.0.0')
     # logging.info("process_is_alive_noneed_begin")
-    # serve(app, host='0.0.0.0', port=5000, threads=30)  # WAITRESS!
+    serve(app, host='0.0.0.0', port=5000, threads=30)  # WAITRESS!
     # logging.info("try check and start app, end")
 
 
