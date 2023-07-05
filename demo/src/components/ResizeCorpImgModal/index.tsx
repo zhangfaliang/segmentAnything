@@ -99,6 +99,8 @@ export default function ResizeCorpImgModal({
         size: size,
       });
     }
+    setOpen(false);
+
     const { data, code, message } =
       (await postData({
         url: "/generate/mask",
@@ -115,7 +117,6 @@ export default function ResizeCorpImgModal({
           size: size,
         },
       })) || {};
-    setOpen(false);
 
     if (code === -1) {
       toast.error(`🔐--${message}`, {
