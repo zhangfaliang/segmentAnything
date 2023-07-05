@@ -22,6 +22,7 @@ import { handleImageScale } from "../../components/helpers/scaleHelper";
 import { modelScaleProps } from "../../components/helpers/Interfaces";
 import { onnxMaskToImage } from "../../components/helpers/maskUtils";
 import { modelData } from "../../components/helpers/onnxModelAPI";
+import { Helmet } from "react-helmet";
 
 const ort = require("onnxruntime-web");
 /* @ts-ignore */
@@ -263,6 +264,14 @@ function ResponsiveAppBar() {
   return (
     <>
       <AppBar position="fixed">
+        <Helmet>
+          <link
+            href="/assets/favicon.ico"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+          />
+        </Helmet>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
