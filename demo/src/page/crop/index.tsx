@@ -22,6 +22,7 @@ export const Crop = () => {
   const {
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
     loading: [loading, setLoading],
+    rePolling: [rePolling, setRePolling],
   } = useContext(AppContext)!;
   const [cropData, setCropData]: any = useState();
   const [cropper, setCropper]: any = useState();
@@ -42,6 +43,7 @@ export const Crop = () => {
     naturalWidth: 0,
     autoScaleValue: true,
   });
+
   useEffect(() => {
     return () => {
       setLocalUpLoadImgData(null);
@@ -157,6 +159,8 @@ export const Crop = () => {
       <ResizeCorpImgModal
         width={values.imgWidth.toFixed(0)}
         height={values.imgHeight.toFixed(0)}
+        setRePolling={setRePolling}
+        rePolling={rePolling}
         open={openResize}
         setOpen={setOpenResize}
         setValues={setValues}
@@ -166,6 +170,8 @@ export const Crop = () => {
         localUpLoadImgData={localUpLoadImgData}
         setLocalUpLoadImgData={setLocalUpLoadImgData}
         setCropData={setCropData}
+        setLoading={setLoading}
+        handleRestUpload={handleRestUpload}
       />
       <div className="crop_wrapper_content">
         <div className="crop_wrapper_content_center">
@@ -175,14 +181,6 @@ export const Crop = () => {
               重新上传
             </Button>
 
-            <Button variant="contained" onClick={handleCrop}>
-              <CropIcon
-                style={{
-                  marginRight: "5px",
-                }}
-              />{" "}
-              裁剪
-            </Button>
             <Button variant="contained" onClick={handleGenerate}>
               <AddTaskIcon
                 style={{
@@ -197,7 +195,7 @@ export const Crop = () => {
             autoCropArea={1}
             autoCrop={autoCrop}
             modal={true}
-            style={{ height: "auto", width: "100%" }}
+            // style={{ height: "", width: "auto" }}
             initialAspectRatio={1 / 1.16}
             src={cropData || localUpLoadImgData.data_url}
             viewMode={2}
@@ -210,8 +208,8 @@ export const Crop = () => {
             minContainerHeight={0}
             highlight={true}
             rotatable={false}
-            scalable={true}
-            zoomable={true}
+            scalable={false}
+            zoomable={false}
             crop={onCrop}
             movable={true}
             setCropper={setCropper}
@@ -231,7 +229,7 @@ export const Crop = () => {
                     marginRight: "5px",
                   }}
                 />{" "}
-                自定填充参数
+                自动补全裁剪参数
               </Button>
             </Grid>
             <Grid item xs={12} md={12}>
@@ -260,14 +258,24 @@ export const Crop = () => {
             </Grid>
 
             <Grid item xs={12} md={12}>
-              <Button variant="contained" onClick={handleReset}>
+              {/* <Button variant="contained" onClick={handleReset}>
                 <CleaningServicesIcon
                   style={{
                     marginRight: "5px",
                   }}
                 />{" "}
                 重新裁剪
-              </Button>
+              </Button> */}
+              {!!values.width && (
+                <Button variant="contained" onClick={handleCrop}>
+                  <CropIcon
+                    style={{
+                      marginRight: "5px",
+                    }}
+                  />{" "}
+                  裁剪
+                </Button>
+              )}
             </Grid>
           </Grid>
         </Box>

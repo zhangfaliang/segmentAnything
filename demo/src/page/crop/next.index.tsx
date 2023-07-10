@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from "react";
 import Cropper from "cropperjs";
 import { cleanImageProps } from "./utils";
 
-const REQUIRED_IMAGE_STYLES = { opacity: 0, maxWidth: "100%" };
+const REQUIRED_IMAGE_STYLES = {
+  opacity: 0,
+  // height: "calc(100vh - 200px)",
+  // width: "auto",
+};
 
 interface ReactCropperDefaultOptions {
   scaleX?: number;

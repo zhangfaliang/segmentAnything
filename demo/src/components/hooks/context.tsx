@@ -29,6 +29,8 @@ const AppContextProvider = (props: {
   const [globalLoadFile, setGlobalLoadFileLoadFile] = useState<any | null>(
     () => {}
   );
+  const [rePolling, setRePolling] = useState<any | null>(() => {});
+
   return (
     <AppContext.Provider
       value={{
@@ -46,6 +48,7 @@ const AppContextProvider = (props: {
         processImgType: [processImgType, setProcessImgType],
         localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
         globalLoadFile: [globalLoadFile, setGlobalLoadFileLoadFile],
+        rePolling: [rePolling, setRePolling],
       }}
     >
       {props.children}

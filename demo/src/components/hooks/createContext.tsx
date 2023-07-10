@@ -46,6 +46,7 @@ interface contextProps {
     globalLoadFile: any,
     setGlobalLoadFileLoadFile: (e: any | null) => void
   ];
+  rePolling: [rePolling: any, setRePolling: (e: any | null) => void];
 }
 
 const AppContext = createContext<contextProps | null>(null);

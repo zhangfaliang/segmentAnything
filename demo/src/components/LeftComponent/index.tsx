@@ -36,6 +36,7 @@ const LeftComponent = ({}: any) => {
     maskImgList: [maskImgList, setMaskImgList],
     maskImg: [maskImg],
     showMaskImgList: [showMaskImgList, setShowMaskImgList],
+    rePolling: [rePolling, setRePolling],
   } = useContext(AppContext)!;
   const navigate = useNavigate();
   const [taskData, setTaskData]: any = React.useState({});
@@ -54,7 +55,6 @@ const LeftComponent = ({}: any) => {
   };
 
   const processRes = (res: any) => {
-    console.log(res.data, "resresres");
     setTaskData(res?.data);
     if (res?.data?.queueNumber > 0) {
       const data = {
@@ -86,6 +86,16 @@ const LeftComponent = ({}: any) => {
       polling.stopPolling();
     };
   }, []);
+  useEffect(() => {
+    if (rePolling) {
+      polling.stopPolling();
+      startPolling({ reStart: true });
+      return () => {
+        polling.stopPolling();
+      };
+    }
+  }, [rePolling]);
+
   return (
     <div className="app_left">
       <div className="app_left_content">

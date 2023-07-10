@@ -2,12 +2,12 @@ import "./index.scss";
 import React, { useState, useContext } from "react";
 import "./index.scss";
 import AppContext from "../hooks/createContext";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { handleImageScale } from "../../components/helpers/scaleHelper";
 import ImageUploading from "react-images-uploading";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-const maxSize = 5;
+const maxSize = 40;
 const maxNumber = 5;
 
 export default function App({ loadFile }: any) {
@@ -98,7 +98,7 @@ export default function App({ loadFile }: any) {
     if (file) {
       const img = await readImg(file);
       try {
-        const base64URL: any = await compressImg(img, file.type, 1000, 1000);
+        const base64URL: any = await compressImg(img, file.type, 1400, 1624);
         const newImg = new Image();
         newImg.src = base64URL;
         newImg.onload = () => {
@@ -110,6 +110,11 @@ export default function App({ loadFile }: any) {
         setMaskImg(null);
         setPreviousMask("");
         setMergedMask("");
+        setLocalUpLoadImgData({
+          data_url: base64URL,
+          imgName: file.name,
+          size: file.size,
+        });
       } catch (error) {
         toast(`😂--图片上传出错请再试一次`, {
           position: "top-center",
@@ -122,7 +127,6 @@ export default function App({ loadFile }: any) {
         });
       }
     }
-    setLocalUpLoadImgData({ data_url, imgName: file.name, size: file.size });
     //       size: file.size, });
     // const { data, code, message } =
     //   (await uploadData({
@@ -162,6 +166,7 @@ export default function App({ loadFile }: any) {
 
   return !localUpLoadImgData ? (
     <div className="App">
+      <ToastContainer />
       <h1>请上传图片</h1>
       <p>支持格式：jpg、png、jpeg、webp</p>
       <ImageUploading
@@ -197,21 +202,20 @@ export default function App({ loadFile }: any) {
               {...dragProps}
               className="upload__image_btn"
             >
-              <CloudUploadIcon
-                style={{
-                  height: "50px",
-                  width: "50px",
-                  display: "block",
-                  marginRight: "20px",
-                }}
-              />
-              or
               <Button
                 variant="contained"
                 style={{
                   marginLeft: "20px",
                 }}
               >
+                <CloudUploadIcon
+                  style={{
+                    height: "50px",
+                    width: "50px",
+                    display: "block",
+                    marginRight: "20px",
+                  }}
+                />
                 上传图片
               </Button>
             </div>

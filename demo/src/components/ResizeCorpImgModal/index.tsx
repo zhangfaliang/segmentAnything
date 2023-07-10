@@ -22,6 +22,9 @@ export default function ResizeCorpImgModal({
   localUpLoadImgData,
   setLocalUpLoadImgData,
   setCropData,
+  setRePolling,
+  setLoading,
+  handleRestUpload,
 }: any) {
   const handleClose = ({}) => {
     setOpen(false);
@@ -91,14 +94,14 @@ export default function ResizeCorpImgModal({
     const size = fileSize.toFixed(2);
     image.src = base64URL;
     if (cropData) {
-      setCropData(base64URL);
+      setCropData("");
     } else {
       setLocalUpLoadImgData({
-        ...localUpLoadImgData,
-        data_url: base64URL,
-        size: size,
+        data_url: "",
+        size: "",
       });
     }
+    setLoading(true);
     setOpen(false);
 
     const { data, code, message } =
@@ -117,7 +120,10 @@ export default function ResizeCorpImgModal({
           size: size,
         },
       })) || {};
+    setLoading(false);
 
+    setRePolling(true);
+    handleRestUpload && handleRestUpload();
     if (code === -1) {
       toast.error(`🔐--${message}`, {
         position: "top-center",
