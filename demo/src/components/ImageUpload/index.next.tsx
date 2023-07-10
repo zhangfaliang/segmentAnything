@@ -98,7 +98,7 @@ export default function App({ loadFile }: any) {
     if (file) {
       const img = await readImg(file);
       try {
-        const base64URL: any = await compressImg(img, file.type, 1400, 1624);
+        const base64URL: any = await compressImg(img, file.type, 3000, 3480);
         const newImg = new Image();
         newImg.src = base64URL;
         newImg.onload = () => {
