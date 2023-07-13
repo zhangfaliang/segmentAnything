@@ -29,6 +29,23 @@ app.get("/assets/data/*", async (req, res, next) => {
     next(error);
   }
 });
+app.get("/assets/compressed_data/*", async (req, res, next) => {
+  const dataDir = path.join(__dirname, "src/assets/data/");
+  const filePath = req.path.replace("/assets/data/", "");
+  const fullFilePath = path.join(dataDir, filePath);
+  try {
+    res.sendFile(fullFilePath, {}, (err) => {
+      if (err) {
+        console.error(`无法发送文件：${fullFilePath}`);
+        next(err);
+      } else {
+        console.log(`已发送文件：${fullFilePath}`);
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 /**
  * 创建任务列表
  */
