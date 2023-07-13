@@ -30,8 +30,8 @@ app.get("/assets/data/*", async (req, res, next) => {
   }
 });
 app.get("/assets/compressed_data/*", async (req, res, next) => {
-  const dataDir = path.join(__dirname, "src/assets/data/");
-  const filePath = req.path.replace("/assets/data/", "");
+  const dataDir = path.join(__dirname, "src/assets/compressed_data/");
+  const filePath = req.path.replace("/assets/compressed_data/", "");
   const fullFilePath = path.join(dataDir, filePath);
   try {
     res.sendFile(fullFilePath, {}, (err) => {
