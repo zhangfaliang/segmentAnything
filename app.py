@@ -387,29 +387,52 @@
 
  
 
-import requests
-import io
+# import requests
+# import io
 
  
-image_path = '20230608-120759.jpeg'
-# 从图像文件中读取字节流
-with open(image_path, 'rb') as f:
-    image_data = f.read()
+# image_path = '20230608-120759.jpeg'
+# # 从图像文件中读取字节流
+# with open(image_path, 'rb') as f:
+#     image_data = f.read()
 
-# 创建 BytesIO 对象
-image_file_object = io.BytesIO(image_data)
+# # 创建 BytesIO 对象
+# image_file_object = io.BytesIO(image_data)
 
-# 将 BytesIO 对象重置到初始位置
-image_file_object.seek(0)
-r = requests.post('https://clipdrop-api.co/super-resolution/v1',
-  files = {
-    'image_file': ('car.jpg', image_file_object, 'image/jpeg'),
-    },
-  data = { 'upscale': 4 },
-  headers = { 'x-api-key': '3cd84362657491f071e72adca9ca976f157be0a079d164c41235718b37181b92a60c1eab1b7d00fdb2830103361b1cc2'}
-)
-if (r.ok):
-  with open('20230608-120759out.jpeg', 'wb') as f:
-    f.write(r.content)
-else:
-  r.raise_for_status()
+# # 将 BytesIO 对象重置到初始位置
+# image_file_object.seek(0)
+# r = requests.post('https://clipdrop-api.co/super-resolution/v1',
+#   files = {
+#     'image_file': ('car.jpg', image_file_object, 'image/jpeg'),
+#     },
+#   data = { 'upscale': 4 },
+#   headers = { 'x-api-key': '3cd84362657491f071e72adca9ca976f157be0a079d164c41235718b37181b92a60c1eab1b7d00fdb2830103361b1cc2'}
+# )
+# if (r.ok):
+#   with open('20230608-120759out.jpeg', 'wb') as f:
+#     f.write(r.content)
+# else:
+#   r.raise_for_status()
+#'demo', 'src', 'assets', 'data
+import os
+from PIL import Image
+from utils.compressImg import compress_images_in_directory
+# input_path = "demo/src/assets/data/ TC2000045@_@1688961160237.png"
+# output_path = "demo/src/assets/data/output_smail.png"
+# max_width = 800
+# max_height = 600
+
+# compress_image(input_path, output_path, max_width, max_height)
+
+
+
+
+# 指定目录和压缩参数
+input_directory = 'demo/src/assets/data/'
+output_directory = 'demo/src/assets/compressed_data/'
+max_width = 400
+max_height = 400*1.16
+
+# 调用函数压缩图片
+compress_images_in_directory(input_directory, output_directory, max_width, max_height)
+

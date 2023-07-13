@@ -19,6 +19,7 @@ import os
 import io
 from PIL import Image
 import types
+from utils.compressImg import compress_image
 
 maskApiTask = types.SimpleNamespace(
   done=False,
@@ -119,6 +120,15 @@ def delete_files():
     img_path = os.path.join('demo', 'src', 'assets', 'data', f'{name}.jpeg')
     if os.path.exists(img_path):
         os.remove(img_path)
+    small_img_path = os.path.join('demo', 'src', 'assets', 'compressed_data', f'{name}.jpg')
+    if os.path.exists(small_img_path):
+        os.remove(small_img_path)
+    small_img_path = os.path.join('demo', 'src', 'assets', 'compressed_data', f'{name}.png')
+    if os.path.exists(small_img_path):
+        os.remove(img_path)
+    small_img_path = os.path.join('demo', 'src', 'assets', 'compressed_data', f'{name}.jpeg')
+    if os.path.exists(small_img_path):
+        os.remove(small_img_path)    
     # 删除.np文件
     npy_path = os.path.join('demo', 'src', 'assets', 'data', f'{name}_embedding.npy')
     if os.path.exists(npy_path):
@@ -162,58 +172,35 @@ async def save_image():
         # 将 BytesIO 对象重置到初始位置
         image_file_object.seek(0)
         # 构建请求的数据
-        files = {
-            'image_file': (save_path, image_file_object, 'image/jpeg'),
-        }
-        # 发送 POST 请求
-        r = requests.post('https://clipdrop-api.co/remove-background/v1',
-                          files=files,
-                          headers={
-                            #  'Accept': 'image/jpeg',
-                            'x-api-key': '6407952b1601ca97b86c2da1a7ca451fd85b7b2de17fd3876f3223ead1e37e93b0a300da289b853cd18de5d28df59396'})
-        print(r.headers)
-        if (r.ok):
-          with open(save_path, 'wb') as f:
-            f.write(r.content)
-        else:
-            r.raise_for_status()
-
-        image = Image.open(save_path)
-        # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
-        background = Image.new('RGBA', image.size, (255, 255, 255))
-        # 将原始图片粘贴到新的背景图像上
-        background.paste(image, (0, 0), image)
-        # 保存带有白色背景的图片
-        background.save(save_path)
-        print(save_path,'处理背景图片成功')
-      
-        # response =  requests.post(
-        #     'https://api.remove.bg/v1.0/removebg',
-        #     # files={'image_file': open(save_path, 'rb')},
-        #     data={
-        #         "image_file_b64": imgData,
-        #         'size': 'full',#"auto", "preview", "small", "regular", "medium", "hd", "full", "4k"
-        #         'type': 'auto',#"auto", "person", "product", "animal", "car", "car_interior", "car_part", "transportation", "graphics", "other"
-        #         'type_level': '1',#["none", "latest", "1", "2"]:
-        #         'format': "jpg",#["jpg", "zip", "png", "auto"]:
-        #         # 'roi': "rgba", #["rgba", "alpha"]:
-        #         'crop': True , #true  false
-        #         'crop_margin': None,
-        #         'scale': 'original'  ,#'original'  
-        #         'position': 'original'  , #'original'
-        #         'channels': 'rgba',#'rgba'  alpha
-        #         'add_shadow': True, #true  false
-        #         'semitransparency': True #true  false
-        #         },
-        #     headers={'X-Api-Key': Api_Key},
-        # )
-        # if response.status_code == requests.codes.ok:
-        #      with open(save_path, 'wb') as f:
-        #           f.write(response.content)
-        #           print(imgName,'保存成功')
-        #           print(imgName,'处理背景图片')
+        # files = {
+        #     'image_file': (save_path, image_file_object, 'image/jpeg'),
+        # }
+        # # 发送 POST 请求
+        # r = requests.post('https://clipdrop-api.co/remove-background/v1',
+        #                   files=files,
+        #                   headers={
+        #                     #  'Accept': 'image/jpeg',
+        #                     'x-api-key': '6407952b1601ca97b86c2da1a7ca451fd85b7b2de17fd3876f3223ead1e37e93b0a300da289b853cd18de5d28df59396'})
+        # print(r.headers)
+        # if (r.ok):
+        #   with open(save_path, 'wb') as f:
+        #     f.write(r.content)
         # else:
-        #     print("Error:", response.status_code, response.text)
+        #     r.raise_for_status()
+
+        # image = Image.open(save_path)
+        # # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
+        # background = Image.new('RGBA', image.size, (255, 255, 255))
+        # # 将原始图片粘贴到新的背景图像上
+        # background.paste(image, (0, 0), image)
+        # # 保存带有白色背景的图片
+        # background.save(save_path)
+        # print(save_path,'处理背景图片成功')
+      
+        output_directory = 'demo/src/assets/compressed_data/'+'small_'+imgName
+        max_width = 400
+        max_height = 400*1.16
+        compress_image(save_path, output_directory, max_width, max_height)
 
         print('npy生成中 ....')
         # 返回保存成功的信息
@@ -232,6 +219,7 @@ async def save_image():
       # --output 
         maskApiTask.done = False           
         return jsonify({'status': 'success', 'message': 'Image saved successfully','data':{
+                'compressedOImgURL':'/assets/compressed_data/small_'+imgName,
                 'imgURL':'/assets/data/'+imgName,
                 'npyURL':'/assets/data/'+new_filename+'_embedding.npy',
                 'onnxURL':'/model/sam_'+new_filename+'_onnx_quantized_example.onnx'
@@ -246,6 +234,8 @@ def get_onnx_files():
     npy_paths = []
     image_path = 'demo/src/assets/data'
     image_paths = []
+    compressedOImgURLs=[]
+    compressedOImgURL ='demo/src/assets/compressed_data'
     for root, dirs, files in os.walk(onnx_path):
         for filename in files:
         # 判断是否为图片文件
@@ -265,8 +255,14 @@ def get_onnx_files():
             # 判断是否为图片文件
             if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.jpeg'):
                 image_path = os.path.join(root, filename)
+                compressedOImgURL= os.path.join('demo/src/assets/compressed_data','small_'+filename)
                 image_paths.append(image_path)
-        return {'onnx_paths': onnx_paths,'npy_paths': npy_paths,'image_paths': image_paths}
+                compressedOImgURLs.append(compressedOImgURL)
+        return {'onnx_paths': onnx_paths,
+                'npy_paths': npy_paths,
+                'image_paths': image_paths,                
+                'compressedOImgURL_paths':compressedOImgURLs,
+                }
       
 @app.route('/')
 def ok():

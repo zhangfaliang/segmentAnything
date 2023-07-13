@@ -74,7 +74,40 @@ export default function ResizeCorpImgModal({
   //     autoScaleValue: value,
   //   });
   // };
+  const compressImg = (img: any, type: string, mx: number, mh: number) => {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const { width: originWidth, height: originHeight } = img;
+      // 最大尺寸限制
+      const maxWidth = mx;
+      const maxHeight = mh;
+      // 目标尺寸
+      let targetWidth = originWidth;
+      let targetHeight = originHeight;
+      if (originWidth > maxWidth || originHeight > maxHeight) {
+        if (originWidth / originHeight > 1) {
+          // 宽图片
+          targetWidth = maxWidth;
+          targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+        } else {
+          // 高图片
+          targetHeight = maxHeight;
+          targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+        }
+      }
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      context && context.clearRect(0, 0, targetWidth, targetHeight);
+      // 图片绘制
+      context && context.drawImage(img, 0, 0, targetWidth, targetHeight);
+      // canvas.toBlob(function (blob) {
+      //   resolve(blob);
+      // }, type || "image/png");
 
+      resolve(canvas.toDataURL(type || "image/jpg"));
+    });
+  };
   const handleResize = async () => {
     const { imgHeight, imgWidth }: any = values;
     if (imgHeight <= 0 || imgWidth <= 0) return;
@@ -92,6 +125,7 @@ export default function ResizeCorpImgModal({
       base64Data.length % 4 === 0 ? 0 : 4 - (base64Data.length % 4);
     const fileSize = ((base64Data.length + padding) * 0.75) / 1024; // 单位为KB
     const size = fileSize.toFixed(2);
+
     image.src = base64URL;
     if (cropData) {
       setCropData("");

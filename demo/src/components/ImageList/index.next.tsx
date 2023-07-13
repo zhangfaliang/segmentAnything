@@ -34,7 +34,71 @@ export default function TitlebarImageList({}: any) {
     const res = await getData({ url: "/api/files" });
     if (!isEmpty(res)) {
       const imgDataList: any = [];
-      const { image_paths, onnx_paths, npy_paths }: any = res || {};
+      const {
+        image_paths,
+        onnx_paths,
+        npy_paths,
+        compressedOImgURL_paths,
+      }: any = res || {};
+      // if (!isEmpty(compressedOImgURL_paths)) {
+      //   compressedOImgURL_paths.forEach((item: any) => {
+      //     let npy = "";
+      //     let onnx = "";
+      //     const pathArr = item.split("/");
+      //     const fileName = (pathArr[pathArr.length - 1] || "")
+      //       ?.replace(/.(png|jpg|jpeg|webp|gif)/, "")
+      //       ?.replace("small_", "");
+
+      //     let reg = new RegExp(`${fileName}`);
+      //     if (!isEmpty(onnx_paths)) {
+      //       onnx = onnx_paths.find((item: any) => reg.test(item)) || "";
+      //     }
+
+      //     if (!isEmpty(npy_paths)) {
+      //       npy = npy_paths.find((item: any) => reg.test(item) || "");
+      //     }
+
+      //     if (npy && onnx) {
+      //       let imgURL = "";
+      //       if (!isEmpty(image_paths)) {
+      //         imgURL =
+      //           image_paths.find((item: any) => reg.test(fileName)) || "";
+      //         imgURL = imgURL.replace("demo/src", "");
+      //       }
+      //       const order = get(
+      //         imgURL.match(/@_@(\d+)\.(jpg|png|jpeg|webp)/),
+      //         "1",
+      //         0
+      //       );
+
+      //       imgDataList.push({
+      //         imgURL,
+      //         npyURL: npy.replace("demo/src", ""),
+      //         onnxURL: onnx.replace("demo", ""),
+      //         img: item.replace("demo/src", ""),
+      //         title: item,
+      //         author: "@halara",
+      //         // rows: 8,
+      //         // cols: 2,
+      //         featured: true,
+      //         order: order,
+      //       });
+      //     }
+      //     imgDataList.sort((a: any, b: any) => {
+      //       return b.order - a.order;
+      //     });
+      //     if (!isEmpty(imgDataList)) {
+      //       imgDataList.map((item: any) => {});
+
+      //       setImgList(imgDataList);
+      //       if (imgDataList.length >= 2) {
+      //         setDeleteFlag(true);
+      //       } else {
+      //         setDeleteFlag(false);
+      //       }
+      //     }
+      //   });
+      // }
       if (!isEmpty(image_paths)) {
         image_paths.forEach((item: any) => {
           let npy = "";
@@ -65,7 +129,10 @@ export default function TitlebarImageList({}: any) {
               imgURL,
               npyURL: npy.replace("demo/src", ""),
               onnxURL: onnx.replace("demo", ""),
-              img: item.replace("demo/src", ""),
+              img: item
+                .replace("demo/src", "")
+                .replace("/data", "/compressed_data")
+                .replace(fileName, "small_" + fileName),
               title: item,
               author: "@halara",
               // rows: 8,
