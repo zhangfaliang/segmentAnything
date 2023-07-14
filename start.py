@@ -189,7 +189,7 @@ async def save_image():
 
         image = Image.open(save_path)
         # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
-        background = Image.new('RGBA', image.size, (255, 255, 255))
+        background = Image.new('RGBA', image.size, (239, 239, 239))
         # 将原始图片粘贴到新的背景图像上
         background.paste(image, (0, 0), image)
         # 保存带有白色背景的图片
