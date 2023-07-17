@@ -179,7 +179,7 @@ async def save_image():
                           files=files,
                           headers={
                             #  'Accept': 'image/jpeg',
-                            'x-api-key': '636cc69f7b4dc1f857bcf9675ffb88490c7cd3721b4ac8cfba5a813faedfe13102d6f08f923bc1af9c29c92d30085ba1'})
+                            'x-api-key': '948e06275c5101f62bb5931c9d189f40d3da77d993b3005f49e09782d335687619dee798ea5ea07d4c89d00180e4eaa1'})
         print(r.headers)
         if (r.ok):
           with open(save_path, 'wb') as f:
