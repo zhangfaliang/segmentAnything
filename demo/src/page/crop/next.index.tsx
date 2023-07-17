@@ -4,8 +4,8 @@ import { cleanImageProps } from "./utils";
 
 const REQUIRED_IMAGE_STYLES = {
   opacity: 0,
-  // height: "calc(100vh - 200px)",
-  // width: "auto",
+  height: "calc(100vh - 200px)",
+  width: "auto",
 };
 
 interface ReactCropperDefaultOptions {
