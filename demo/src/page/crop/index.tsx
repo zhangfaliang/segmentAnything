@@ -53,16 +53,26 @@ export const Crop = () => {
   const handleChange = (prop: any) => (event: any) => {
     if (event.target.value < 0) return;
     const processValue = `${event.target.value}`.replace(/^0/, "");
+    let width = 0;
+    let height = 0;
+    if (prop === "width") {
+      width = Number(processValue);
+      height = Number(processValue) * 1.16;
+    } else {
+      height = Number(processValue);
+      width = Number(processValue) / 1.16;
+    }
     const data: any = {
       ...values,
-      [prop]: Number(processValue) || "",
+      width,
+      height,
     };
     if (!autoCrop) {
       cropper.crop();
       setAutoCrop(true);
     }
-    cropper.setData(data);
     setValues(data);
+    cropper.setData(data);
   };
   const handleCrop = () => {
     if (typeof cropper !== "undefined") {
