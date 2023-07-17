@@ -123,7 +123,7 @@ export default function ResizeCorpImgModal({
     const base64Data = base64URL.split(",")[1];
     const padding =
       base64Data.length % 4 === 0 ? 0 : 4 - (base64Data.length % 4);
-    const fileSize = ((base64Data.length + padding) * 0.75) / 1024; // 单位为KB
+    const fileSize = (base64Data.length + padding) / 1024; // 单位为KB
     const size = fileSize.toFixed(2);
 
     image.src = base64URL;

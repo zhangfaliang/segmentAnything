@@ -50,15 +50,17 @@ export default function App({ loadFile }: any) {
       let targetWidth = originWidth;
       let targetHeight = originHeight;
       if (originWidth > maxWidth || originHeight > maxHeight) {
-        if (originWidth / originHeight > 1) {
-          // 宽图片
-          targetWidth = maxWidth;
-          targetHeight = Math.round(maxWidth * (originHeight / originWidth));
-        } else {
-          // 高图片
-          targetHeight = maxHeight;
-          targetWidth = Math.round(maxHeight * (originWidth / originHeight));
-        }
+        targetWidth = maxWidth;
+        targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+        // if (originWidth / originHeight > 1) {
+        //   // 宽图片
+        //   targetWidth = maxWidth;
+        //   targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+        // } else {
+        //   // 高图片
+        //   targetHeight = maxHeight;
+        //   targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+        // }
       }
       canvas.width = targetWidth;
       canvas.height = targetHeight;
@@ -99,7 +101,7 @@ export default function App({ loadFile }: any) {
       const img = await readImg(file);
       try {
         // const base64URL: any = await compressImg(img, file.type, 2000, 2320);
-        const base64URL: any = await compressImg(img, file.type, 1000, 1024);
+        const base64URL: any = await compressImg(img, file.type, 1024, 1187);
         const newImg = new Image();
         newImg.src = base64URL;
         newImg.onload = () => {
