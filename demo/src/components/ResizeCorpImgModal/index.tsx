@@ -126,16 +126,13 @@ export default function ResizeCorpImgModal({
     const fileSize = (base64Data.length + padding) / 1024; // 单位为KB
     const size = fileSize.toFixed(2);
 
-    image.src = base64URL;
-    if (cropData) {
-      setCropData("");
-    } else {
-      setLocalUpLoadImgData({
-        data_url: "",
-        size: "",
-      });
-    }
-    setLoading(true);
+    // image.src = base64URL;
+    setCropData("");
+    setLocalUpLoadImgData({
+      data_url: "",
+      size: "",
+    });
+    // setLoading(true);
     setOpen(false);
 
     const { data, code, message } =
@@ -155,7 +152,6 @@ export default function ResizeCorpImgModal({
         },
       })) || {};
     setLoading(false);
-
     setRePolling(true);
     handleRestUpload && handleRestUpload();
     if (code === -1) {
