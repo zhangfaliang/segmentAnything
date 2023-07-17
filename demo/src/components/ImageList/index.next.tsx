@@ -204,7 +204,7 @@ export default function TitlebarImageList({}: any) {
           rowHeight={imgRowHeight}
           gap={20}
         >
-          {imgList.map((item: any) => (
+          {imgList.map((item: any, index: any) => (
             <ImageListItem
               key={item.img}
               onClick={() => clickUser(item)}
@@ -218,8 +218,12 @@ export default function TitlebarImageList({}: any) {
                   cursor: "pointer",
                   height: imgRowHeight,
                 }}
-                src={`${item.img}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                src={`${
+                  index === 0 ? item?.imgURL : item.img
+                }?w=248&fit=crop&auto=format`}
+                srcSet={`${
+                  index === 0 ? item?.imgURL : item.img
+                }?w=248&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
                 // className="lazyload"
