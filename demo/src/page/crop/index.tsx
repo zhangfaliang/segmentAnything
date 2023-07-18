@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import Cropper from "./next.index";
 import "cropperjs/dist/cropper.css";
 import "./index.scss";
@@ -10,7 +10,6 @@ import Button from "@mui/material/Button";
 import CropIcon from "@mui/icons-material/Crop";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,6 +27,7 @@ export const Crop = () => {
   const [cropper, setCropper]: any = useState();
   const [autoCrop, setAutoCrop]: any = useState(false);
   const [openResize, setOpenResize] = React.useState(false);
+  const cropEle: any = useRef<HTMLImageElement>(null);
 
   const [values, setValues]: any = useState({
     x: 0,
@@ -92,7 +92,7 @@ export const Crop = () => {
     setAutoCrop(true);
     cropper.autoCrop = true;
   };
-  const onCrop = (e: any) => {
+  const onCrop = (e: any, ...other: any) => {
     const processValueWidth = Number(`${e.detail.width}`.replace(/^0/, ""));
     const processValueHeight = Number(`${e.detail.height}`.replace(/^0/, ""));
     const data: any = {
@@ -183,7 +183,7 @@ export const Crop = () => {
         setLoading={setLoading}
         handleRestUpload={handleRestUpload}
       />
-      <div className="crop_wrapper_content">
+      <div className="crop_wrapper_content" ref={cropEle}>
         <div className="crop_wrapper_content_center">
           <div className="crop_btn_group_wrapper">
             <Button variant="contained" onClick={handleRestUpload}>
@@ -207,8 +207,9 @@ export const Crop = () => {
             modal={true}
             // style={{ height: "", width: "auto" }}
             initialAspectRatio={1 / 1.16}
+            aspectRatio={1 / 1.16}
             src={cropData || localUpLoadImgData.data_url}
-            viewMode={2}
+            viewMode={1}
             background={false}
             responsive={false}
             guides={true}
