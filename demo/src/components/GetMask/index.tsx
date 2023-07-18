@@ -160,9 +160,9 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
       <div className="hover_and_click_maskList">
         <div>mask 列表 </div>
         {!!get(maskImgList, "length") &&
-          maskImgList?.map(({ src, name }: any) => {
+          maskImgList?.map(({ src, name }: any, index: any) => {
             return (
-              <div>
+              <div key={index}>
                 <img src={src} alt={name} title={name} />
                 <Button className="get_mask_item" variant="contained">
                   <AddTaskIcon
