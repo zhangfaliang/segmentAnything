@@ -33,10 +33,7 @@ function LinearProgressWithLabel(
 
 const LeftComponent = ({}: any) => {
   const {
-    maskImgList: [maskImgList, setMaskImgList],
-    maskImg: [maskImg],
-    showMaskImgList: [showMaskImgList, setShowMaskImgList],
-    rePolling: [rePolling, setRePolling],
+    rePolling: [rePolling],
   } = useContext(AppContext)!;
   const navigate = useNavigate();
   const [taskData, setTaskData]: any = React.useState({});

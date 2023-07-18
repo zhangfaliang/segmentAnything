@@ -21,8 +21,6 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     image: [image, setImage],
     maskImg: [maskImg, setMaskImg],
     processImgType: [processImgType, setProcessImgType],
-    previousMask: [, setPreviousMask],
-    mergedMask: [, setMergedMask],
     maskImgList: [maskImgList, setMaskImgList],
     showMaskImgList: [showMaskImgList, setShowMaskImgList],
   } = useContext(AppContext)!;
@@ -40,7 +38,11 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
       setMaskImgList([]);
     };
   }, []);
-
+  let name = "";
+  if (image?.src) {
+    const pathArr = image?.src?.split("/");
+    name = pathArr[pathArr?.length - 1];
+  }
   const maskImageClasses = `absolute opacity-40 pointer-events-none`;
   const addCutOutObject = () => {
     if (!maskImg?.src) {
@@ -55,10 +57,13 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
       });
       return;
     }
-    setMaskImgList([...maskImgList, maskImg?.src]);
+
+    setMaskImgList([
+      ...maskImgList,
+      { src: maskImg?.src, name: name.replace(".", "_mask.") },
+    ]);
     setShowMaskImgList(true);
   };
-  console.log(maskImgList, "maskImgList");
 
   return (
     <div className="mask_wrapper">
@@ -77,7 +82,10 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                     marginRight: "5px",
                   }}
                 />{" "}
-                <a href={image.src} download>
+                <a
+                  href={image.src}
+                  download={name.replace(".", "_process_bg.")}
+                >
                   {" "}
                   获取白底图片(可用于webui img2img)
                 </a>
@@ -152,8 +160,22 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
       <div className="hover_and_click_maskList">
         <div>mask 列表 </div>
         {!!get(maskImgList, "length") &&
-          maskImgList?.map((item) => {
-            return <img src={item} alt="" />;
+          maskImgList?.map(({ src, name }: any) => {
+            return (
+              <div>
+                <img src={src} alt={name} title={name} />
+                <Button className="get_mask_item" variant="contained">
+                  <AddTaskIcon
+                    style={{
+                      marginRight: "5px",
+                    }}
+                  />
+                  <a href={src} download={name}>
+                    down
+                  </a>
+                </Button>
+              </div>
+            );
           })}
       </div>
     </div>
