@@ -163,38 +163,39 @@ async def save_image():
         print(imgName,'保存成功')
         
         # 从图像文件中读取字节流
-        print(save_path,'处理背景图片')
+        # print(save_path,'处理背景图片')
         #948e06275c5101f62bb5931c9d189f40d3da77d993b3005f49e09782d335687619dee798ea5ea07d4c89d00180e4eaa1
-        with open(save_path, 'rb') as f:
-            image_data = f.read()
-        # 创建 BytesIO 对象
-        image_file_object = io.BytesIO(image_data)
-        # 将 BytesIO 对象重置到初始位置
-        image_file_object.seek(0)
-        files = {
-            'image_file': (save_path, image_file_object, 'image/jpeg'),
-        }
-        # 发送 POST 请求
-        r = requests.post('https://clipdrop-api.co/remove-background/v1',
-                          files=files,
-                          headers={
-                            #  'Accept': 'image/jpeg',
-                            'x-api-key': '7dcd5171ffc0fcd3749f56a2e0f301f4ff671138504fc3ff8fb6a0d7f60cd5edde20c8433705e5d485e93549d5d3590f'})
-        print(r.headers)
-        if (r.ok):
-          with open(save_path, 'wb') as f:
-            f.write(r.content)
-        else:
-            r.raise_for_status()
+        
+        # with open(save_path, 'rb') as f:
+        #     image_data = f.read()
+        # # 创建 BytesIO 对象
+        # image_file_object = io.BytesIO(image_data)
+        # # 将 BytesIO 对象重置到初始位置
+        # image_file_object.seek(0)
+        # files = {
+        #     'image_file': (save_path, image_file_object, 'image/jpeg'),
+        # }
+        # # 发送 POST 请求
+        # r = requests.post('https://clipdrop-api.co/remove-background/v1',
+        #                   files=files,
+        #                   headers={
+        #                     #  'Accept': 'image/jpeg',
+        #                     'x-api-key': '7dcd5171ffc0fcd3749f56a2e0f301f4ff671138504fc3ff8fb6a0d7f60cd5edde20c8433705e5d485e93549d5d3590f'})
+        # print(r.headers)
+        # if (r.ok):
+        #   with open(save_path, 'wb') as f:
+        #     f.write(r.content)
+        # else:
+        #     r.raise_for_status()
 
-        image = Image.open(save_path)
-        # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
-        background = Image.new('RGBA', image.size, (239, 239, 239))
-        # 将原始图片粘贴到新的背景图像上
-        background.paste(image, (0, 0), image)
+        # image = Image.open(save_path)
+        # # 创建一个新的 RGBA 图像，尺寸与原始图片相同，背景色为白色
+        # background = Image.new('RGBA', image.size, (239, 239, 239))
+        # # 将原始图片粘贴到新的背景图像上
+        # background.paste(image, (0, 0), image)
         # 保存带有白色背景的图片
-        background.save(save_path)
-        print(save_path,'处理背景图片成功')
+        # background.save(save_path)
+        # print(save_path,'处理背景图片成功')
       
         output_directory = 'demo/src/assets/compressed_data/'+'small_'+imgName
         max_width = 400
