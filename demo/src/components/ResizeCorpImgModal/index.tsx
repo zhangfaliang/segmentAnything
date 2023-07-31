@@ -147,6 +147,9 @@ export default function ResizeCorpImgModal({
           imgName: localUpLoadImgData.imgName.replace(
             /(\.png|\.jpg|\.jpeg|\.webp)$/,
             `@_@${new Date().getTime()}$1`
+          ).replace(
+            / +/,
+            ``
           ), //file.name,
           size: size,
         },
