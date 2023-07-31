@@ -119,7 +119,7 @@ app.get("/get/maskTask", async (req, res, next) => {
 app.get("/model/*", async (req, res, next) => {
   const dataDir = path.join(__dirname, "model/");
   const filePath = req.path.replace("/model/", "");
-  const fullFilePath = path.join(dataDir, filePath);
+  const fullFilePath = decodeURIComponent(path.join(dataDir, filePath));
   try {
     res.sendFile(fullFilePath, {}, (err) => {
       if (err) {
