@@ -14,7 +14,10 @@ function arrayToImageData(input: any, width: number, height: number) {
     // Threshold the onnx model mask prediction at 0.0
     // This is equivalent to thresholding the mask using predictor.model.mask_threshold
     // in python
+    // 将 onnx 模型掩码预测阈值设为 0.0
+    // 这等同于使用 predictor.model.mask_threshold 对掩码进行阈值处理
     if (input[i] > 0.0) {
+      // 选中内容
       arr[4 * i + 0] = r;
       arr[4 * i + 1] = g;
       arr[4 * i + 2] = b;

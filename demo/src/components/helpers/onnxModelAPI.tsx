@@ -67,7 +67,6 @@ const modelData = ({ clicks, tensor, modelScale }: modeDataProps) => {
   //由于没有先前的遮罩，因此该Tensor被初始化为包含单个值0的标量张量。
 
   const hasMaskInput = new Tensor("float32", [0]);
-
   return {
     image_embeddings: imageEmbedding, //
     point_coords: pointCoordsTensor,

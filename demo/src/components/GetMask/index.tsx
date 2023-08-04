@@ -171,7 +171,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                     }}
                   />
                   <a href={src} download={name}>
-                    down
+                    Download
                   </a>
                 </Button>
               </div>

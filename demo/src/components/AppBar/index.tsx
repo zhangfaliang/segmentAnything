@@ -115,8 +115,11 @@ function ResponsiveAppBar() {
       console.log(error);
     }
   };
+  console.log(model, "modelmodelmodelmodel--model");
 
-  // Decode a Numpy file into a tensor.
+  console.log(tensor, "modelmodelmodelmodel--tensor");
+
+  // 将 Numpy 文件解码为张量
   const loadNpyTensor = async (tensorFile: string, dType: string) => {
     let npLoader = new npyjs();
 
@@ -208,7 +211,6 @@ function ResponsiveAppBar() {
           tensor,
           modelScale,
         });
-
         if (feeds === undefined) return;
         // 使用从 modelData() 返回的数据进行 SAM ONNX 模型的运行
         const results = await model.run(feeds);
@@ -250,7 +252,6 @@ function ResponsiveAppBar() {
           );
           // 将合并后的掩码转换为图像，并设置为 mergedMask 状态
           setMergedMask(mask);
-
           // 将最新的输出掩码设置为 maskImg 状态
           setMaskImg(mask);
           setPreviousMask(mergedOutput);
