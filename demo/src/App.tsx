@@ -121,7 +121,7 @@ const App = () => {
         // rendered as an HTML image using onnxMaskToImage() from maskUtils.tsx.
         // 此处可以merge mask
         setMaskImg(
-          onnxMaskToImage(output.data, output.dims[2], output.dims[3])
+          onnxMaskToImage(output.data, output.dims[2], output.dims[3],[])
         );
       }
     } catch (e) {

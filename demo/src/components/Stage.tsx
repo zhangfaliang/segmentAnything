@@ -14,6 +14,7 @@ const Stage = ({ loadFile }: any) => {
   const {
     clicks: [, setClicks],
     image: [image],
+    imageScale: [, setImageScale],
   } = useContext(AppContext)!;
 
   const getClick = (x: number, y: number, clickType?: any): modelInputProps => {
@@ -30,34 +31,32 @@ const Stage = ({ loadFile }: any) => {
 
     const use_image: any = document.getElementById("use_image");
     if (event?.clickType !== "right") {
-      let el = event.target;
-      const rect = el.getBoundingClientRect();
-      let x = event.clientX - 251;
-      let y = event.clientY - 83;
+      let x = event.clientX - 247;
+      let y = event.clientY - 80;
       const dotEle = document.createElement("div");
       dotEle.style.position = "absolute";
       dotEle.style.left = `${x}px`;
       dotEle.style.top = `${y}px`;
-      dotEle.style.width = "10px";
-      dotEle.style.height = "10px";
+      dotEle.style.width = "5px";
+      dotEle.style.height = "5px";
       dotEle.style.borderRadius = "50%";
       dotEle.style.backgroundColor = "green";
       dotEle.style.zIndex = "100";
+      dotEle.style.pointerEvents = "none";
       dotEle.className = "maskPointer";
       parentEle.appendChild(dotEle);
     } else {
-      let el = event.target;
-      const rect = el.getBoundingClientRect();
-      let x = event.clientX - 251;
-      let y = event.clientY - 83;
+      let x = event.clientX - 247;
+      let y = event.clientY - 80;
       const dotEle = document.createElement("div");
       dotEle.style.position = "absolute";
       dotEle.style.left = `${x}px`;
       dotEle.style.top = `${y}px`;
-      dotEle.style.width = "10px";
-      dotEle.style.height = "10px";
+      dotEle.style.width = "5px";
+      dotEle.style.height = "5px";
       dotEle.style.borderRadius = "50%";
       dotEle.style.zIndex = "100";
+      dotEle.style.pointerEvents = "none";
       dotEle.style.backgroundColor = "red";
       dotEle.className = "maskPointer";
       parentEle.appendChild(dotEle);
@@ -74,6 +73,7 @@ const Stage = ({ loadFile }: any) => {
     let x = e.clientX - rect.left;
     let y = e.clientY - rect.top;
     const imageScale = image ? image.width / el.offsetWidth : 1;
+    setImageScale(imageScale)
     x *= imageScale;
     y *= imageScale;
     const click = getClick(x, y, e.clickType || 1);
