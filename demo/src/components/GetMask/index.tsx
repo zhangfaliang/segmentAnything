@@ -25,7 +25,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     processImgType: [processImgType, setProcessImgType],
     maskImgList: [maskImgList, setMaskImgList],
     showMaskImgList: [showMaskImgList, setShowMaskImgList],
-    rect: [rect, setRect]
+    rangeRects: [rangeRects, setRangeRects]
   } = useContext(AppContext)!;
   const navigate = useNavigate();
 
@@ -37,7 +37,11 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
 
   useEffect(() => {
     setAspect(undefined);
+    document.addEventListener('keydown', documentKeydown) 
+    document.addEventListener('keyup', documentKeyup)
     return () => {
+      document.removeEventListener('keydown', documentKeydown )
+      document.removeEventListener('keyup', documentKeyup)
       setMaskImgList([]);
     };
   }, []);
@@ -76,7 +80,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
         const clientRect = el.getBoundingClientRect();
         let x = e.clientX - Math.ceil(clientRect.left);
         let y = e.clientY - Math.ceil(clientRect.top);
-        setRect({x, y, w: 0, h: 0})
+        setRangeRects([...rangeRects, {x, y, w: 0, h: 0, id: new Date().getTime()}])
       }
     }
   }
@@ -86,24 +90,25 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     const clientRect = el.getBoundingClientRect();
     let currentX = e.clientX - Math.ceil(clientRect.left);
     let currentY = e.clientY - Math.ceil(clientRect.top);
+    const [rect] = rangeRects.slice(-1)
     let w = currentX - rect.x;
     let h = currentY - rect.y;
-    // const imageScale = image ? image.width / el.offsetWidth : 1;
-    // x *= imageScale;
-    // y *= imageScale;
-    setRect({...rect, w, h})
+    rect.w = w
+    rect.h = h
+    rangeRects[rangeRects.length-1] = rect
+    setRangeRects([...rangeRects])
     e.preventDefault()
   }
   function onMouseUp() {
     isMouseDown.current = false
   }
-  document.onkeydown = (e) => {
-    if (e.keyCode == 91) {
+  function documentKeydown(e: {keyCode: number}) {
+    if (e.keyCode == 17) {
       isControlKey.current = true
     }
   }
-  document.onkeyup = (e) => {
-    if (e.keyCode == 91) {
+  function documentKeyup(e: {keyCode: number}) {
+    if (e.keyCode == 17) {
       isControlKey.current = false
     }
   }
@@ -133,30 +138,30 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                 </a>
               </Button>
             </div>
-            <div className="use_img_mask_wrapper"
-              onMouseDown={(event) => {
-                getPosition(event)
-              }}
-              onMouseMove={(event) => {
-                getClientRect(event)
-                event.preventDefault();
-              }}
-              onMouseUp={() => {
-                onMouseUp()
-              }}>
+            <div className="use_img_mask_wrapper">
               <img
                 ref={imgRef}
                 alt="Crop me"
                 onLoad={onImageLoad}
                 onClick={(e: any) => {
-                  if (!isControlKey.current) {
-                    processImgType === "mask" && handleMouseMove(e);
-                  }
+                  if (isControlKey.current) return;
+                  processImgType === "mask" && handleMouseMove(e);
                 }}
                 onContextMenu={(event) => {
-                  if (processImgType !== "mask") return;
-                  handleMouseMove({ ...event, clickType: "right" });
                   event.preventDefault();
+                  if (processImgType !== "mask") return;
+                  if (isControlKey.current) return;
+                  handleMouseMove({ ...event, clickType: "right" });
+                }}
+                onMouseDown={(event) => {
+                  getPosition(event)
+                }}
+                onMouseMove={(event) => {
+                  getClientRect(event)
+                  event.preventDefault();
+                }}
+                onMouseUp={() => {
+                  onMouseUp()
                 }}
                 src={image.src}
                 className={`target_img`}
@@ -168,18 +173,17 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                   className={`${maskImageClasses} target_img use_img_mask`}
                 ></img>
               )}
-              <div className={'rect_mask'}
-                style={{
-                  left: rect.x,
-                  top: rect.y,
-                  width: rect.w + 'px',
-                  height: rect.h + 'px',
-                  display: rect.w > 5 ? 'block' : 'none'
-                }}
-                onMouseDown={(e) => {
-                  e.stopPropagation()
-                }}
-              ></div>
+              {rangeRects.map((rect: any) => {
+                return <div className={'rect_mask'} key={rect.id}
+                  style={{
+                    left: rect.x,
+                    top: rect.y,
+                    width: rect.w + 'px',
+                    height: rect.h + 'px',
+                    display: rect.w > 5 ? 'block' : 'none'
+                  }}
+                ></div>
+              })}
             </div>
           </div>
         )}

@@ -43,7 +43,7 @@ function ResponsiveAppBar() {
     previousMask: [previousMask, setPreviousMask],
     mergedMask: [, setMergedMask],
     globalLoadFile: [, setGlobalLoadFileLoadFile],
-    rect: [rect],
+    rangeRects: [rangeRects],
     imageScale: [imageScale],
   } = useContext(AppContext)!;
 
@@ -130,25 +130,36 @@ function ResponsiveAppBar() {
     return tensor;
   };
   
-  let dataRange:any = new Map()
-  let position = 0
+  let dataRange = new Map()
+  let currtDataRange = new Map()
   // Run the ONNX model every time clicks has changed
   useEffect(() => {
     runONNX();
     if (!image) return
     const width = (image as any).width
-    const rx = Math.round(rect.x * imageScale)
-    const ry = Math.round(rect.y * imageScale)
-    const w = Math.round(rect.w * imageScale)
-    const h = Math.round(rect.h * imageScale)
-    for (let i = ry; i < (ry+h); i++) {
-      for (let j = rx; j < (rx+w); j++) {
-        const index = i * width + j
-        dataRange.set(index, index)
+    const {x, y} = clicks ? clicks[0] : {x: 0, y: 0}
+    const position = Math.round(width * Math.round(y) + Math.round(x))
+    dataRange.clear()
+    for (let i = 0; i < rangeRects.length; i ++) {
+      const data = new Map()
+      const rect = rangeRects[i]
+      const rx = Math.round(rect.x * imageScale)
+      const ry = Math.round(rect.y * imageScale)
+      const w = Math.round(rect.w * imageScale)
+      const h = Math.round(rect.h * imageScale)
+      for (let i = ry; i < (ry+h); i++) {
+        for (let j = rx; j < (rx+w); j++) {
+          const index = i * width + j
+          data.set(index, index)
+        }
+      }
+      if (data.get(position)) {
+        currtDataRange = data
+      } else {
+        dataRange = new Map([...dataRange, ...data])
       }
     }
-    const {x, y} = clicks ? clicks[0] : {x: 0, y: 0}
-    position = Math.round(width * Math.round(y) + Math.round(x))
+    
   }, [clicks]);
   useEffect(() => {
     (window as any).loadFile = loadFile;
@@ -164,30 +175,14 @@ function ResponsiveAppBar() {
       // 如果上次的掩码为空，则直接返回当前的掩码
       return currentMask;
     }
-    
     const mergedMask = new Uint8ClampedArray(height * width);
-    // for (let i = 0; i < height; i++) {
-    //   for (let j = 0; j < width; j++) {
-    //     const index = i * width + j;
-    //     if (!dataRange.get(index)) {
-    //       mergedMask[index] = Math.max(
-    //         previousMask[index],
-    //         currentMask[index] * 255
-    //       );
-    //     } else {
-    //       if (currentMask[index] > 0) {
-    //         mergedMask[index] = currentMask[index]
-    //       } else {
-    //         mergedMask[index] = previousMask[index]
-    //       }
-    //     }
-    //   }
-    // }
-    if (dataRange.get(position)) {
+    
+    if (currtDataRange.size) {
       for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
           const index = i * width + j;
-          if (dataRange.get(index)) {
+          if (currtDataRange.get(index)) {
+            // 检查当前像素位置的掩码是否与上次的掩码存在交集
             mergedMask[index] = Math.max(
               previousMask[index],
               currentMask[index] * 255
@@ -225,19 +220,17 @@ function ResponsiveAppBar() {
       // 如果上次的掩码为空，则直接返回当前的掩码
       return currentMask;
     }
-
     const removedMask = new Uint8ClampedArray(height * width);
-
-    if (dataRange.get(position)) {
+   
+    if (currtDataRange.size) {
       for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
           const index = i * width + j;
-          // 检查当前像素位置的掩码是否与上次的掩码存在交集
-          if (dataRange.get(index)) {
+          if (currtDataRange.get(index)) {
             if (currentMask[index] > 0) {
               removedMask[index] = 0;
             } else {
-              removedMask[index] = previousMask[index]; // 移除交集的掩码
+              removedMask[index] = previousMask[index];
             }
           } else {
             removedMask[index] = previousMask[index];
@@ -263,25 +256,6 @@ function ResponsiveAppBar() {
         }
       }
     }
-    // for (let i = 0; i < height; i++) {
-    //   for (let j = 0; j < width; j++) {
-    //     const index = i * width + j;
-    //     // 检查当前像素位置的掩码是否与上次的掩码存在交集
-    //     if (currentMask[index] > 0) {
-    //       if (!dataRange.get(index)) {
-    //         removedMask[index] = previousMask[index]; // 移除交集的掩码
-    //       } else {
-    //         removedMask[index] = 0;
-    //       }
-    //     } else {
-    //       removedMask[index] = Math.max(
-    //         previousMask[index],
-    //         currentMask[index] * 255
-    //       );
-    //     }
-    //   }
-    // }
-
     return removedMask;
   };
 
