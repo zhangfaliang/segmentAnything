@@ -11,12 +11,14 @@ import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import Typography from "@mui/material/Typography";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import JSZip from "jszip";
 import "./index.scss";
 
 const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const [aspect, setAspect] = useState<number | undefined>(16 / 9);
+  const [downImg, setDownImg] = useState("");
+
   const {
     image: [image, setImage],
     maskImg: [maskImg, setMaskImg],
@@ -43,6 +45,29 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     const pathArr = image?.src?.split("/");
     name = pathArr[pathArr?.length - 1];
   }
+  useEffect(() => {
+    if (image?.src) {
+      const img = new Image();
+      img.crossOrigin = "anonymous"; // 设置为匿名跨域请求
+      img.src = image?.src;
+      // 等待图片加载完成
+      img.onload = function () {
+        // 创建一个 Canvas 元素
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        // 获取 2D 上下文
+        const ctx: any = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        // 将 Canvas 数据转换为 Base64 编码
+        const base64Data = canvas.toDataURL("image/jpeg");
+        setDownImg(
+          base64Data.replace(/data:image\/(jpeg|png|jpg|gif);base64,/, "")
+        );
+      };
+    }
+  }, [image?.src]);
+
   const maskImageClasses = `absolute opacity-40 pointer-events-none`;
   const addCutOutObject = () => {
     if (!maskImg?.src) {
@@ -65,6 +90,33 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setShowMaskImgList(true);
   };
 
+  function downloadFolder({ maskSrc, maskName }: any) {
+    const imgData1 = maskSrc.replace(
+      /data:image\/(jpeg|png|jpg|gif);base64,/,
+      ""
+    ); // 替换为第一个图片的 base64 编码数据
+    const imgData2 = downImg; // 替换为第二个图片的 base64 编码数据
+
+    // 创建一个新的 JSZip 实例
+    const zip = new JSZip();
+
+    // 将图片数据添加到 ZIP 文件夹中
+    zip.file(maskName, imgData1, { base64: true });
+    zip.file(name, imgData2, { base64: true });
+    // 生成 ZIP 文件
+    zip.generateAsync({ type: "blob" }).then(function (blob: any) {
+      // 创建一个链接元素并模拟点击来触发下载
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = maskName.replace("_mask.png", ""); // 下载的 ZIP 文件名
+      link.click();
+    });
+  }
+
+  const handleClick = ({ maskSrc, maskName }: any) => {
+    downloadFolder({ maskSrc, maskName });
+  };
+
   return (
     <div className="mask_wrapper">
       <div className="mask_img">
@@ -76,12 +128,13 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                 <PlaylistAddIcon />
                 添加到mask列表
               </Button>
-              <Button variant="contained">
+              {/* <Button variant="contained">
                 <AddTaskIcon
                   style={{
                     marginRight: "5px",
                   }}
                 />{" "}
+                获取白底图片(可用于webui img2img)
                 <a
                   href={image.src}
                   download={name.replace(".", "_process_bg.")}
@@ -89,7 +142,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                   {" "}
                   获取白底图片(可用于webui img2img)
                 </a>
-              </Button>
+              </Button> */}
             </div>
             <div className="use_img_mask_wrapper">
               <img
@@ -164,15 +217,20 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
             return (
               <div key={index}>
                 <img src={src} alt={name} title={name} />
-                <Button className="get_mask_item" variant="contained">
+                <Button
+                  onClick={() => handleClick({ maskSrc: src, maskName: name })}
+                  className="get_mask_item"
+                  variant="contained"
+                >
                   <AddTaskIcon
                     style={{
                       marginRight: "5px",
                     }}
                   />
-                  <a href={src} download={name}>
+                  Download
+                  {/* <a href={src} download={name}>
                     Download
-                  </a>
+                  </a> */}
                 </Button>
               </div>
             );
