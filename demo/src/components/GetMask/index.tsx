@@ -3,6 +3,8 @@ import AppContext from "../hooks/createContext";
 import Button from "@mui/material/Button";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import RefreshIcon from '@mui/icons-material/Refresh';
+import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ListAltIcon from "@mui/icons-material/ListAlt";
@@ -17,11 +19,13 @@ import "./index.scss";
 const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   const imgRef = useRef<HTMLImageElement>(null);
   const isControlKey = useRef(false)
+  const [isDelete, setIsDelete] = useState(false)
   const [aspect, setAspect] = useState<number | undefined>(16 / 9);
 
   const {
     image: [image, setImage],
     maskImg: [maskImg, setMaskImg],
+    previousMask: [, setPreviousMask],
     processImgType: [processImgType, setProcessImgType],
     maskImgList: [maskImgList, setMaskImgList],
     showMaskImgList: [showMaskImgList, setShowMaskImgList],
@@ -102,15 +106,34 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   function onMouseUp() {
     isMouseDown.current = false
   }
+  function rectMaskClick(i: number) {
+    rangeRects.splice(i, 1)
+    setRangeRects([...rangeRects])
+  }
   function documentKeydown(e: {keyCode: number}) {
     if (e.keyCode == 17) {
       isControlKey.current = true
+    }
+    if (e.keyCode == 18) {
+      setIsDelete(true)
     }
   }
   function documentKeyup(e: {keyCode: number}) {
     if (e.keyCode == 17) {
       isControlKey.current = false
     }
+    if (e.keyCode == 18) {
+      setIsDelete(false)
+    }
+  }
+  function reset() {
+    const parentEle: any = document.getElementById("useImgWrapper")
+    const children = parentEle.querySelectorAll(".maskPointer")
+    children.forEach((el: HTMLDivElement) => {
+      parentEle.removeChild(el)
+    });
+    setPreviousMask(null)
+    setMaskImg(null)
   }
   return (
     <div className="mask_wrapper">
@@ -136,6 +159,10 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                   {" "}
                   获取白底图片(可用于webui img2img)
                 </a>
+              </Button>
+              <Button variant="contained" onClick={reset} color="error">
+                <RefreshIcon />
+                重置
               </Button>
             </div>
             <div className="use_img_mask_wrapper">
@@ -173,16 +200,30 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                   className={`${maskImageClasses} target_img use_img_mask`}
                 ></img>
               )}
-              {rangeRects.map((rect: any) => {
-                return <div className={'rect_mask'} key={rect.id}
+              {rangeRects.map((rect: any, i: number) => {
+                return <div className={`rect_mask`} key={rect.id}
                   style={{
                     left: rect.x,
                     top: rect.y,
                     width: rect.w + 'px',
                     height: rect.h + 'px',
-                    display: rect.w > 5 ? 'block' : 'none'
+                    display: rect.w > 5 ? 'block' : 'none',
+                    pointerEvents: isDelete ? 'inherit' : 'none'
                   }}
-                ></div>
+                  onContextMenu={(event) => {
+                    event.preventDefault();
+                  }}
+                >
+                  <span
+                    className={'close_button'}
+                    style={{
+                      display: isDelete ? 'block' : 'none',
+                    }}
+                    onClick={() => {
+                      rectMaskClick(i)
+                    }}
+                  ><CloseIcon /></span>
+                </div>
               })}
             </div>
           </div>

@@ -56,7 +56,20 @@
   .rect_mask {
     position: absolute;
     border: 1px solid red;
-    pointer-events: none;
+    .close_button {
+      position: "relative";
+      svg {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: aliceblue;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);;
+        cursor: pointer;
+      }
+    }
   }
 }
 

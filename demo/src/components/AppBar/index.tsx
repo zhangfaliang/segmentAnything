@@ -159,7 +159,6 @@ function ResponsiveAppBar() {
         dataRange = new Map([...dataRange, ...data])
       }
     }
-    
   }, [clicks]);
   useEffect(() => {
     (window as any).loadFile = loadFile;
