@@ -127,11 +127,13 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     }
   }
   function reset() {
-    const parentEle: any = document.getElementById("useImgWrapper")
-    const children = parentEle.querySelectorAll(".maskPointer")
-    children.forEach((el: HTMLDivElement) => {
-      parentEle.removeChild(el)
+    const useImgWrapper: any = document.getElementById("useImgWrapper")
+    const maskPointers = useImgWrapper.querySelectorAll(".maskPointer")
+    maskPointers.forEach((el: HTMLDivElement) => {
+      useImgWrapper.removeChild(el)
     });
+
+    setRangeRects([])
     setPreviousMask(null)
     setMaskImg(null)
   }
