@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import AppContext from "../hooks/createContext";
 import Button from "@mui/material/Button";
+import Switch from "@mui/material/Switch";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -134,21 +135,22 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setRangeRects([...rangeRects])
   }
   function documentKeydown(e: {keyCode: number}) {
-    if (e.keyCode == 17) {
-      isControlKey.current = true
-    }
+    // if (e.keyCode == 17) {
+    //   isControlKey.current = true
+    // }
     if (e.keyCode == 18) {
       setIsDelete(true)
     }
   }
   function documentKeyup(e: {keyCode: number}) {
-    if (e.keyCode == 17) {
-      isControlKey.current = false
-    }
+    // if (e.keyCode == 17) {
+    //   isControlKey.current = false
+    // }
     if (e.keyCode == 18) {
       setIsDelete(false)
     }
   }
+  
   function reset() {
     const useImgWrapper:any = document.getElementById("useImgWrapper")
     const maskPointers = useImgWrapper.querySelectorAll(".maskPointer")
@@ -185,7 +187,6 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   const handleClick = ({ maskSrc, maskName }: any) => {
     downloadFolder({ maskSrc, maskName });
   };
-
   return (
     <div className="mask_wrapper">
       <div className="mask_img">
@@ -216,6 +217,12 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                 <RefreshIcon />
                 重置
               </Button>
+              <div>
+                <span>设置隔离区域</span>
+                <Switch onChange={({target: {checked}}) => {
+                  isControlKey.current = checked
+                }}/>
+              </div>
             </div>
             <div className="use_img_mask_wrapper">
               <img
