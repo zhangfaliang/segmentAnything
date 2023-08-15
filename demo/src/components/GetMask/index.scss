@@ -60,13 +60,13 @@
       position: "relative";
       svg {
         position: absolute;
-        top: -5px;
-        right: -5px;
-        background-color: aliceblue;
+        top: -8px;
+        right: -8px;
+        background-color: rgba(240, 248, 255, .7);
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);
         cursor: pointer;
       }
     }

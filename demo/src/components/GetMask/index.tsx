@@ -6,12 +6,14 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import CloseIcon from '@mui/icons-material/Close';
+import HelpIcon from '@mui/icons-material/Help';
 import { useNavigate } from "react-router-dom";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import { get } from "lodash";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import Typography from "@mui/material/Typography";
+import Popover from '@mui/material/Popover';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import JSZip from "jszip";
@@ -187,6 +189,15 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   const handleClick = ({ maskSrc, maskName }: any) => {
     downloadFolder({ maskSrc, maskName });
   };
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const open = Boolean(anchorEl);
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <div className="mask_wrapper">
       <div className="mask_img">
@@ -217,8 +228,44 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                 <RefreshIcon />
                 重置
               </Button>
-              <div>
-                <span>设置隔离区域</span>
+              <div style={{display: "flex", alignItems: "center", marginLeft: "12px"}}>
+                <span>设置隔离区域</span>  
+                <Typography
+                  aria-owns={open ? 'mouse-over-popover' : undefined}
+                  aria-haspopup="true"
+                  onMouseEnter={handlePopoverOpen}
+                  onMouseLeave={handlePopoverClose}
+                >
+                  <HelpIcon color="disabled" style={{width: "18px"}}/>
+                </Typography>
+                <Popover id="mouse-over-popover"
+                  sx={{
+                    pointerEvents: 'none',
+                  }}
+                  open={open}
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  onClose={handlePopoverClose}
+                  disableRestoreFocus>
+                  <Typography sx={{ p: 1 }} fontSize={14} color={"#666"} width={250}>
+                    <span style={{display: "flex"}}>
+                      <span>1、</span>
+                      <span>设置隔离区：打开按钮，按下鼠标并拖动，可选中隔离区域，将不想被连带选中的区域进行隔离。(设置完隔离区，需将按钮关闭，进行选中mask操作)</span>
+                    </span>
+                    <br/>
+                    <span style={{display: "flex"}}>
+                      <span>2、</span>
+                      <span>取消隔离区：按住键盘 Alt/option 键，点击“关闭”按钮，可删除选中区域。</span>
+                    </span>
+                  </Typography>
+                </Popover>
                 <Switch onChange={({target: {checked}}) => {
                   isControlKey.current = checked
                 }}/>
