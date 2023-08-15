@@ -1,3 +1,11 @@
+/*
+ * @Author: zhao yongfei v-zhaoyongfei@doublefs.com
+ * @Date: 2023-08-05 11:03:13
+ * @LastEditors: zhao yongfei v-zhaoyongfei@doublefs.com
+ * @LastEditTime: 2023-08-10 19:45:42
+ * @FilePath: /segmentanything/demo/src/components/hooks/createContext.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 // Copyright (c) Meta Platforms, Inc. and affiliates.
 // All rights reserved.
 
@@ -47,6 +55,8 @@ interface contextProps {
     setGlobalLoadFileLoadFile: (e: any | null) => void
   ];
   rePolling: [rePolling: any, setRePolling: (e: any | null) => void];
+  rangeRects: [rangeRects: any, setRangeRects: (e: any[]) => void]
+  imageScale: [imageScale: any, setImageScale: (e: number) => void]
 }
 
 const AppContext = createContext<contextProps | null>(null);

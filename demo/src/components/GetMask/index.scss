@@ -1,7 +1,7 @@
 .use_img_operate_wrapper {
   display: flex;
   jusetify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   .use_img_operate {
     display: flex;
@@ -49,13 +49,27 @@
   }
 }
 .use_img_mask_wrapper {
-  height: calc(100vh - 120px);
-  width: 100%;
-  display: flex;
-  justify-content: center;
   position: relative;
   .use_img_mask {
     top: 0;
+  }
+  .rect_mask {
+    position: absolute;
+    border: 1px solid red;
+    .close_button {
+      position: "relative";
+      svg {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: aliceblue;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, .12);;
+        cursor: pointer;
+      }
+    }
   }
 }
 

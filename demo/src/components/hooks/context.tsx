@@ -30,7 +30,8 @@ const AppContextProvider = (props: {
     () => {}
   );
   const [rePolling, setRePolling] = useState<any | null>(() => {});
-
+  const [rangeRects, setRangeRects] = useState<any>([])
+  const [imageScale, setImageScale] = useState(0)
   return (
     <AppContext.Provider
       value={{
@@ -49,6 +50,8 @@ const AppContextProvider = (props: {
         localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
         globalLoadFile: [globalLoadFile, setGlobalLoadFileLoadFile],
         rePolling: [rePolling, setRePolling],
+        rangeRects: [rangeRects, setRangeRects],
+        imageScale: [imageScale, setImageScale]
       }}
     >
       {props.children}

@@ -178,7 +178,8 @@ const App = ({}: any) => {
           const mask = onnxMaskToImage(
             mergedOutput,
             output.dims[2],
-            output.dims[3]
+            output.dims[3],
+            []
           );
           // 将合并后的掩码转换为图像，并设置为 mergedMask 状态
           setMergedMask(mask);
@@ -198,7 +199,8 @@ const App = ({}: any) => {
           const mask = onnxMaskToImage(
             mergedOutput,
             output.dims[2],
-            output.dims[3]
+            output.dims[3],
+            []
           );
           // 将合并后的掩码转换为图像，并设置为 mergedMask 状态
           setMergedMask(mask);
