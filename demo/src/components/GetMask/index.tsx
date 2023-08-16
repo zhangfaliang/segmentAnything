@@ -133,6 +133,9 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   }
   function onMouseUp() {
     isMouseDown.current = false
+    setTimeout(() => {
+      isSelected.current = false
+    }, 50);
   }
   function rectMaskClick(i: number) {
     rangeRects.splice(i, 1)
@@ -259,7 +262,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                   <Typography sx={{ p: 1 }} fontSize={14} color={"#666"} width={250}>
                     <span style={{display: "flex"}}>
                       <span>1、</span>
-                      <span>设置隔离区：打开按钮，按下鼠标并拖动，可选中隔离区域，将不想被连带选中的区域进行隔离。(设置完隔离区，需将按钮关闭，进行选中mask操作)</span>
+                      <span>设置隔离区：打开按钮或按control键，按下鼠标并拖动，可选中隔离区域，将不想被连带选中的区域进行隔离。(设置完隔离区，需将按钮关闭，进行选中mask操作)</span>
                     </span>
                     <br/>
                     <span style={{display: "flex"}}>
@@ -279,8 +282,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                 alt="Crop me"
                 onLoad={onImageLoad}
                 onClick={(e: any) => {
-                  if (isControlKey.current) return;
-                  if (isSelected.current) {
+                  if (isControlKey.current || isSelected.current) {
                     isSelected.current = false
                     return
                   }
