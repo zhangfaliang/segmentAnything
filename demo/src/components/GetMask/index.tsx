@@ -114,8 +114,10 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
       }
     }
   }
+  let isSelected = useRef(false)
   function getClientRect(e: any) {
     if (!isMouseDown.current) return
+    isSelected.current = true
     let el = e.nativeEvent.target;
     const clientRect = el.getBoundingClientRect();
     let currentX = e.clientX - Math.ceil(clientRect.left);
@@ -137,17 +139,17 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setRangeRects([...rangeRects])
   }
   function documentKeydown(e: {keyCode: number}) {
-    // if (e.keyCode == 17) {
-    //   isControlKey.current = true
-    // }
+    if (e.keyCode == 17) {
+      isControlKey.current = true
+    }
     if (e.keyCode == 18) {
       setIsDelete(true)
     }
   }
   function documentKeyup(e: {keyCode: number}) {
-    // if (e.keyCode == 17) {
-    //   isControlKey.current = false
-    // }
+    if (e.keyCode == 17) {
+      isControlKey.current = false
+    }
     if (e.keyCode == 18) {
       setIsDelete(false)
     }
@@ -278,6 +280,10 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
                 onLoad={onImageLoad}
                 onClick={(e: any) => {
                   if (isControlKey.current) return;
+                  if (isSelected.current) {
+                    isSelected.current = false
+                    return
+                  }
                   processImgType === "mask" && handleMouseMove(e);
                 }}
                 onContextMenu={(event) => {
