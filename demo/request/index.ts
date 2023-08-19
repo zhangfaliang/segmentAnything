@@ -3,11 +3,11 @@
 //"";
 let host =
   process.env.NODE_ENV === "production"
-    ? "https://sam.doublefs.com"
+    ? "http://localhost:5000"
     : "http://localhost:5000";
 let nodeHost =
   process.env.NODE_ENV === "production"
-    ? "https:///samui.doublefs.com"
+    ? "http://localhost:5000"
     : "http://localhost:9090";
 // host = "http://localhost:5000";
 export const postData = ({ url, data, isNodeServer }: any) => {

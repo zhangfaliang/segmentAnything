@@ -150,5 +150,5 @@ app.get("/", function (req, res) {
 });
 
 app.listen(8080, () => {
-  console.log("监听端口：8080");
+  console.log("6006");
 });
