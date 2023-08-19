@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 let host =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:5000"
+    ? "https://u196188-98ae-b1600f14.neimeng.seetacloud.com:6443"
     : "http://localhost:5000";
 
 const postData = ({ url, data }) => {

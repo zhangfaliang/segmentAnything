@@ -44,7 +44,10 @@ const LeftComponent = ({}: any) => {
     navigate("/upload");
   };
   const pageRequestData = async () => {
-    const res = await getData({ url: `/get/maskTask`, isNodeServer: true });
+    const res = await getData({
+      url: `/python/get/maskTask`,
+      isNodeServer: true,
+    });
     return res;
   };
   const apiCallback = (res: any) => {
