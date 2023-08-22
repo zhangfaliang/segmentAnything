@@ -3,11 +3,11 @@
 //"";
 let host =
   process.env.NODE_ENV === "production"
-    ? "https://u196188-98ae-b1600f14.neimeng.seetacloud.com:6443"
+    ? "http://localhost:5000"
     : "http://localhost:5000";
 let nodeHost =
   process.env.NODE_ENV === "production"
-    ? "https://u196188-98ae-b1600f14.neimeng.seetacloud.com:6443"
+    ? "http://localhost:5000"
     : "http://localhost:9090";
 // host = "http://localhost:5000";
 export const postData = ({ url, data, isNodeServer }: any) => {
