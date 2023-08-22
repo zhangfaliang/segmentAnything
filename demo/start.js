@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const history = require("connect-history-api-fallback");
 const Queue = require("./queue");
-var proxy = require("express-http-proxy");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -29,12 +28,6 @@ app.get("/assets/data/*", async (req, res, next) => {
     next(error);
   }
 });
-app.use(
-  "/proxy",
-  proxy("locat", {
-    https: true,
-  })
-);
 
 app.get("/assets/compressed_data/*", async (req, res, next) => {
   const dataDir = path.join(__dirname, "src/assets/compressed_data/");

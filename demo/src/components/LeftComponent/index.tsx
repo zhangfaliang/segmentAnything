@@ -45,7 +45,7 @@ const LeftComponent = ({}: any) => {
   };
   const pageRequestData = async () => {
     const res = await getData({
-      url: `/python/get/maskTask`,
+      url: `/get/maskTask`,
       isNodeServer: true,
     });
     return res;
