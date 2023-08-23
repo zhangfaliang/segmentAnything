@@ -3,14 +3,14 @@
 //"";
 import { get } from "lodash";
 const host_name_map = {
-  "samui1.doublefs.com": "aigc-py.doublefs.com",
-  "samui2.doublefs.com": "train1-py.doublefs.com",
-  "samui3.doublefs.com": "train2-py.doublefs.com",
-  "samuiaigc.doublefs.com": "train3-py.doublefs.com",
+  "samui1.doublefs.com": "https://aigc-py.doublefs.com",
+  "samui2.doublefs.com": "https://train1-py.doublefs.com",
+  "samui3.doublefs.com": "https://train2-py.doublefs.com",
+  "samuiaigc.doublefs.com": "https://train3-py.doublefs.com",
 };
 let host =
   process.env.NODE_ENV === "production"
-    ? get(host_name_map, window?.location?.origin, "http://127.0.0.1:5000")
+    ? get(host_name_map, window?.location?.host, "http://127.0.0.1:5000")
     : "http://127.0.0.1:5000";
 let nodeHost =
   process.env.NODE_ENV === "production"
