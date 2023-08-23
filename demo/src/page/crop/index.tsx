@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import Cropper from "./next.index";
 import "cropperjs/dist/cropper.css";
+import ItemCrop from "./ItemCrop";
 import "./index.scss";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -22,6 +22,10 @@ export const Crop = () => {
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
     loading: [loading, setLoading],
     rePolling: [rePolling, setRePolling],
+    localUpLoadImgArrayData: [
+      localUpLoadImgArrayData,
+      setLocalUpLoadImgArrayData,
+    ],
   } = useContext(AppContext)!;
   const [cropData, setCropData]: any = useState();
   const [cropper, setCropper]: any = useState();
@@ -44,12 +48,6 @@ export const Crop = () => {
     autoScaleValue: true,
   });
 
-  useEffect(() => {
-    return () => {
-      setLocalUpLoadImgData(null);
-      setCropData(null);
-    };
-  }, []);
   const handleChange = (prop: any) => (event: any) => {
     if (event.target.value < 0) return;
     const processValue = `${event.target.value}`.replace(/^0/, "");
@@ -81,32 +79,12 @@ export const Crop = () => {
     }
   };
 
-  const handleReset = () => {
-    if (typeof cropper !== "undefined") {
-      setCropData(null);
-      cropper.clear();
-    }
-  };
   const handleAutoFullParams = () => {
     cropper.crop();
     setAutoCrop(true);
     cropper.autoCrop = true;
   };
-  const onCrop = (e: any, ...other: any) => {
-    const processValueWidth = Number(`${e.detail.width}`.replace(/^0/, ""));
-    const processValueHeight = Number(`${e.detail.height}`.replace(/^0/, ""));
-    const data: any = {
-      ...values,
-      scaleX: e.detail.scaleX,
-      scaleY: e.detail.scaleY,
-      rotate: e.detail.rotate,
-      x: e.detail.x,
-      y: e.detail.y,
-      width: processValueWidth || "",
-      height: processValueHeight || "",
-    };
-    setValues(data);
-  };
+
   const handleRestUpload = () => {
     // cropper.crop();
     setAutoCrop(false);
@@ -114,29 +92,7 @@ export const Crop = () => {
     setLocalUpLoadImgData(null);
     setCropData(null);
   };
-  const handleRemoveBg = async () => {
-    setLoading(true);
-    const { data, code, message } =
-      (await postData({
-        url: "/remove_background",
-        data: {
-          imgData: (cropData || localUpLoadImgData.data_url).replace(
-            /data:image\/(jpeg|png|jpg|gif);base64,/,
-            ""
-          ),
-          imgName: localUpLoadImgData.imgName, //file.name,
-          size: localUpLoadImgData.size,
-        },
-      })) || {};
 
-    setLocalUpLoadImgData({
-      data_url: "",
-      imgName: `${localUpLoadImgData.imgName}_${new Date().getTime()}`,
-      size: "",
-    });
-    // 更改页面图片内容
-    setLoading(false);
-  };
   const handleGenerate = async () => {
     const imgData = cropper.getImageData();
     if (values?.height) {
@@ -163,10 +119,10 @@ export const Crop = () => {
     setOpenResize(true);
   };
 
-  return localUpLoadImgData ? (
+  return localUpLoadImgArrayData?.length ? (
     <>
       <ToastContainer />
-      <ResizeCorpImgModal
+      {/* <ResizeCorpImgModal
         width={values.imgWidth.toFixed(0)}
         height={values.imgHeight.toFixed(0)}
         setRePolling={setRePolling}
@@ -182,7 +138,7 @@ export const Crop = () => {
         setCropData={setCropData}
         setLoading={setLoading}
         handleRestUpload={handleRestUpload}
-      />
+      /> */}
       <div className="crop_wrapper_content" ref={cropEle}>
         <div className="crop_wrapper_content_center">
           <div className="crop_btn_group_wrapper">
@@ -200,33 +156,15 @@ export const Crop = () => {
               生成mask
             </Button>
           </div>
-          <Cropper
-            className="crop_wrapper_content_left"
-            autoCropArea={1}
-            autoCrop={autoCrop}
-            modal={true}
-            // style={{ height: "", width: "auto" }}
-            initialAspectRatio={1 / 1.16}
-            aspectRatio={1 / 1.16}
-            src={cropData || localUpLoadImgData.data_url}
-            viewMode={1}
-            background={false}
-            responsive={false}
-            guides={true}
-            center={true}
-            data={values}
-            minContainerWidth={0}
-            minContainerHeight={0}
-            highlight={true}
-            rotatable={false}
-            scalable={false}
-            zoomable={false}
-            crop={onCrop}
-            movable={true}
-            setCropper={setCropper}
-            cropper={cropper}
-            checkCrossOrigin={true}
-          />
+          <div className="crop_item_wrapper">
+            {localUpLoadImgArrayData.map((item: any, index: any) => (
+              <ItemCrop
+                key={item.imgName}
+                item={item}
+                key_str={`key_${index}`}
+              />
+            ))}
+          </div>
         </div>
         <Box
           className="crop_wrapper_content_right"
@@ -269,14 +207,6 @@ export const Crop = () => {
             </Grid>
 
             <Grid item xs={12} md={12}>
-              {/* <Button variant="contained" onClick={handleReset}>
-                <CleaningServicesIcon
-                  style={{
-                    marginRight: "5px",
-                  }}
-                />{" "}
-                重新裁剪
-              </Button> */}
               {!!values.width && (
                 <Button variant="contained" onClick={handleCrop}>
                   <CropIcon

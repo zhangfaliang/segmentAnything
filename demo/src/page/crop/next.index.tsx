@@ -67,6 +67,7 @@ const ReactCropper = ({ ...props }) => {
     onInitialized,
     cropper,
     setCropper,
+    id_value,
     ...rest
   } = props;
 
@@ -89,7 +90,7 @@ const ReactCropper = ({ ...props }) => {
   }, [src]);
 
   useEffect(() => {
-    const ele: any = document.querySelector("#corp_img_component");
+    const ele: any = document.querySelector(`#${id_value}_corp_img_component`);
     if (ele) {
       const cropper = new Cropper(ele, {
         dragMode,
@@ -97,7 +98,7 @@ const ReactCropper = ({ ...props }) => {
         ready: (e) => {
           if (e.currentTarget !== null) {
             // applyDefaultOptions(e.currentTarget.cropper, defaultOptions);
-          }
+          } // document.querySelector(`#_1124053233-1400x.jpg_corp_img_component`);
           ready && ready(e);
         },
       });
@@ -106,7 +107,9 @@ const ReactCropper = ({ ...props }) => {
     }
 
     return () => {
-      const ele: any = document.querySelector("#corp_img_component");
+      const ele: any = document.querySelector(
+        `#${id_value}_corp_img_component`
+      );
       ele?.cropper?.destroy();
     };
   }, []);
@@ -116,7 +119,7 @@ const ReactCropper = ({ ...props }) => {
   return (
     <div style={style} className={className}>
       <img
-        id="corp_img_component"
+        id={`${id_value}_corp_img_component`}
         {...imageProps}
         style={REQUIRED_IMAGE_STYLES}
       />

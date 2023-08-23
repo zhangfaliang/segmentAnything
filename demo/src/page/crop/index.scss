@@ -19,14 +19,17 @@
   overflow-y: auto;
   box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.1);
 }
-.crop_wrapper_content_left {
-  flex: 1;
+.crop_item_wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.crop_wrapper_content_left {
+  width: 466px;
+  margin: 0 40px;
 }
 .crop_btn_group_wrapper {
-  padding: 10px 0;
-  height: 60px;
+  padding: 30px 0;
   width: 100%;
   justify-content: center;
   display: flex;

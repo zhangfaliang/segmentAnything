@@ -80,46 +80,20 @@ export default function App({ loadFile }: any) {
     previousMask: [, setPreviousMask],
     mergedMask: [, setMergedMask],
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
+    localUpLoadImgArrayData: [
+      localUpLoadImgArrayData,
+      setLocalUpLoadImgArrayData,
+    ],
+    imageArray: [, setImageArray],
   } = useContext(AppContext)!;
   const [images, setImages] = useState<File[]>([]);
-
   const uploadImg = async ({ imageList }: any) => {
-    const { data_url, file }: any = imageList[0];
-    if (file.size / 1024 > maxSize * 1024) {
-      toast(`🔥--图片不能大于 ${maxSize} MB`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "light",
-      });
-      return;
-    }
-    if (file) {
-      const img = await readImg(file);
-      try {
-        // const base64URL: any = await compressImg(img, file.type, 2000, 2320);
-        const base64URL: any = await compressImg(img, file.type, 2000, 2320);
-        const newImg = new Image();
-        newImg.src = base64URL;
-        newImg.onload = () => {
-          const { height, width, samScale } = handleImageScale(newImg);
-          newImg.width = width;
-          newImg.height = height;
-          setImage(newImg);
-        };
-        setMaskImg(null);
-        setPreviousMask("");
-        setMergedMask("");
-        setLocalUpLoadImgData({
-          data_url: base64URL,
-          imgName: file.name,
-          size: file.size,
-        });
-      } catch (error) {
-        toast(`😂--图片上传出错请再试一次`, {
+    let imgArray: any = [];
+    let localUpLoadImgArrayData: any = [];
+    for (var i = 0; i < imageList?.length; i++) {
+      const { data_url, file }: any = imageList[i];
+      if (file.size / 1024 > maxSize * 1024) {
+        toast(`🔥--图片不能大于 ${maxSize} MB`, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -128,8 +102,51 @@ export default function App({ loadFile }: any) {
           draggable: true,
           theme: "light",
         });
+        return;
+      }
+      if (file) {
+        const img = await readImg(file);
+        try {
+          // const base64URL: any = await compressImg(img, file.type, 2000, 2320);
+          const base64URL: any = await compressImg(img, file.type, 2000, 2320);
+          const newImg = new Image();
+          newImg.src = base64URL;
+          newImg.onload = () => {
+            const { height, width, samScale } = handleImageScale(newImg);
+            newImg.width = width;
+            newImg.height = height;
+            // setImage(newImg);
+            imgArray.push(newImg);
+          };
+          setMaskImg(null);
+          setPreviousMask("");
+          setMergedMask("");
+          // setLocalUpLoadImgData({
+          //   data_url: base64URL,
+          //   imgName: file.name,
+          //   size: file.size,
+          // });
+          localUpLoadImgArrayData.push({
+            data_url: base64URL,
+            imgName: file.name,
+            size: file.size,
+          });
+        } catch (error) {
+          toast(`😂--图片上传出错请再试一次`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+          });
+        }
       }
     }
+    setImageArray(imgArray);
+    setLocalUpLoadImgArrayData(localUpLoadImgArrayData);
+
     //       size: file.size, });
     // const { data, code, message } =
     //   (await uploadData({
@@ -167,13 +184,13 @@ export default function App({ loadFile }: any) {
     }
   };
 
-  return !localUpLoadImgData ? (
+  return !localUpLoadImgArrayData.length ? (
     <div className="App">
       <ToastContainer />
       <h1>请上传图片</h1>
       <p>支持格式：jpg、png、jpeg、webp</p>
       <ImageUploading
-        multiple={false}
+        multiple={true}
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}

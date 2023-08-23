@@ -13,6 +13,7 @@ const AppContextProvider = (props: {
 }) => {
   const [clicks, setClicks] = useState<Array<modelInputProps> | null>(null);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
+  const [imageArray, setImageArray] = useState<any>([]);
   const [maskImg, setMaskImg] = useState<HTMLImageElement | null>(null);
   const [maskImgList, setMaskImgList] = useState<any>([]);
   const [showMaskImgList, setShowMaskImgList] = useState<any>(false);
@@ -26,15 +27,21 @@ const AppContextProvider = (props: {
   const [localUpLoadImgData, setLocalUpLoadImgData] = useState<any | null>(
     null
   );
+  const [localUpLoadImgArrayData, setLocalUpLoadImgArrayData] = useState([]);
   const [globalLoadFile, setGlobalLoadFileLoadFile] = useState<any | null>(
     () => {}
   );
   const [rePolling, setRePolling] = useState<any | null>(() => {});
-  const [rangeRects, setRangeRects] = useState<any>([])
-  const [imageScale, setImageScale] = useState(0)
+  const [rangeRects, setRangeRects] = useState<any>([]);
+  const [imageScale, setImageScale] = useState(0);
   return (
     <AppContext.Provider
       value={{
+        imageArray: [imageArray, setImageArray],
+        localUpLoadImgArrayData: [
+          localUpLoadImgArrayData,
+          setLocalUpLoadImgArrayData,
+        ],
         clicks: [clicks, setClicks],
         image: [image, setImage],
         huggingImage: [huggingImage, setHuggingImage],
@@ -51,7 +58,7 @@ const AppContextProvider = (props: {
         globalLoadFile: [globalLoadFile, setGlobalLoadFileLoadFile],
         rePolling: [rePolling, setRePolling],
         rangeRects: [rangeRects, setRangeRects],
-        imageScale: [imageScale, setImageScale]
+        imageScale: [imageScale, setImageScale],
       }}
     >
       {props.children}

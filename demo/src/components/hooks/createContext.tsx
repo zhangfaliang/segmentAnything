@@ -16,13 +16,14 @@ import { createContext } from "react";
 import { modelInputProps } from "../helpers/Interfaces";
 
 interface contextProps {
-  clicks: [
-    clicks: modelInputProps[] | null,
-    setClicks: (e: modelInputProps[] | null) => void
-  ];
+  clicks: [clicks: modelInputProps[] | null, setClicks: (e: any) => void];
   image: [
     image: HTMLImageElement | null,
     setImage: (e: HTMLImageElement | null) => void
+  ];
+  imageArray: [
+    imageArray: any,
+    setImageArray: (e: HTMLImageElement | null) => void
   ];
   huggingImage: [
     huggingImage: HTMLImageElement | null,
@@ -50,13 +51,17 @@ interface contextProps {
     localUpLoadImgData: any | null,
     setLocalUpLoadImgData: (e: any | null) => void
   ];
+  localUpLoadImgArrayData: [
+    localUpLoadImgArrayData: any,
+    setLocalUpLoadImgArrayData: (e: any | null) => void
+  ];
   globalLoadFile: [
     globalLoadFile: any,
     setGlobalLoadFileLoadFile: (e: any | null) => void
   ];
   rePolling: [rePolling: any, setRePolling: (e: any | null) => void];
-  rangeRects: [rangeRects: any, setRangeRects: (e: any[]) => void]
-  imageScale: [imageScale: any, setImageScale: (e: number) => void]
+  rangeRects: [rangeRects: any, setRangeRects: (e: any[]) => void];
+  imageScale: [imageScale: any, setImageScale: (e: number) => void];
 }
 
 const AppContext = createContext<contextProps | null>(null);
