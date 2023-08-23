@@ -1,13 +1,20 @@
 // const host = "https://sam.test.doublefs.com";
 // https://sam.doublefs.com
 //"";
+import { get } from "lodash";
+const host_name_map = {
+  "samui1.doublefs.com": "https://webui-py.doublefs.com",
+  "samui2.doublefs.com": "https://train1-py.doublefs.com",
+  "samui3.doublefs.com": "https://train2-py.doublefs.com",
+  "samuiaigc.doublefs.com": "https://aigc-py.doublefs.com",
+};
 let host =
   process.env.NODE_ENV === "production"
-    ? "http://127.0.0.1:5000"
+    ? get(host_name_map, window?.location?.host, "http://127.0.0.1:5000")
     : "http://127.0.0.1:5000";
 let nodeHost =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:8080"
+    ? window?.location?.origin
     : "http://127.0.0.1:9090";
 // host = "http://localhost:5000";
 export const postData = ({ url, data, isNodeServer }: any) => {
