@@ -113,9 +113,10 @@ export default function App({ loadFile }: any) {
         setMaskImg(null);
         setPreviousMask("");
         setMergedMask("");
+        const [name, suffix] = file.name.split('.')
         setLocalUpLoadImgData({
           data_url: base64URL,
-          imgName: file.name,
+          imgName: `${name}.${suffix.toLowerCase()}`,
           size: file.size,
         });
       } catch (error) {
