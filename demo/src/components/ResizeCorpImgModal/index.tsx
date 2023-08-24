@@ -18,10 +18,8 @@ export default function ResizeCorpImgModal({
   height,
   setValues,
   values,
-  cropData,
   localUpLoadImgData,
   setLocalUpLoadImgData,
-  setCropData,
   setRePolling,
   setLoading,
   handleRestUpload,
@@ -101,10 +99,6 @@ export default function ResizeCorpImgModal({
       context && context.clearRect(0, 0, targetWidth, targetHeight);
       // 图片绘制
       context && context.drawImage(img, 0, 0, targetWidth, targetHeight);
-      // canvas.toBlob(function (blob) {
-      //   resolve(blob);
-      // }, type || "image/png");
-
       resolve(canvas.toDataURL(type || "image/jpg"));
     });
   };
@@ -127,7 +121,7 @@ export default function ResizeCorpImgModal({
     const size = fileSize.toFixed(2);
 
     // image.src = base64URL;
-    setCropData("");
+    // setCropData("");
     setLocalUpLoadImgData({
       data_url: "",
       size: "",
@@ -144,13 +138,12 @@ export default function ResizeCorpImgModal({
             /data:image\/(jpeg|png|jpg|gif);base64,/,
             ""
           ),
-          imgName: localUpLoadImgData.imgName.replace(
-            /(\.png|\.jpg|\.jpeg|\.webp)$/,
-            `@_@${new Date().getTime()}$1`
-          ).replace(
-            / +|\-|\/|\+|/g,
-            ``
-          ), //file.name,
+          imgName: localUpLoadImgData.imgName
+            .replace(
+              /(\.png|\.jpg|\.jpeg|\.webp)$/,
+              `@_@${new Date().getTime()}$1`
+            )
+            .replace(/ +|\-|\/|\+|/g, ``), //file.name,
           size: size,
         },
       })) || {};

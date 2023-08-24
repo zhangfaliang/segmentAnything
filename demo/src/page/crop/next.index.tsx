@@ -68,6 +68,8 @@ const ReactCropper = ({ ...props }) => {
     cropper,
     setCropper,
     id_value,
+    readyCallBack,
+    imgName,
     ...rest
   } = props;
 
@@ -92,7 +94,7 @@ const ReactCropper = ({ ...props }) => {
   useEffect(() => {
     const ele: any = document.querySelector(`#${id_value}_corp_img_component`);
     if (ele) {
-      const cropper = new Cropper(ele, {
+      const cropper: any = new Cropper(ele, {
         dragMode,
         ...rest,
         ready: (e) => {
@@ -102,8 +104,11 @@ const ReactCropper = ({ ...props }) => {
           ready && ready(e);
         },
       });
+      cropper.imgName = imgName;
+      cropper.id_value = id_value;
       onInitialized && onInitialized(cropper);
       setCropper(cropper);
+      readyCallBack && readyCallBack(cropper);
     }
 
     return () => {

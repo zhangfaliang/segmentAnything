@@ -2,7 +2,18 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import Cropper from "./next.index";
 import AppContext from "../../components/hooks/createContext";
 
-const ItemCrop = ({ item, key_str }: any) => {
+const ItemCrop = ({
+  item,
+  key_str,
+  readyCallBack,
+  autoCrop,
+  values,
+  cropData,
+  setCropperDataArray,
+  valuesArray,
+  setValuesArray,
+  id_value,
+}: any) => {
   const {
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
     loading: [loading, setLoading],
@@ -12,10 +23,8 @@ const ItemCrop = ({ item, key_str }: any) => {
       setLocalUpLoadImgArrayData,
     ],
   } = useContext(AppContext)!;
-  const [cropData, setCropData]: any = useState();
+  // const [cropData, setCropData]: any = useState();
   const [cropper, setCropper]: any = useState();
-  const [autoCrop, setAutoCrop]: any = useState(false);
-  const cropEle: any = useRef<HTMLImageElement>(null);
 
   const onCrop = (e: any, ...other: any) => {
     const processValueWidth = Number(`${e.detail.width}`.replace(/^0/, ""));
@@ -30,26 +39,29 @@ const ItemCrop = ({ item, key_str }: any) => {
       width: processValueWidth || "",
       height: processValueHeight || "",
     };
-    setValues(data);
+
+    // valuesArray, setValuesArray,
+
+    // setValues(data);
   };
-  const [values, setValues]: any = useState({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    rotate: 0,
-    scaleX: 1,
-    scaleY: 1,
-    imgHeight: 0,
-    imgWidth: 0,
-    naturalHeight: 0,
-    naturalWidth: 0,
-    autoScaleValue: true,
-  });
+  // const [values, setValues]: any = useState({
+  //   x: 0,
+  //   y: 0,
+  //   width: 0,
+  //   height: 0,
+  //   rotate: 0,
+  //   scaleX: 1,
+  //   scaleY: 1,
+  //   imgHeight: 0,
+  //   imgWidth: 0,
+  //   naturalHeight: 0,
+  //   naturalWidth: 0,
+  //   autoScaleValue: true,
+  // });
   useEffect(() => {
     return () => {
       setLocalUpLoadImgData(null);
-      setCropData(null);
+      setCropperDataArray([]);
     };
   }, []);
 
@@ -80,7 +92,9 @@ const ItemCrop = ({ item, key_str }: any) => {
       setCropper={setCropper}
       cropper={cropper}
       checkCrossOrigin={true}
-      id_value={key_str}
+      id_value={id_value}
+      readyCallBack={readyCallBack}
+      imgName={item.imgName}
     />
   );
 };
