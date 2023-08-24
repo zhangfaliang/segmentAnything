@@ -144,13 +144,12 @@ export default function ResizeCorpImgModal({
             /data:image\/(jpeg|png|jpg|gif);base64,/,
             ""
           ),
-          imgName: localUpLoadImgData.imgName.replace(
-            /(\.png|\.jpg|\.jpeg|\.webp)$/,
-            `@_@${new Date().getTime()}$1`
-          ).replace(
-            / +|\-|\/|\+|/g,
-            ``
-          ), //file.name,
+          imgName: localUpLoadImgData.imgName
+            .replace(
+              /(\.png|\.jpg|\.jpeg|\.webp)$/,
+              `@_@${new Date().getTime()}$1`
+            )
+            .replace(/ +|\-|\/|\+|/g, ``), //file.name,
           size: size,
         },
       })) || {};
