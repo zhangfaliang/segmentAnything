@@ -50,6 +50,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     return () => {
       document.removeEventListener('keydown', documentKeydown )
       document.removeEventListener('keyup', documentKeyup)
+      setRangeRects([])
       setMaskImgList([]);
     };
   }, []);
