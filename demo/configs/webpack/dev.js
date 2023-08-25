@@ -15,6 +15,7 @@ module.exports = merge(commonConfig, {
     allowedHosts: "all", // That solved it
     hot: true, // enable HMR on the server
     open: true,
+    port: 6006,
     // These headers enable the cross origin isolation state
     // needed to enable use of SharedArrayBuffer for ONNX
     // multithreading.

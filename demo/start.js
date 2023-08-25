@@ -8,7 +8,10 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const queue = new Queue();
-const { createProxyMiddleware } = require("http-proxy-middleware");
+const {
+  createProxyMiddleware,
+  fixRequestBody,
+} = require("http-proxy-middleware");
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "100mb" }));
@@ -17,11 +20,12 @@ app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 const apiProxy = createProxyMiddleware("/python", {
   target: "http://127.0.0.1:5000", // 代理目标为本地的 http://localhost:5000
   changeOrigin: true, // 必须设置为 true，以便更改 host 头以匹配目标 URL
+  onProxyReq: fixRequestBody,
   pathRewrite: {
     "^/python": "", // 删除请求中的 '/python' 前缀
   },
 });
-app.use("^/python/*", apiProxy);
+app.use("/python/", apiProxy);
 
 app.get("/assets/data/*", async (req, res, next) => {
   const dataDir = path.join(__dirname, "src/assets/data/");
