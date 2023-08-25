@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 const apiProxy = createProxyMiddleware("/python", {
   target: "http://127.0.0.1:5000", // 代理目标为本地的 http://localhost:5000
   changeOrigin: true, // 必须设置为 true，以便更改 host 头以匹配目标 URL
-  onProxyReq: fixRequestBody,
+  // onProxyReq: fixRequestBody,
   pathRewrite: {
     "^/python": "", // 删除请求中的 '/python' 前缀
   },
