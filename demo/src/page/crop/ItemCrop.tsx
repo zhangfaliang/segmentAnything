@@ -4,26 +4,18 @@ import AppContext from "../../components/hooks/createContext";
 
 const ItemCrop = ({
   item,
-  key_str,
   readyCallBack,
   autoCrop,
   values,
   cropData,
   setCropperDataArray,
-  valuesArray,
-  setValuesArray,
   id_value,
 }: any) => {
   const {
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
     loading: [loading, setLoading],
     rePolling: [rePolling, setRePolling],
-    localUpLoadImgArrayData: [
-      localUpLoadImgArrayData,
-      setLocalUpLoadImgArrayData,
-    ],
   } = useContext(AppContext)!;
-  // const [cropData, setCropData]: any = useState();
   const [cropper, setCropper]: any = useState();
 
   const onCrop = (e: any, ...other: any) => {

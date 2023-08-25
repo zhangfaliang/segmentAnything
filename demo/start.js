@@ -1,6 +1,4 @@
 const express = require("express");
-var proxy = require("express-http-proxy");
-
 const path = require("path");
 const history = require("connect-history-api-fallback");
 const Queue = require("./queue");
@@ -72,17 +70,17 @@ app.post("/generate/mask", async (req, res, next) => {
       `新任务添加 ，当前任务数为${taskLength},你的任务是第${taskLength + 1}个`
     );
 
-    if (taskLength >= 5) {
-      console.log(`任务数大于5，稍后再试`);
-      res.send({
-        code: -1,
-        message: "任务数大于5，稍后再试",
-        data: {
-          desc: `任务数大于5，稍后再试`,
-        },
-      });
-      return;
-    }
+    // if (taskLength >= 5) {
+    //   console.log(`任务数大于5，稍后再试`);
+    //   res.send({
+    //     code: -1,
+    //     message: "任务数大于5，稍后再试",
+    //     data: {
+    //       desc: `任务数大于5，稍后再试`,
+    //     },
+    //   });
+    //   return;
+    // }
     queue.task({
       data: {
         size: req.body.size,
@@ -123,7 +121,7 @@ app.get("/get/maskTask", async (req, res, next) => {
       code: 0,
       message: "success",
       data: {
-        desc: `${queue?.delayArr?.length}任务数为在执行`,
+        desc: `${queue?.delayArr?.length}  任务数为在执行`,
         queueNumber: queue?.delayArr?.length,
       },
     });

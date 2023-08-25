@@ -1,5 +1,5 @@
 import "./index.scss";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./index.scss";
 import AppContext from "../hooks/createContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -87,6 +87,9 @@ export default function App({ loadFile }: any) {
     imageArray: [, setImageArray],
   } = useContext(AppContext)!;
   const [images, setImages] = useState<File[]>([]);
+  useEffect(() => {
+    setLocalUpLoadImgArrayData([]);
+  }, []);
   const uploadImg = async ({ imageList }: any) => {
     let imgArray: any = [];
     let localUpLoadImgArrayData: any = [];
@@ -145,6 +148,11 @@ export default function App({ loadFile }: any) {
       }
     }
     setImageArray(imgArray);
+    console.log(
+      localUpLoadImgArrayData,
+      "localUpLoadImgArrayDatalocalUpLoadImgArrayData"
+    );
+
     setLocalUpLoadImgArrayData(localUpLoadImgArrayData);
 
     //       size: file.size, });
@@ -209,6 +217,7 @@ export default function App({ loadFile }: any) {
             <div
               style={isDragging ? { color: "red" } : undefined}
               onClick={(e: any) => {
+                onImageRemoveAll();
                 const parentEle: any = document.getElementById("useImgWrapper");
                 const maskPointers: any =
                   document.querySelectorAll(".maskPointer");

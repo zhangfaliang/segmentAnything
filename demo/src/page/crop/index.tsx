@@ -2,9 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import "cropperjs/dist/cropper.css";
 import ItemCrop from "./ItemCrop";
 import "./index.scss";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import AppContext from "../../components/hooks/createContext";
 import Button from "@mui/material/Button";
 import CropIcon from "@mui/icons-material/Crop";
@@ -13,13 +10,11 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ResizeCorpImgModal from "../../components/ResizeCorpImgModal";
 import { get } from "lodash";
 import { postData } from "../../../request/index";
 
 export const Crop = () => {
   const {
-    localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
     loading: [loading, setLoading],
     rePolling: [rePolling, setRePolling],
     localUpLoadImgArrayData: [
@@ -28,9 +23,7 @@ export const Crop = () => {
     ],
   } = useContext(AppContext)!;
   const [cropperDataArray, setCropperDataArray]: any = useState([]);
-  const [autoCrop, setAutoCrop]: any = useState(false);
   const cropEle: any = useRef<HTMLImageElement>(null);
-
   const [values, setValues]: any = useState({
     x: 0,
     y: 0,
@@ -79,47 +72,49 @@ export const Crop = () => {
       width,
       height,
     };
-    if (!autoCrop) {
-      if (cropEle?.current?.cropperArray?.length) {
-        cropEle?.current?.cropperArray?.forEach((item: any) => {
-          console.log(item?.crop, item?.setData);
-          item?.crop();
-          item?.setData(data);
-        });
-      }
-      // cropper.crop();
-      setAutoCrop(true);
+
+    if (cropEle?.current?.cropperArray?.length) {
+      cropEle?.current?.cropperArray?.forEach((item: any) => {
+        console.log(item?.crop, item?.setData);
+        item?.crop();
+        item?.setData(data);
+      });
     }
+
     setValues(data);
-    // cropper.setData(data);
   };
   const handleCrop = () => {
     if (cropEle?.current?.cropperArray?.length) {
       const cropperArray: any = [];
       cropEle?.current?.cropperArray?.forEach((item: any) => {
         cropperArray.push(item.getCroppedCanvas().toDataURL());
+        item.clear();
       });
       setCropperDataArray(cropperArray);
+      setTimeout(() => {
+        cropEle?.current?.cropperArray?.forEach((item: any) => {
+          item.clear();
+        });
+      }, 10);
     }
   };
 
   const handleAutoFullParams = () => {
-    setAutoCrop(true);
     if (cropEle?.current?.cropperArray?.length) {
       cropEle?.current?.cropperArray?.forEach((item: any) => {
         item?.crop();
-        item.autoCrop = true;
       });
     }
   };
 
   const handleRestUpload = () => {
-    setAutoCrop(false);
     if (cropEle?.current?.cropperArray?.length) {
       cropEle?.current?.cropperArray?.forEach((item: any) => {
-        item.autoCrop = false;
+        item.clear();
       });
     }
+    cropEle.current.cropperArray = [];
+    setLocalUpLoadImgArrayData([]);
     setCropperDataArray([]);
   };
   const setApi = async ({ values, id_value, imgName }: any) => {
@@ -203,7 +198,6 @@ export const Crop = () => {
           scaleX: 1,
           scaleY: 1,
         });
-        console.log(item?.imgName, "base64URLbase64URLbase64URL");
 
         setApi({
           values: {
@@ -219,9 +213,6 @@ export const Crop = () => {
           imgName: item?.imgName,
         });
       });
-
-      // setValuesArray(array);
-      // setOpenResize(true);
     }
     //
   };
@@ -230,30 +221,27 @@ export const Crop = () => {
       if (!cropEle?.current?.cropperArray) {
         cropEle.current.cropperArray = [];
       }
-      cropEle.current.cropperArray.push(cropper);
+      const res = cropEle.current.cropperArray.filter(
+        (item: any) => item?.imgName === cropper?.imgName
+      );
+      if (res?.length) {
+        cropEle?.current?.cropperArray?.forEach((item: any, index: any) => {
+          if (item?.imgName === cropper?.imgName) {
+            cropEle.current.cropperArray[index] = cropper;
+          }
+        });
+      } else {
+        cropEle.current.cropperArray.push(cropper);
+      }
+
+      cropper?.crop();
     }
   };
 
   return localUpLoadImgArrayData?.length ? (
     <>
       <ToastContainer />
-      {/* <ResizeCorpImgModal
-        width={values.imgWidth.toFixed(0)}
-        height={values.imgHeight.toFixed(0)}
-        setRePolling={setRePolling}
-        rePolling={rePolling}
-        open={openResize}
-        setOpen={setOpenResize}
-        setAutoCrop={setAutoCrop}
-        valuesArray={valuesArray}
-        setValuesArray={setValuesArray}
-        setCropperDataArray={setCropperDataArray}
-        localUpLoadImgData={localUpLoadImgData}
-        setLocalUpLoadImgData={setLocalUpLoadImgData}
-        cropperDataArray={cropperDataArray || []}
-        setLoading={setLoading}
-        handleRestUpload={handleRestUpload}
-      /> */}
+
       <div className="crop_wrapper_content" ref={cropEle}>
         <div className="crop_wrapper_content_center">
           <div className="crop_btn_group_wrapper">
@@ -270,6 +258,24 @@ export const Crop = () => {
               />{" "}
               生成mask
             </Button>
+            <Button variant="contained" onClick={handleAutoFullParams}>
+              <AutoFixHighIcon
+                style={{
+                  marginRight: "5px",
+                }}
+              />{" "}
+              选中裁剪全部
+            </Button>
+            {!!valuesArray.length && (
+              <Button variant="contained" onClick={handleCrop}>
+                <CropIcon
+                  style={{
+                    marginRight: "5px",
+                  }}
+                />{" "}
+                裁剪
+              </Button>
+            )}
           </div>
           <div className="crop_item_wrapper">
             {localUpLoadImgArrayData.map((item: any, index: any) => (
@@ -280,8 +286,7 @@ export const Crop = () => {
                 key_index={index}
                 readyCallBack={readyCallBack}
                 // data={data}
-                autoCrop={autoCrop}
-                setAutoCrop={setAutoCrop}
+                autoCrop={false}
                 valuesArray={valuesArray}
                 setValuesArray={setValuesArray}
                 cropData={get(cropperDataArray, index, "")}
@@ -290,60 +295,6 @@ export const Crop = () => {
             ))}
           </div>
         </div>
-        <Box
-          className="crop_wrapper_content_right"
-          sx={{ width: 400, paddingLeft: 5 }}
-        >
-          <Grid container spacing={1}>
-            <Grid item xs={12} md={12}>
-              <Button variant="contained" onClick={handleAutoFullParams}>
-                <AutoFixHighIcon
-                  style={{
-                    marginRight: "5px",
-                  }}
-                />{" "}
-                自动补全裁剪参数
-              </Button>
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <TextField
-                label="width"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={handleChange("width")}
-                value={values.width > 0 ? values.width?.toFixed(0) : ""}
-                variant="standard"
-              />
-            </Grid>
-            <Grid item xs={12} md={12}>
-              <TextField
-                label="height"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={values.height > 0 ? values.height.toFixed(0) : ""}
-                onChange={handleChange("height")}
-                variant="standard"
-              />
-            </Grid>
-
-            <Grid item xs={12} md={12}>
-              {!!valuesArray.length && (
-                <Button variant="contained" onClick={handleCrop}>
-                  <CropIcon
-                    style={{
-                      marginRight: "5px",
-                    }}
-                  />{" "}
-                  裁剪
-                </Button>
-              )}
-            </Grid>
-          </Grid>
-        </Box>
       </div>
     </>
   ) : null;

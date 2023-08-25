@@ -99,16 +99,15 @@ const ReactCropper = ({ ...props }) => {
         ...rest,
         ready: (e) => {
           if (e.currentTarget !== null) {
-            // applyDefaultOptions(e.currentTarget.cropper, defaultOptions);
-          } // document.querySelector(`#_1124053233-1400x.jpg_corp_img_component`);
+            readyCallBack && readyCallBack(cropper);
+            onInitialized && onInitialized(cropper);
+          }
           ready && ready(e);
         },
       });
       cropper.imgName = imgName;
       cropper.id_value = id_value;
-      onInitialized && onInitialized(cropper);
       setCropper(cropper);
-      readyCallBack && readyCallBack(cropper);
     }
 
     return () => {

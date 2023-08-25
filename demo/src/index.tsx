@@ -6,7 +6,6 @@ import AppBar from "./components/AppBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ImageUpload from "./components/ImageUpload/index.next";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SAM from "./SAM";
 import LeftComponent from "./components/LeftComponent/index";
 import ImageList from "./components/ImageList/index.next";
 import "./assets/scss/App.scss";

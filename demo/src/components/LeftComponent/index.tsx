@@ -65,7 +65,7 @@ const LeftComponent = ({}: any) => {
         "1": 85,
         "0": 100,
       };
-      setProgress(get(data, res?.data?.queueNumber, ""));
+      setProgress(get(data, res?.data?.desc, ""));
     }
   };
   const startPolling = ({ reStart }: any) => {
@@ -115,9 +115,7 @@ const LeftComponent = ({}: any) => {
         <Box mt={4} sx={{ width: "100%" }}>
           <Typography variant="button" display="block" gutterBottom>
             {taskData?.desc}
-            {!!taskData?.queueNumber && (
-              <LinearProgressWithLabel value={progress} />
-            )}
+            {!!taskData?.queueNumber && <LinearProgress color="success" />}
           </Typography>
         </Box>
       </div>
