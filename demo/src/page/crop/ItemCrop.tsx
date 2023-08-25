@@ -10,6 +10,9 @@ const ItemCrop = ({
   cropData,
   setCropperDataArray,
   id_value,
+  key_index,
+  valuesArray,
+  setValuesArray,
 }: any) => {
   const {
     localUpLoadImgData: [localUpLoadImgData, setLocalUpLoadImgData],
@@ -31,10 +34,14 @@ const ItemCrop = ({
       width: processValueWidth || "",
       height: processValueHeight || "",
     };
-
-    // valuesArray, setValuesArray,
-
-    // setValues(data);
+    if (valuesArray && valuesArray[key_index]) {
+      valuesArray[key_index] = data;
+      setValuesArray([...valuesArray]);
+    } else {
+      let arr = [];
+      arr[key_index] = data;
+      setValuesArray([...arr]);
+    }
   };
 
   useEffect(() => {

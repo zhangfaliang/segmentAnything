@@ -10,7 +10,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { get } from "lodash";
+import { get, set } from "lodash";
 import { postData } from "../../../request/index";
 
 export const Crop = () => {
@@ -39,22 +39,7 @@ export const Crop = () => {
     naturalWidth: 0,
     autoScaleValue: true,
   });
-  const [valuesArray, setValuesArray]: any = useState([
-    {
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-      rotate: 0,
-      scaleX: 1,
-      scaleY: 1,
-      imgHeight: 0,
-      imgWidth: 0,
-      naturalHeight: 0,
-      naturalWidth: 0,
-      autoScaleValue: true,
-    },
-  ]);
+  const [valuesArray, setValuesArray]: any = useState([]);
 
   const handleChange = (prop: any) => (event: any) => {
     if (event.target.value < 0) return;
@@ -96,7 +81,7 @@ export const Crop = () => {
         cropEle?.current?.cropperArray?.forEach((item: any) => {
           item.clear();
         });
-      }, 10);
+      }, 20);
     }
     setLoading(false);
   };
@@ -244,6 +229,7 @@ export const Crop = () => {
       cropper?.crop();
     }
   };
+  console.log(valuesArray, "valuesArrayvaluesArrayvaluesArray");
 
   return localUpLoadImgArrayData?.length ? (
     <>
@@ -271,7 +257,7 @@ export const Crop = () => {
                   marginRight: "5px",
                 }}
               />{" "}
-              选中裁剪全部
+              选中全部展示裁剪框
             </Button>
             {!!valuesArray.length && (
               <Button variant="contained" onClick={handleCrop}>

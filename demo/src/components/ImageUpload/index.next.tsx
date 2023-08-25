@@ -8,7 +8,8 @@ import ImageUploading from "react-images-uploading";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const maxSize = 400;
-const maxNumber = 200;
+const maxNumber = 1000;
+const maxPicNum = 10;
 
 export default function App({ loadFile }: any) {
   // 压缩前将file转换成img对象
@@ -85,7 +86,7 @@ export default function App({ loadFile }: any) {
     for (var i = 0; i < imageList?.length; i++) {
       const { data_url, file }: any = imageList[i];
       if (file.size / 1024 > maxSize * 1024) {
-        toast(`🔥--图片不能大于 ${maxSize} MB`, {
+        toast.error(`🔥--图片不能大于 ${maxSize} MB`, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -138,6 +139,18 @@ export default function App({ loadFile }: any) {
 
   const onChange = (imageList: any) => {
     setImages(imageList);
+    if (imageList?.length > maxPicNum) {
+      toast(`🔥  最大上传图片张数为${maxPicNum}张`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+      return;
+    }
     if (imageList?.length) {
       setLoading(true);
       uploadImg({ imageList });
