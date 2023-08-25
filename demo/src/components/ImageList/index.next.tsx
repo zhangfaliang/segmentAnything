@@ -31,7 +31,7 @@ export default function TitlebarImageList({}: any) {
   }, []);
 
   const getImgList = async () => {
-    const res = await getData({ url: "/api/files" });
+    const res = await getData({ url: "/python/api/files" });
     if (!isEmpty(res)) {
       const imgDataList: any = [];
       const {
@@ -167,7 +167,7 @@ export default function TitlebarImageList({}: any) {
 
     const pathArr = deleteData?.imgURL?.split("/");
     const name = get(pathArr, pathArr.length - 1, "").replace(/\.\D+|\d+$/, "");
-    await postData({ url: "/delete", data: { name } });
+    await postData({ url: "/python/delete", data: { name } });
     await getImgList();
     setLoading(false);
     setOpen(false);
