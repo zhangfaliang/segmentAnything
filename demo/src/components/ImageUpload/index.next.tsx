@@ -7,8 +7,8 @@ import { handleImageScale } from "../../components/helpers/scaleHelper";
 import ImageUploading from "react-images-uploading";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-const maxSize = 40;
-const maxNumber = 5;
+const maxSize = 400;
+const maxNumber = 200;
 
 export default function App({ loadFile }: any) {
   // 压缩前将file转换成img对象
@@ -52,24 +52,12 @@ export default function App({ loadFile }: any) {
       if (originWidth > maxWidth || originHeight > maxHeight) {
         targetWidth = maxWidth;
         targetHeight = Math.round(maxWidth * (originHeight / originWidth));
-        // if (originWidth / originHeight > 1) {
-        //   // 宽图片
-        //   targetWidth = maxWidth;
-        //   targetHeight = Math.round(maxWidth * (originHeight / originWidth));
-        // } else {
-        //   // 高图片
-        //   targetHeight = maxHeight;
-        //   targetWidth = Math.round(maxHeight * (originWidth / originHeight));
-        // }
       }
       canvas.width = targetWidth;
       canvas.height = targetHeight;
       context && context.clearRect(0, 0, targetWidth, targetHeight);
       // 图片绘制
       context && context.drawImage(img, 0, 0, targetWidth, targetHeight);
-      // canvas.toBlob(function (blob) {
-      //   resolve(blob);
-      // }, type || "image/png");
 
       resolve(canvas.toDataURL(type || "image/jpg"));
     });
@@ -85,6 +73,7 @@ export default function App({ loadFile }: any) {
       setLocalUpLoadImgArrayData,
     ],
     imageArray: [, setImageArray],
+    loading: [, setLoading],
   } = useContext(AppContext)!;
   const [images, setImages] = useState<File[]>([]);
   useEffect(() => {
@@ -124,11 +113,6 @@ export default function App({ loadFile }: any) {
           setMaskImg(null);
           setPreviousMask("");
           setMergedMask("");
-          // setLocalUpLoadImgData({
-          //   data_url: base64URL,
-          //   imgName: file.name,
-          //   size: file.size,
-          // });
           localUpLoadImgArrayData.push({
             data_url: base64URL,
             imgName: file.name,
@@ -148,49 +132,18 @@ export default function App({ loadFile }: any) {
       }
     }
     setImageArray(imgArray);
-    console.log(
-      localUpLoadImgArrayData,
-      "localUpLoadImgArrayDatalocalUpLoadImgArrayData"
-    );
-
     setLocalUpLoadImgArrayData(localUpLoadImgArrayData);
-
-    //       size: file.size, });
-    // const { data, code, message } =
-    //   (await uploadData({
-    //     url: uploadURL,
-    //     data: {
-    //       imgData: data_url.replace(
-    //         /data:image\/(jpeg|png|webp|jpg);base64/,
-    //         ""
-    //       ),
-    //       imgName: file.name, //file.name,
-    //       size: file.size,
-    //     },
-    //   })) || {};
-
-    // if (code === -1) {
-    //   toast(`🔐--${message}`, {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     theme: "light",
-    //   });
-    // }
-    // const { imgURL, npyURL, onnxURL } = data;
-    // const url = new URL(imgURL, location.origin);
-    // loadFile({ imgURL: url, npyURL, onnxURL, data });
+    setLoading(false);
   };
 
   const onChange = (imageList: any) => {
     setImages(imageList);
     if (imageList?.length) {
+      setLoading(true);
       uploadImg({ imageList });
     }
   };
+  const onError = (imageList: any) => {};
 
   return !localUpLoadImgArrayData.length ? (
     <div className="App">
@@ -201,6 +154,7 @@ export default function App({ loadFile }: any) {
         multiple={true}
         value={images}
         onChange={onChange}
+        onError={onError}
         maxNumber={maxNumber}
         dataURLKey="data_url"
       >

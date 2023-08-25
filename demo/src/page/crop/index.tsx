@@ -22,6 +22,7 @@ export const Crop = () => {
       setLocalUpLoadImgArrayData,
     ],
   } = useContext(AppContext)!;
+
   const [cropperDataArray, setCropperDataArray]: any = useState([]);
   const cropEle: any = useRef<HTMLImageElement>(null);
   const [values, setValues]: any = useState({
@@ -84,11 +85,11 @@ export const Crop = () => {
     setValues(data);
   };
   const handleCrop = () => {
+    setLoading(true);
     if (cropEle?.current?.cropperArray?.length) {
       const cropperArray: any = [];
       cropEle?.current?.cropperArray?.forEach((item: any) => {
         cropperArray.push(item.getCroppedCanvas().toDataURL());
-        item.clear();
       });
       setCropperDataArray(cropperArray);
       setTimeout(() => {
@@ -97,6 +98,7 @@ export const Crop = () => {
         });
       }, 10);
     }
+    setLoading(false);
   };
 
   const handleAutoFullParams = () => {
@@ -113,7 +115,10 @@ export const Crop = () => {
         item.clear();
       });
     }
-    cropEle.current.cropperArray = [];
+    if (cropEle?.current?.cropperArray?.length) {
+      cropEle.current.cropperArray = [];
+    }
+
     setLocalUpLoadImgArrayData([]);
     setCropperDataArray([]);
   };
@@ -172,6 +177,8 @@ export const Crop = () => {
     }
   };
   const handleGenerate = async () => {
+    setLoading(true);
+
     if (cropEle?.current?.cropperArray?.length) {
       let array: any = [];
       cropEle?.current?.cropperArray?.forEach((item: any, index: any) => {

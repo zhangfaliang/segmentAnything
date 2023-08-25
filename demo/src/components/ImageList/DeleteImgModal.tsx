@@ -29,7 +29,7 @@ export default function AlertDialog({
       >
         <DialogTitle style={{ width: "350px" }} id="alert-dialog-title">
           {" "}
-          确定删除mask所有文件
+          确定删除mask和原图文件
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
