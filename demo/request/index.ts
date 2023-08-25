@@ -4,12 +4,12 @@
 import { get } from "lodash";
 let host =
   process.env.NODE_ENV === "production"
-    ? "http://127.0.0.1:8080"
+    ? window?.location?.origin
     : "http://127.0.0.1:9090";
 let nodeHost =
   process.env.NODE_ENV === "production"
-    ? "http://127.0.0.1:8080"
-    : "http://127.0.0.1:9090";
+    ? window?.location?.origin
+    : window?.location?.origin;
 // host = "http://localhost:5000";
 export const postData = ({ url, data, isNodeServer }: any) => {
   const processHost = isNodeServer ? nodeHost : host;
