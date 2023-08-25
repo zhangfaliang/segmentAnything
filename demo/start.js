@@ -161,6 +161,6 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-app.listen(6060, () => {
-  console.log("6060");
+app.listen(6006, () => {
+  console.log("6006");
 });
