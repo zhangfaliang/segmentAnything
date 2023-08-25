@@ -6,7 +6,10 @@ let host =
   process.env.NODE_ENV === "production"
     ? window?.location?.origin
     : "http://127.0.0.1:9090";
-let nodeHost = window?.location?.origin;
+let nodeHost =
+  process.env.NODE_ENV === "production"
+    ? window?.location?.origin
+    : "http://127.0.0.1:9090";
 // host = "http://localhost:5000";
 export const postData = ({ url, data, isNodeServer }: any) => {
   const processHost = isNodeServer ? nodeHost : host;

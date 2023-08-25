@@ -25,8 +25,7 @@
   flex-wrap: wrap;
 }
 .crop_wrapper_content_left {
-  width: 466px;
-  margin: 0 40px;
+  margin: 10px;
 }
 .crop_btn_group_wrapper {
   padding: 30px 0;
@@ -50,4 +49,27 @@
   flex-direction: column;
   width: 400px;
   padding-left: 20px;
+}
+<style scoped > .container {
+  display: flex;
+}
+.before {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  /* 这个属性可以得到想要的效果 */
+}
+.img-container {
+  height: 400px;
+  overflow: hidden;
+}
+.afterCropper {
+  flex: 1;
+  margin-left: 20px;
+  border: 1px solid salmon;
+  text-align: center;
+}
+.afterCropper img {
+  width: 150px;
+  margin-top: 30px;
 }

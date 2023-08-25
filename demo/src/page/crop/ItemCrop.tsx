@@ -44,20 +44,7 @@ const ItemCrop = ({
 
     // setValues(data);
   };
-  // const [values, setValues]: any = useState({
-  //   x: 0,
-  //   y: 0,
-  //   width: 0,
-  //   height: 0,
-  //   rotate: 0,
-  //   scaleX: 1,
-  //   scaleY: 1,
-  //   imgHeight: 0,
-  //   imgWidth: 0,
-  //   naturalHeight: 0,
-  //   naturalWidth: 0,
-  //   autoScaleValue: true,
-  // });
+
   useEffect(() => {
     return () => {
       setLocalUpLoadImgData(null);
@@ -71,7 +58,7 @@ const ItemCrop = ({
       autoCropArea={1}
       autoCrop={autoCrop}
       modal={true}
-      // style={{ height: "", width: "auto" }}
+      style={{ height: "400px", width: "366px", padding: "2px" }}
       initialAspectRatio={1 / 1.16}
       aspectRatio={1 / 1.16}
       src={cropData || item?.data_url}
