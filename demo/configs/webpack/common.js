@@ -59,44 +59,44 @@ module.exports = {
           loader: "url-loader",
         },
       },
-      {
-        test: /\.onnx$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "onnx/",
-              publicPath: "/",
-              exclude: [
-                resolve(__dirname, "..", "src/assets/data"),
-                resolve(__dirname, "..", "model"),
-              ],
-            },
-          },
-        ],
-      },
-      {
-        test: /\.npy$/,
-        use: [
-          {
-            loader: "raw-loader",
-            options: {},
-          },
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "npy/",
-              publicPath: "/",
-              exclude: [
-                resolve(__dirname, "..", "src/assets/data"),
-                resolve(__dirname, "..", "model"),
-              ],
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.onnx$/,
+      //   use: [
+      //     {
+      //       loader: "file-loader",
+      //       options: {
+      //         name: "[name].[ext]",
+      //         outputPath: "onnx/",
+      //         publicPath: "/",
+      //         exclude: [
+      //           resolve(__dirname, "..", "src/assets/data"),
+      //           resolve(__dirname, "..", "model"),
+      //         ],
+      //       },
+      //     },
+      //   ],
+      // },
+      // {
+      //   test: /\.npy$/,
+      //   use: [
+      //     {
+      //       loader: "raw-loader",
+      //       options: {},
+      //     },
+      //     {
+      //       loader: "file-loader",
+      //       options: {
+      //         name: "[name].[ext]",
+      //         outputPath: "npy/",
+      //         publicPath: "/",
+      //         exclude: [
+      //           resolve(__dirname, "..", "src/assets/data"),
+      //           resolve(__dirname, "..", "model"),
+      //         ],
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
   plugins: [
