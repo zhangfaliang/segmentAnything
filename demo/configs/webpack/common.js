@@ -32,7 +32,7 @@ module.exports = {
       {
         test: [/\.jsx?$/, /\.tsx?$/],
         use: ["ts-loader"],
-        exclude: /node_modules/,
+        exclude: [/node_modules/],
       },
       {
         test: /\.css$/,
@@ -47,6 +47,10 @@ module.exports = {
         use: [
           "file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]",
           "image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false",
+        ],
+        exclude: [
+          resolve(__dirname, "..", "src/assets/compressed_data"),
+          resolve(__dirname, "..", "src/assets/data"),
         ],
       },
       {
@@ -64,6 +68,10 @@ module.exports = {
               name: "[name].[ext]",
               outputPath: "onnx/",
               publicPath: "/",
+              exclude: [
+                resolve(__dirname, "..", "src/assets/data"),
+                resolve(__dirname, "..", "model"),
+              ],
             },
           },
         ],
@@ -81,6 +89,10 @@ module.exports = {
               name: "[name].[ext]",
               outputPath: "npy/",
               publicPath: "/",
+              exclude: [
+                resolve(__dirname, "..", "src/assets/data"),
+                resolve(__dirname, "..", "model"),
+              ],
             },
           },
         ],
