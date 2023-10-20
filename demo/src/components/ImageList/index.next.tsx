@@ -24,7 +24,19 @@ export default function TitlebarImageList({}: any) {
   const [deleteData, setDeleteData]: any = React.useState({});
   const [imgRowHeight, setImgRowHeight]: any = React.useState(0);
   const [clientHeight, setClientHeight]: any = React.useState(0);
+  useEffect(() => {
+    const scEle = document.querySelector("#wasmsimdwasm");
+    if (scEle) return;
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    // Firefox，Opera，Chrome，Safari 3+
+    script.onload = function () {};
+    script.id = "wasmsimdwasm";
+    script.src = "/js/ort-wasm-simd.wasm";
+    document.getElementsByTagName("head")[0].appendChild(script);
 
+    // setGlobalLoadFileLoadFile(loadFile);
+  }, []);
   useEffect(() => {
     setImgRowHeight(((document.body.clientWidth - 260) / 1) * 1.16);
     setClientHeight(document.body.clientHeight);

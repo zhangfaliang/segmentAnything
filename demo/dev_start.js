@@ -5,12 +5,15 @@ const Queue = require("./queue");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const compression = require("compression");
+var compressible = require("compressible");
+app.use(compression());
+
+const queue = new Queue();
 const {
   createProxyMiddleware,
   fixRequestBody,
 } = require("http-proxy-middleware");
-
-const queue = new Queue();
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "100mb" }));
@@ -24,13 +27,37 @@ const apiProxy = createProxyMiddleware("/python", {
     "^/python": "", // 删除请求中的 '/python' 前缀
   },
 });
-app.use("^/python/*", apiProxy);
-
+const LastModified = new Date().toUTCString();
+app.use("/python/", apiProxy);
 app.get("/assets/data/*", async (req, res, next) => {
   const dataDir = path.join(__dirname, "src/assets/data/");
   const filePath = req.path.replace("/assets/data/", "");
-  const fullFilePath = path.join(dataDir, filePath);
+  const fullFilePath = decodeURIComponent(path.join(dataDir, filePath));
   try {
+    res.set("Cache-Control", "public, max-age=86400");
+    res.set("Last-Modified", LastModified);
+
+    res.sendFile(fullFilePath, {}, (err) => {
+      if (err) {
+        console.error(`无法发送文件：${fullFilePath}`);
+        next(err);
+      } else {
+        console.log(`已发送文件：${fullFilePath}`);
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/assets/compressed_data/*", async (req, res, next) => {
+  const dataDir = path.join(__dirname, "src/assets/compressed_data/");
+  const filePath = req.path.replace("/assets/compressed_data/", "");
+  const fullFilePath = decodeURIComponent(path.join(dataDir, filePath));
+  try {
+    res.set("Cache-Control", "public, max-age=86400");
+    res.set("Last-Modified", LastModified);
+
     res.sendFile(fullFilePath, {}, (err) => {
       if (err) {
         console.error(`无法发送文件：${fullFilePath}`);
@@ -80,6 +107,7 @@ app.post("/generate/mask", async (req, res, next) => {
     let newTaskLength = taskLength - 1;
     newTaskLength = newTaskLength >= 0 ? newTaskLength : 0;
     console.log(`当前任务数为${newTaskLength},你的任务是第${taskLength}个`);
+    res.set("Cache-Control", "no-store");
     res.send({
       code: 0,
       message: "",
@@ -100,6 +128,7 @@ app.post("/generate/mask", async (req, res, next) => {
 });
 app.get("/get/maskTask", async (req, res, next) => {
   try {
+    res.set("Cache-Control", "no-store");
     res.send({
       code: 0,
       message: "success",
@@ -116,8 +145,11 @@ app.get("/get/maskTask", async (req, res, next) => {
 app.get("/model/*", async (req, res, next) => {
   const dataDir = path.join(__dirname, "model/");
   const filePath = req.path.replace("/model/", "");
-  const fullFilePath = path.join(dataDir, filePath);
+  const fullFilePath = decodeURIComponent(path.join(dataDir, filePath));
   try {
+    res.set("Cache-Control", "public, max-age=86400");
+    res.set("Last-Modified", LastModified);
+
     res.sendFile(fullFilePath, {}, (err) => {
       if (err) {
         console.error(`无法发送文件：${fullFilePath}`);
@@ -130,8 +162,17 @@ app.get("/model/*", async (req, res, next) => {
     next(error);
   }
 });
+const maxAge = {
+  html: "1d",
+  js: "7d",
+  css: "7d",
+  images: "7d",
+};
 
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "dist"))),
+  {
+    maxAge: maxAge,
+  };
 // 添加 connect-history-api-fallback 中间件
 
 app.use(
@@ -147,5 +188,12 @@ app.get("/", function (req, res) {
 });
 
 app.listen(9090, () => {
-  console.log("监听端口：9090");
+  console.log(
+    compressible("text/html"),
+    compressible("image/png"),
+    compressible("application/octet-stream"),
+    compressible("application/wasm"),
+    compressible("application/octet-stream")
+  );
+  console.log("9090---");
 });

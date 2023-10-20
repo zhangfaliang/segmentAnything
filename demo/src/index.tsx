@@ -88,6 +88,7 @@ const router = createBrowserRouter([
     ),
   },
 ]); //1.通过createBrowserRouter 创建一个路由表
+
 root.render(
   <AppContextProvider>
     <ThemeProvider theme={theme}>
