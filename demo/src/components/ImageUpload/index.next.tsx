@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const maxSize = 400;
 const maxNumber = 1000;
-const maxPicNum = 10;
+const maxPicNum = 100000;
 
 export default function App({ loadFile }: any) {
   // 压缩前将file转换成img对象
