@@ -23,7 +23,7 @@ import { modelScaleProps } from "../../components/helpers/Interfaces";
 import { onnxMaskToImage } from "../../components/helpers/maskUtils";
 import { modelData } from "../../components/helpers/onnxModelAPI";
 import { Helmet } from "react-helmet";
-
+import { get } from "lodash";
 const ort = require("onnxruntime-web");
 /* @ts-ignore */
 import npyjs from "npyjs";
@@ -96,21 +96,35 @@ function ResponsiveAppBar() {
       setPreviousMask("");
       setMergedMask("");
 
-      await Promise.resolve(loadNpyTensor(npyURL, "float32")).then(
-        (embedding) => setTensor(embedding)
-      );
-      const initModel = async () => {
-        try {
-          if (onnxURL === undefined) return;
-          const URL: string = onnxURL;
-          const model = await InferenceSession.create(URL);
+      // await Promise.resolve(loadNpyTensor(npyURL, "float32")).then(
+      //   (embedding) => setTensor(embedding)
+      // );
+      const arr = [loadNpyTensor(npyURL, "float32")];
+      if (onnxURL !== undefined) {
+        const URL: string = onnxURL;
+        arr.push(InferenceSession.create(URL));
+      }
+
+      await Promise.all(arr).then((values) => {
+        setTensor(get(values, 0));
+        const model: any = get(values, 1);
+        if (model) {
           setModel(model);
-          setLoading(false);
-        } catch (e) {
-          console.log(e);
         }
-      };
-      initModel();
+      });
+      setLoading(false);
+      // const initModel = async () => {
+      //   try {
+      //     if (onnxURL === undefined) return;
+      //     const URL: string = onnxURL;
+      //     const model = await InferenceSession.create(URL);
+      //     setModel(model);
+      //     setLoading(false);
+      //   } catch (e) {
+      //     console.log(e);
+      //   }
+      // };
+      // initModel();
       navigate("/mask");
     } catch (error) {
       setLoading(false);
@@ -129,34 +143,34 @@ function ResponsiveAppBar() {
     const tensor = new ort.Tensor(dType, npArray.data, npArray.shape);
     return tensor;
   };
-  
-  let dataRange = new Map()
-  let currtDataRange = new Map()
+
+  let dataRange = new Map();
+  let currtDataRange = new Map();
   // Run the ONNX model every time clicks has changed
   useEffect(() => {
     runONNX();
-    if (!image) return
-    const width = (image as any).width
-    const {x, y} = clicks ? clicks[0] : {x: 0, y: 0}
-    const position = Math.round(width * Math.round(y) + Math.round(x))
-    dataRange.clear()
-    for (let i = 0; i < rangeRects.length; i ++) {
-      const data = new Map()
-      const rect = rangeRects[i]
-      const rx = Math.round(rect.x * imageScale)
-      const ry = Math.round(rect.y * imageScale)
-      const w = Math.round(rect.w * imageScale)
-      const h = Math.round(rect.h * imageScale)
-      for (let i = ry; i < (ry+h); i++) {
-        for (let j = rx; j < (rx+w); j++) {
-          const index = i * width + j
-          data.set(index, index)
+    if (!image) return;
+    const width = (image as any).width;
+    const { x, y } = clicks ? clicks[0] : { x: 0, y: 0 };
+    const position = Math.round(width * Math.round(y) + Math.round(x));
+    dataRange.clear();
+    for (let i = 0; i < rangeRects.length; i++) {
+      const data = new Map();
+      const rect = rangeRects[i];
+      const rx = Math.round(rect.x * imageScale);
+      const ry = Math.round(rect.y * imageScale);
+      const w = Math.round(rect.w * imageScale);
+      const h = Math.round(rect.h * imageScale);
+      for (let i = ry; i < ry + h; i++) {
+        for (let j = rx; j < rx + w; j++) {
+          const index = i * width + j;
+          data.set(index, index);
         }
       }
       if (data.get(position)) {
-        currtDataRange = data
+        currtDataRange = data;
       } else {
-        dataRange = new Map([...dataRange, ...data])
+        dataRange = new Map([...dataRange, ...data]);
       }
     }
   }, [clicks]);
@@ -175,7 +189,7 @@ function ResponsiveAppBar() {
       return currentMask;
     }
     const mergedMask = new Uint8ClampedArray(height * width);
-    
+
     if (currtDataRange.size) {
       for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
@@ -187,7 +201,7 @@ function ResponsiveAppBar() {
               currentMask[index] * 255
             );
           } else {
-            mergedMask[index] = previousMask[index]
+            mergedMask[index] = previousMask[index];
           }
         }
       }
@@ -196,7 +210,7 @@ function ResponsiveAppBar() {
         for (let j = 0; j < width; j++) {
           const index = i * width + j;
           if (dataRange.get(index)) {
-            mergedMask[index] = previousMask[index]
+            mergedMask[index] = previousMask[index];
           } else {
             mergedMask[index] = Math.max(
               previousMask[index],
@@ -220,7 +234,7 @@ function ResponsiveAppBar() {
       return currentMask;
     }
     const removedMask = new Uint8ClampedArray(height * width);
-   
+
     if (currtDataRange.size) {
       for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
