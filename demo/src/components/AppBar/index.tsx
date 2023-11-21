@@ -131,7 +131,6 @@ function ResponsiveAppBar() {
       console.log(error);
     }
   };
-  // console.log(model, "modelmodelmodelmodel--model");
 
   // console.log(tensor, "modelmodelmodelmodel--tensor");
 
