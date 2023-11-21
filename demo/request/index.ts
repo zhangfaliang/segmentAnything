@@ -60,6 +60,14 @@ export const getData = ({ url, isNodeServer }: any) => {
       return { error: error };
     });
 };
+export const downloadData = ({ url }: any) => {
+  const processUrl = `${host}${url}`;
+  return fetch(processUrl).then(
+    res => res.blob()
+  ).then(blob => {
+    return blob
+  })
+};
 export const uploadData = ({ url, data }: any) => {
   const processUrl = `${host}${url}`;
 

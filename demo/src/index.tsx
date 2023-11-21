@@ -8,9 +8,11 @@ import ImageUpload from "./components/ImageUpload/index.next";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LeftComponent from "./components/LeftComponent/index";
 import ImageList from "./components/ImageList/index.next";
+import FolderList from "./components/FolderList/index";
 import "./assets/scss/App.scss";
 import Crop from "./page/crop";
 import Stage from "./components/Stage";
+import BatchMask from "./components/BatchMask/index.next";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
@@ -82,6 +84,21 @@ const router = createBrowserRouter([
           </div>
           <div className="app_right">
             <Stage />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    path: "/batch_mask",
+    caseSensitive: false,
+    element: (
+      <div>
+        <AppBar />
+        <div className="app_wrapper">
+          <FolderList />
+          <div className="app_right">
+            <BatchMask />
           </div>
         </div>
       </div>

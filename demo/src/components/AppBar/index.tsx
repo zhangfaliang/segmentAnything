@@ -31,6 +31,7 @@ import npyjs from "npyjs";
 const pages = [
   { text: "图片列表", link: "/" },
   { text: "上传图片", link: "/upload" },
+  { text: "批量MASK", link: "/batch_mask" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 

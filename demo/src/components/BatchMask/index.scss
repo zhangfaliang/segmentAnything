@@ -1,0 +1,79 @@
+.App {
+  margin-top: 40px;
+  font-family: sans-serif;
+  width: 80%;
+  min-width: 800px;
+  margin: 40px auto 20px;
+  .upload-wrapper {
+    padding: 12px;
+    border: 1px dashed #e5e7eb;
+    border-radius: 8px;
+    height: 90px;
+    .tips {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #6b7280;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    &:hover {
+      border-color: #60f267 !important;
+    }
+  }
+  .file-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    height: 90px;
+    position: relative;
+    .folder-zip-icon {
+      width: 60px;
+      height: 60px;
+    }
+    .file-name {
+      margin-left: 10px;
+    }
+    .close-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      display: none;
+    }
+    &:hover {
+      .close-icon {
+        display: block;
+      }
+    }
+  }
+  .form_box {
+    .form_item {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      .label {
+        display: block;
+        text-align: left;
+        color: #6b7280;
+        font-size: 14px;
+      }
+    }
+    .form_item_small .MuiInputBase-input {
+      padding: 2px 6px;
+      width: 60px;
+      text-align: center;
+    }
+  }
+  .start_batch_process {
+    height: 40px;
+    width: 100%;
+    margin-top: 50px;
+    color: #008334;
+    border-radius: 5px;
+  }
+}
+
+
