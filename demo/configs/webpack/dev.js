@@ -24,5 +24,22 @@ module.exports = merge(commonConfig, {
       "Cross-Origin-Embedder-Policy": "credentialless",
     },
   },
+  proxy: {
+    '/assets/data': {
+      target: 'http://localhost:9090',
+      changeOrigin: true,
+      // pathRewrite: { '^/api': '' },
+    },
+    '/assets/compressed_data': {
+      target: 'http://localhost:9090',
+      changeOrigin: true,
+      // pathRewrite: { '^/api': '' },
+    },
+    '/model': {
+      target: 'http://localhost:9090',
+      changeOrigin: true,
+      // pathRewrite: { '^/api': '' },
+    },
+  },
   devtool: "cheap-module-source-map",
 });
