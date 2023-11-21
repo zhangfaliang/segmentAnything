@@ -284,18 +284,16 @@ def traverse_folder():
 
 @app.route('/grounded', methods=['POST'])
 async def grounded():
-    directory = "Grounded_Segment_Anything/uploadFiles"
+    directory = "Grounded_Segment_Anything/uploads"
     file = request.json['file']
     file_name = request.json['fileName']
     save_path = os.path.join(directory, file_name)
     # 将图片保存到磁盘
     with open(save_path, 'wb') as f:
         f.write(base64.b64decode(file))
-    print(file_name,'保存成功，开始解压')
-
+    # 解压
     await unzip_file(save_path, directory)
-    print(file_name,'解压成功，生成mask')
-
+    # 生成mask
     folder_name = file_name.split(".")[0]
     folder = os.path.join(directory, folder_name)
     output_dir = os.path.join("Grounded_Segment_Anything/outputs", folder_name)
@@ -323,9 +321,7 @@ async def grounded():
             )
             print(child_file_name, "生成成功")
 
-    print("全部完成，开始压缩")
     zip_folder(output_dir, output_dir + '.zip')
-    print(child_file_name, "压缩完成")
     os.remove(folder+'.zip')
     shutil.rmtree(folder)
     return jsonify({'status': 'success', 'message': 'successfully'})

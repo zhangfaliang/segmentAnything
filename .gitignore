@@ -55,4 +55,4 @@ package-lock.json
 
 # Grounded_Segment_Anything
 Grounded_Segment_Anything/outputs/*
-Grounded_Segment_Anything/uploadFiles/*
+Grounded_Segment_Anything/uploads/*
