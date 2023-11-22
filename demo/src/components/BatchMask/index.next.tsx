@@ -29,8 +29,9 @@ export default () => {
   const [fileName, setFileName] = React.useState("");
   const [file, setFile] = React.useState<unknown>(null);
   const [boxThreshold, setBoxThreshold] = React.useState(0.3);
+  const [textThreshold, setTextThreshold] = React.useState(0.25);
   const [expandAmount, setExpandAmount] = React.useState(0);
-  const [textPrompt, setTextPrompt] = React.useState("face");
+  const [textPrompt, setTextPrompt] = React.useState("face, hair");
 
   useEffect(() => {
     addEvent()
@@ -88,12 +89,17 @@ export default () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.id == "box_threshold") {
       setBoxThreshold(event.target.value === '' ? 0 : Number(event.target.value));
+    } else if (event.target.id == "text_threshold") {
+      setTextThreshold(event.target.value === '' ? 0 : Number(event.target.value));
     } else if (event.target.id == "expand_amount") {
       setExpandAmount(event.target.value === '' ? 0 : Number(event.target.value));
     }
   };
   const boxThresholdSliderChange = (event: Event, newValue: number | number[]) => {
     setBoxThreshold(newValue as number);
+  };
+  const textThresholdSliderChange = (event: Event, newValue: number | number[]) => {
+    setTextThreshold(newValue as number);
   };
   const expandAmountSliderChange = (event: Event, newValue: number | number[]) => {
     setExpandAmount(newValue as number);
@@ -127,13 +133,12 @@ export default () => {
           fileName: fileName,
           box_threshold: boxThreshold,
           // expand_amount: expandAmount,
-          text_threshold: 0.25,
+          text_threshold: textThreshold,
           text_prompt: textPrompt
         } 
       }).then(res => {
         setLoading(false)
-        console.log(res)
-        getFolderList()
+        if (res.status === 'success') getFolderList()
       });
     }
   }
@@ -165,15 +170,16 @@ export default () => {
               uploadInpuRef.current?.click()
             }}
           >
-            <span>拖放zip文件至此处</span>
+            <span>拖放文件至此处</span>
             <span>-或-</span>
             <span>点击上传</span>
           </p>
+          <span className="tips2">只支持zip文件，文件夹重名会将已上传的文件覆盖</span>
         </div>
       }
       <div className="form_box">
         <div className="form_item">
-          <span className="label">GroundingDINO Detection Prompt</span>
+          <span className="label">GroundingDINO Detection Prompt（提示词）</span>
           <TextField
             hiddenLabel
             defaultValue={textPrompt}
@@ -187,7 +193,7 @@ export default () => {
         <div className="form_item form_item_small">
           <Grid container spacing={2} alignItems="center">
             <Grid item xs>
-              <span className="label">GroundingDINO Box Threshold</span>
+              <span className="label">GroundingDINO Box Threshold（识别置信度）</span>
             </Grid>
             <Grid item>
               <TextField
@@ -210,6 +216,29 @@ export default () => {
         <div className="form_item form_item_small">
           <Grid container spacing={2} alignItems="center">
             <Grid item xs>
+              <span className="label">GroundingDINO Text Threshold（提示词相关性）</span>
+            </Grid>
+            <Grid item>
+              <TextField
+                id="text_threshold"
+                value={textThreshold}
+                size="small"
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                inputProps={{
+                  step: 0.001,
+                  min: 0,
+                  max: 1,
+                  type: 'number',
+                }}
+              />
+            </Grid>
+          </Grid>
+          <Slider value={typeof textThreshold === 'number' ? textThreshold : 0} step={0.001} min={0} max={1} onChange={textThresholdSliderChange} aria-label="Default" valueLabelDisplay="off" />
+        </div>
+        {/* <div className="form_item form_item_small">
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs>
             <span className="label">Specify the amount that you wish to expand the mask by (recommend 0-10)</span>
             </Grid>
             <Grid item>
@@ -229,7 +258,7 @@ export default () => {
             </Grid>
           </Grid>
           <Slider value={typeof expandAmount === 'number' ? expandAmount : 0} step={1} min={0} max={100} onChange={expandAmountSliderChange} aria-label="Default" valueLabelDisplay="off" />
-        </div>
+        </div> */}
       </div>
       <Button 
         className="start_batch_process"

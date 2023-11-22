@@ -1,7 +1,6 @@
 from flask import Flask, send_file
 import base64
 import os
-import shutil
 from flask import request
 from flask_cors import CORS
 from flask import Flask, jsonify
@@ -21,7 +20,7 @@ from PIL import Image
 import types
 from utils.compressImg import compress_image
 
-from Grounded_Segment_Anything.grounded_sam import grounded_sam, unzip_file, zip_folder
+from Grounded_Segment_Anything.grounded_sam import grounded_sam, unzip_file, zip_folder, delete_folder
 
 maskApiTask = types.SimpleNamespace(
   done=False,
@@ -283,7 +282,7 @@ def traverse_folder():
     return {'image_paths': image_paths}
 
 @app.route('/grounded', methods=['POST'])
-async def grounded():
+def grounded():
     directory = "Grounded_Segment_Anything/uploads"
     file = request.json['file']
     file_name = request.json['fileName']
@@ -291,8 +290,9 @@ async def grounded():
     # 将图片保存到磁盘
     with open(save_path, 'wb') as f:
         f.write(base64.b64decode(file))
+        
     # 解压
-    await unzip_file(save_path, directory)
+    unzip_file(save_path, directory)
     # 生成mask
     folder_name = file_name.split(".")[0]
     folder = os.path.join(directory, folder_name)
@@ -304,11 +304,10 @@ async def grounded():
             sam_checkpoint = "sam_vit_h_4b8939.pth"
             image_path = os.path.join(folder, child_file_name)
             text_prompt = request.json['text_prompt']
-            output_dir = output_dir
             box_threshold = request.json['box_threshold']
             text_threshold = request.json['text_threshold']
             print(child_file_name, "正在生成")
-            await grounded_sam(
+            grounded_sam(
                 config_file, 
                 grounded_checkpoint, 
                 sam_checkpoint, 
@@ -322,16 +321,21 @@ async def grounded():
             print(child_file_name, "生成成功")
 
     zip_folder(output_dir, output_dir + '.zip')
-    os.remove(folder+'.zip')
-    shutil.rmtree(folder)
+    delete_folder([
+        output_dir,
+        folder+'.zip',
+        folder,
+        'Grounded_Segment_Anything/uploads/__MACOSX'
+    ])
     return jsonify({'status': 'success', 'message': 'successfully'})
+
 
 @app.route('/getFolderList')
 def get_folder_list():
     folderList = os.listdir("Grounded_Segment_Anything/outputs")
-    zip_file_list = [file for file in folderList if file.endswith(".zip")]
-
-    return jsonify({'status': 'success', 'message': 'successfully', "data": zip_file_list})
+    # zip_file_list = [file for file in folderList if file.endswith(".zip")]
+    folderList.reverse()
+    return jsonify({'status': 'success', 'message': 'successfully', "data": folderList})
 
 @app.route('/downloadFile')
 def download_file():

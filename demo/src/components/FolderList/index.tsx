@@ -1,8 +1,8 @@
 /*
  * @Author: zhao v-zhaoyongfei@doublefs.com
  * @Date: 2023-11-20 14:12:37
- * @LastEditors: zhao v-zhaoyongfei@doublefs.com
- * @LastEditTime: 2023-11-20 20:37:01
+ * @LastEditors: zyf1910 xz397673705@163.com
+ * @LastEditTime: 2023-11-21 20:54:01
  * @FilePath: /segmentAnything/demo/src/components/FolderList/index.tsx
  * @Description: 
  */
@@ -37,7 +37,7 @@ export default ({}: any) => {
       <p className="title">已完成任务</p>
       <List>
         {
-          generationCompletedFiles.map((item:string) => {
+          generationCompletedFiles&&generationCompletedFiles.map((item:string) => {
             return (
               <ListItem key={item} onClick={() => downloadFile(item)}>
                 <FolderZipIcon className="folder-icon" fontSize="small"/>

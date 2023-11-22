@@ -1,6 +1,7 @@
 import zipfile
 # import argparse
 import os
+import shutil
 import copy
 
 import numpy as np
@@ -129,7 +130,7 @@ def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
     # with open(os.path.join(output_dir, 'mask.json'), 'w') as f:
     #     json.dump(json_data, f)
 
-async def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, text_prompt, output_dir, box_threshold, text_threshold, file_name):
+def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, text_prompt, output_dir, box_threshold, text_threshold, file_name):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # make dir
     os.makedirs(output_dir, exist_ok=True)
@@ -188,7 +189,7 @@ async def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_p
 
     save_mask_data(output_dir, masks, boxes_filt, pred_phrases, file_name)
 
-async def unzip_file(zip_path, dest_path):
+def unzip_file(zip_path, dest_path):
     """
     解压zip文件
     zip_path: string，zip文件路径
@@ -238,3 +239,10 @@ def zip_folder(folder_path, output_path):
                 zip_file.write(
                     os.path.join(root, file), 
                     os.path.relpath(os.path.join(root, file), folder_path))
+
+def delete_folder(paths):
+    for path in paths:
+        if os.path.isfile(path):
+            os.remove(path)  # remove the file
+        elif os.path.isdir(path):
+            shutil.rmtree(path)  # remove dir and all contains
