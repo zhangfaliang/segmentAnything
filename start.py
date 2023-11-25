@@ -332,10 +332,10 @@ def grounded():
 
 @app.route('/getFolderList')
 def get_folder_list():
-    folderList = os.listdir("Grounded_Segment_Anything/outputs")
-    # zip_file_list = [file for file in folderList if file.endswith(".zip")]
-    folderList.reverse()
-    return jsonify({'status': 'success', 'message': 'successfully', "data": folderList})
+    folder_list = os.listdir("Grounded_Segment_Anything/outputs")
+    # zip_file_list = [file for file in folder_list if file.endswith(".zip")]
+    folder_list.reverse()
+    return jsonify({'status': 'success', 'message': 'successfully', "data": folder_list})
 
 @app.route('/downloadFile')
 def download_file():
