@@ -13,9 +13,11 @@
     color: #1C2025;
     border-bottom: 1px solid #e4e7ed;
   }
-  .MuiListItem-root {
+  .file-list {
     border-radius: 4px;
     padding: 4px;
+    display: flex;
+    justify-content: space-between;
     &:hover{
       background-color: #e0f4e1;
     }
@@ -23,7 +25,7 @@
   .folder-icon {
     color: #82f087;
   }
-  .css-10hburv-MuiTypography-root {
+  .file-name {
     margin-left: 6px;
     font-size: 14px;
   }
