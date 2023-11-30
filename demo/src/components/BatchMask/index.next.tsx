@@ -132,7 +132,7 @@ export default () => {
           file: result,
           fileName: fileName,
           box_threshold: boxThreshold,
-          // expand_amount: expandAmount,
+          expand_amount: expandAmount,
           text_threshold: textThreshold,
           text_prompt: textPrompt
         } 
@@ -236,10 +236,10 @@ export default () => {
           </Grid>
           <Slider value={typeof textThreshold === 'number' ? textThreshold : 0} step={0.001} min={0} max={1} onChange={textThresholdSliderChange} aria-label="Default" valueLabelDisplay="off" />
         </div>
-        {/* <div className="form_item form_item_small">
+        <div className="form_item form_item_small">
           <Grid container spacing={2} alignItems="center">
             <Grid item xs>
-            <span className="label">Specify the amount that you wish to expand the mask by (recommend 0-10)</span>
+            <span className="label">Specify the amount that you wish to expand the mask by（展开遮罩的量，推荐 0-10）</span>
             </Grid>
             <Grid item>
               <TextField
@@ -258,7 +258,7 @@ export default () => {
             </Grid>
           </Grid>
           <Slider value={typeof expandAmount === 'number' ? expandAmount : 0} step={1} min={0} max={100} onChange={expandAmountSliderChange} aria-label="Default" valueLabelDisplay="off" />
-        </div> */}
+        </div>
       </div>
       <Button 
         className="start_batch_process"

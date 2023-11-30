@@ -2,7 +2,7 @@
  * @Author: zhao v-zhaoyongfei@doublefs.com
  * @Date: 2023-11-20 14:12:37
  * @LastEditors: zyf1910 xz397673705@163.com
- * @LastEditTime: 2023-11-28 15:23:06
+ * @LastEditTime: 2023-11-30 12:01:29
  * @FilePath: /segmentAnything/demo/src/components/FolderList/index.tsx
  * @Description: 
  */
@@ -10,7 +10,6 @@ import React, { useContext } from "react";
 import AppContext from "../../components/hooks/createContext";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import FolderZipIcon from '@mui/icons-material/FolderZip';
 import { downloadData } from "../../../request/index";
 import "./index.scss";
