@@ -8,6 +8,7 @@ import numpy as np
 # import json
 import torch
 from PIL import Image, ImageDraw, ImageFont
+from scipy.ndimage import binary_dilation
 
 # Grounding DINO
 import Grounded_Segment_Anything.GroundingDINO.groundingdino.datasets.transforms as T
@@ -46,6 +47,13 @@ def load_model(model_config_path, model_checkpoint_path, device):
     _ = model.eval()
     return model
 
+def dilate_mask(mask, dilation_amt):
+    x, y = np.meshgrid(np.arange(dilation_amt), np.arange(dilation_amt))
+    center = dilation_amt // 2
+    dilation_kernel = ((x - center)**2 + (y - center)**2 <= center**2).astype(np.uint8)
+    dilated_binary_img = binary_dilation(mask, dilation_kernel)
+    dilated_mask = Image.fromarray(dilated_binary_img.astype(np.uint8) * 255)
+    return dilated_mask
 
 def get_grounding_output(model, image, caption, box_threshold, text_threshold, with_logits=True, device="cpu"):
     caption = caption.lower()
@@ -91,6 +99,30 @@ def show_mask(mask, ax, random_color=False):
     mask_image = mask.reshape(h, w, 1) * color.reshape(1, 1, -1)
     ax.imshow(mask_image)
 
+def show_masks(image_np, masks: np.ndarray, alpha=0.5):
+    image = copy.deepcopy(image_np)
+    np.random.seed(0)
+    for mask in masks:
+        
+        color = np.concatenate([np.random.random(3), np.array([0.6])], axis=0)
+        image[mask] = image[mask] * (1 - alpha) + 255 * color.reshape(1, 1, -1) * alpha
+    return image.astype(np.uint8)
+
+def show_boxes(image_np, boxes, color=(255, 0, 0, 255), thickness=2, show_index=False):
+    if boxes is None:
+        return image_np
+
+    image = copy.deepcopy(image_np)
+    for idx, box in enumerate(boxes):
+        x, y, w, h = box
+        cv2.rectangle(image, (x, y), (w, h), color, thickness)
+        if show_index:
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            text = str(idx)
+            textsize = cv2.getTextSize(text, font, 1, 2)[0]
+            cv2.putText(image, text, (x, y+textsize[1]), font, 1, color, thickness)
+
+    return image
 
 def show_box(box, ax, label):
     x0, y0 = box[0], box[1]
@@ -101,7 +133,6 @@ def show_box(box, ax, label):
 
 def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
     value = 0  # 0 for background
-
     mask_img = torch.zeros(mask_list.shape[-2:])
     for idx, mask in enumerate(mask_list):
         mask_img[mask.cpu().numpy()[0] == True] = value + idx + 1
@@ -136,6 +167,9 @@ def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, t
     os.makedirs(output_dir, exist_ok=True)
     # load image
     image_pil, image = load_image(image_path)
+    # image_np = np.array(image_pil)
+    # width, height = simage_pil.size
+    # print('image_pil:', image_pil)
     # load model
     model = load_model(config_file, grounded_checkpoint, device=device)
 
@@ -172,12 +206,23 @@ def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, t
         boxes = transformed_boxes,
         multimask_output = False,
     )
-    
     # draw output image
     plt.figure(figsize=(10, 10))
     plt.imshow(image)
+
+    mask_images, masks_gallery, matted_images = [], [], []
     for mask in masks:
         show_mask(mask.cpu().numpy(), plt.gca(), random_color=True)
+
+        # masks_gallery.append(Image.fromarray(np.any(mask, axis=0)))
+        # blended_image = show_masks(show_boxes(image_np, boxes_filt), mask)
+        # print(blended_image)
+        # mask_images.append(Image.fromarray(blended_image))
+        # image_np_copy = copy.deepcopy(image_np)
+        # image_np_copy[~np.any(mask, axis=0)] = np.array([0, 0, 0, 0])
+        # matted_images.append(Image.fromarray(image_np_copy))
+    print('mask_images:', mask_images)
+
     for box, label in zip(boxes_filt, pred_phrases):
         show_box(box.numpy(), plt.gca(), label)
 
