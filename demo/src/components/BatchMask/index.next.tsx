@@ -28,10 +28,10 @@ export default () => {
   const uploadInpuRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = React.useState("");
   const [file, setFile] = React.useState<unknown>(null);
-  const [boxThreshold, setBoxThreshold] = React.useState(0.3);
-  const [textThreshold, setTextThreshold] = React.useState(0.25);
+  const [boxThreshold, setBoxThreshold] = React.useState(0.2);
+  const [textThreshold, setTextThreshold] = React.useState(0.3);
   const [expandAmount, setExpandAmount] = React.useState(10);
-  const [textPrompt, setTextPrompt] = React.useState("clothing.hands");
+  const [textPrompt, setTextPrompt] = React.useState("pants.skirt.tops.clothes.hands");
 
   useEffect(() => {
     addEvent()
