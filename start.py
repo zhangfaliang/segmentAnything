@@ -307,7 +307,6 @@ def grounded():
             text_prompt = request.json['text_prompt']
             box_threshold = request.json['box_threshold']
             text_threshold = request.json['text_threshold']
-            expand_amount = request.json['expand_amount']
             print(child_file_name, "正在生成")
             grounded_sam(
                 config_file, 
@@ -322,19 +321,19 @@ def grounded():
             )
             print(child_file_name, "生成成功")
             
-            file_path = output_dir + '/mask/' + child_file_name.split(".")[0] + '.jpg'
-            img = Image.open(file_path)
-            binary_img = img.convert('L')
-            threshold = 80
-            binary_img = binary_img.point(lambda p: p > threshold and 255)
-            if expand_amount != 0: 
-                mask_image = ImageOps.invert(dilate_mask(binary_img, expand_amount).convert('L'))
-            else:
-                mask_image = ImageOps.invert(binary_img.convert('L'))
-            input_image = Image.open(image_path)
-            width, height = input_image.size
-            resize_img = mask_image.resize((width, height))
-            resize_img.save(file_path)
+            # file_path = output_dir + '/mask/' + child_file_name.split(".")[0] + '.jpg'
+            # img = Image.open(file_path)
+            # binary_img = img.convert('L')
+            # threshold = 80
+            # binary_img = binary_img.point(lambda p: p > threshold and 255)
+            # # if expand_amount != 0: 
+            # mask_image = ImageOps.invert(dilate_mask(binary_img, 20).convert('L'))
+            # # else:
+            # #     mask_image = ImageOps.invert(binary_img.convert('L'))
+            # input_image = Image.open(image_path)
+            # width, height = input_image.size
+            # resize_img = mask_image.resize((width, height))
+            # resize_img.save(file_path)
 
     zip_folder(output_dir, output_dir + '.zip')
     delete_folder([

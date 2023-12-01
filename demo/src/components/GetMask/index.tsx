@@ -173,12 +173,80 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     setPreviousMask(null);
     setMaskImg(null);
   }
+  // 膨胀操作的函数
+  function dilateImage(data: any, width: number, height: number, radius: number) {
+    var tempData = new Uint8ClampedArray(data.length);
+    tempData.set(data);
 
-  function downloadFolder({ maskSrc, maskName }: any) {
-    const imgData1 = maskSrc.replace(
+    for (var y = 0; y < height; y++) {
+      for (var x = 0; x < width; x++) {
+        var index = (y * width + x) * 4;
+
+        // Check if the pixel is white (255 in all RGB channels)
+        if (data[index] === 0 && data[index + 1] === 0 && data[index + 2] === 0) {
+          for (var dy = -radius; dy <= radius; dy++) {
+            for (var dx = -radius; dx <= radius; dx++) {
+              var nx = x + dx;
+              var ny = y + dy;
+
+              if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                var nIndex = (ny * width + nx) * 4;
+                tempData[nIndex] = 0;
+                tempData[nIndex + 1] = 0;
+                tempData[nIndex + 2] = 0;
+                tempData[nIndex + 3] = 255;
+              }
+            }
+          }
+        }
+      }
+    }
+    data.set(tempData);
+  }
+  function extendMask(maskSrc: string): Promise<string> {
+    return new Promise(resolve => {
+      // 获取Canvas元素
+      var originalCanvas:any = document.getElementById('originalCanvas');
+      var originalCtx:any = originalCanvas.getContext('2d');
+      var img = new Image();
+      img.src = maskSrc
+      img.onload = function() {
+        originalCanvas.width = img.width
+        originalCanvas.height = img.height
+        originalCanvas.style.width = img.width + 'px'
+        originalCanvas.style.height = img.height + 'px'
+        // 将图像绘制到原始Canvas上
+        originalCtx.drawImage(img, 0, 0, originalCanvas.width, originalCanvas.height);
+
+        // 获取原始图像的像素数据
+        var imageData = originalCtx.getImageData(0, 0, originalCanvas.width, originalCanvas.height);
+        var data = imageData.data;
+
+        // 进行膨胀操作
+        var dilationRadius = 2;
+        dilateImage(data, originalCanvas.width, originalCanvas.height, dilationRadius);
+
+        // 将处理后的像素数据绘制到膨胀Canvas上
+        originalCtx.putImageData(imageData, 2, 3);
+        let dataURL = originalCanvas.toDataURL("image/jpg")
+        resolve(dataURL)
+        
+      }
+    })
+  }
+  async function downloadFolder({ maskSrc, maskName }: any) {
+    let imgData1 = maskSrc
+    imgData1 = imgData1.replace(
       /data:image\/(jpeg|png|jpg|gif);base64,/,
       ""
     ); // 替换为第一个图片的 base64 编码数据
+    
+    // let imgData1 = await extendMask(maskSrc)
+    // imgData1 = imgData1.replace(
+    //   /data:image\/(jpeg|png|jpg|gif);base64,/,
+    //   ""
+    // ); // 替换为第一个图片的 base64 编码数据
+
     const imgData2 = downImg; // 替换为第二个图片的 base64 编码数据
 
     // 创建一个新的 JSZip 实例
@@ -210,6 +278,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
   };
   return (
     <div className="mask_wrapper">
+      <canvas id="originalCanvas" style={{display: 'none'}}></canvas>
       <div className="mask_img">
         {image && (
           <div className="use_img_operate_wrapper">

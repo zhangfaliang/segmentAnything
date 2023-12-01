@@ -7,7 +7,7 @@ import copy
 import numpy as np
 # import json
 import torch
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 from scipy.ndimage import binary_dilation
 
 # Grounding DINO
@@ -136,14 +136,18 @@ def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
     mask_img = torch.zeros(mask_list.shape[-2:])
     for idx, mask in enumerate(mask_list):
         mask_img[mask.cpu().numpy()[0] == True] = value + idx + 1
-    plt.figure(figsize=(10, 10))
-    plt.imshow(mask_img.numpy())
-    plt.axis('off')
+    
     path = os.path.join(output_dir, 'mask')
     if not os.path.exists(path):
         os.makedirs(path)
-    plt.savefig(os.path.join(path, file_name + '.jpg'), bbox_inches="tight", dpi=300, pad_inches=0.0)
-
+    # plt.figure(figsize=(10, 10))
+    # plt.imshow(mask_img.numpy())
+    # plt.axis('off')
+    # plt.savefig(os.path.join(path, file_name + '.jpg'), bbox_inches="tight", dpi=300, pad_inches=0.0)
+    binary_img = Image.fromarray(mask_img.numpy().astype(np.uint8) * 255)
+    mask_image = ImageOps.invert(dilate_mask(binary_img, 10).convert('L'))
+    mask_image.save(os.path.join(path, file_name + '.jpg'))
+    
     # json_data = [{
     #     'value': value,
     #     'label': 'background'
@@ -210,7 +214,7 @@ def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, t
     plt.figure(figsize=(10, 10))
     plt.imshow(image)
 
-    mask_images, masks_gallery, matted_images = [], [], []
+    # mask_images, masks_gallery, matted_images = [], [], []
     for mask in masks:
         show_mask(mask.cpu().numpy(), plt.gca(), random_color=True)
 
@@ -221,7 +225,7 @@ def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, t
         # image_np_copy = copy.deepcopy(image_np)
         # image_np_copy[~np.any(mask, axis=0)] = np.array([0, 0, 0, 0])
         # matted_images.append(Image.fromarray(image_np_copy))
-    print('mask_images:', mask_images)
+    # print('mask_images:', mask_images)
 
     for box, label in zip(boxes_filt, pred_phrases):
         show_box(box.numpy(), plt.gca(), label)
