@@ -223,7 +223,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
         var data = imageData.data;
 
         // 进行膨胀操作
-        var dilationRadius = 2;
+        var dilationRadius = 3;
         dilateImage(data, originalCanvas.width, originalCanvas.height, dilationRadius);
 
         // 将处理后的像素数据绘制到膨胀Canvas上
@@ -235,17 +235,17 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     })
   }
   async function downloadFolder({ maskSrc, maskName }: any) {
-    let imgData1 = maskSrc
-    imgData1 = imgData1.replace(
-      /data:image\/(jpeg|png|jpg|gif);base64,/,
-      ""
-    ); // 替换为第一个图片的 base64 编码数据
-    
-    // let imgData1 = await extendMask(maskSrc)
+    // let imgData1 = maskSrc
     // imgData1 = imgData1.replace(
     //   /data:image\/(jpeg|png|jpg|gif);base64,/,
     //   ""
     // ); // 替换为第一个图片的 base64 编码数据
+
+    let imgData1 = await extendMask(maskSrc)
+    imgData1 = imgData1.replace(
+      /data:image\/(jpeg|png|jpg|gif);base64,/,
+      ""
+    ); // 替换为第一个图片的 base64 编码数据
 
     const imgData2 = downImg; // 替换为第二个图片的 base64 编码数据
 

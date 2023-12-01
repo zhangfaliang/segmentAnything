@@ -147,7 +147,7 @@ def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
     binary_img = Image.fromarray(mask_img.numpy().astype(np.uint8) * 255)
     mask_image = ImageOps.invert(dilate_mask(binary_img, 10).convert('L'))
     mask_image.save(os.path.join(path, file_name + '.jpg'))
-    
+
     # json_data = [{
     #     'value': value,
     #     'label': 'background'
