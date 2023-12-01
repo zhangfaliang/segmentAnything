@@ -131,7 +131,7 @@ def show_box(box, ax, label):
     ax.text(x0, y0, label)
 
 
-def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
+def save_mask_data(output_dir, mask_list, box_list, label_list, expand_amount, file_name):
     value = 0  # 0 for background
     mask_img = torch.zeros(mask_list.shape[-2:])
     for idx, mask in enumerate(mask_list):
@@ -145,7 +145,7 @@ def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
     # plt.axis('off')
     # plt.savefig(os.path.join(path, file_name + '.jpg'), bbox_inches="tight", dpi=300, pad_inches=0.0)
     binary_img = Image.fromarray(mask_img.numpy().astype(np.uint8) * 255)
-    mask_image = ImageOps.invert(dilate_mask(binary_img, 10).convert('L'))
+    mask_image = ImageOps.invert(dilate_mask(binary_img, expand_amount).convert('L'))
     mask_image.save(os.path.join(path, file_name + '.jpg'))
 
     # json_data = [{
@@ -165,7 +165,7 @@ def save_mask_data(output_dir, mask_list, box_list, label_list, file_name):
     # with open(os.path.join(output_dir, 'mask.json'), 'w') as f:
     #     json.dump(json_data, f)
 
-def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, text_prompt, output_dir, box_threshold, text_threshold, file_name):
+def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, text_prompt, output_dir, box_threshold, text_threshold, expand_amount, file_name):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # make dir
     os.makedirs(output_dir, exist_ok=True)
@@ -236,7 +236,7 @@ def grounded_sam(config_file, grounded_checkpoint, sam_checkpoint, image_path, t
     #     bbox_inches="tight", dpi=300, pad_inches=0.0
     # )
 
-    save_mask_data(output_dir, masks, boxes_filt, pred_phrases, file_name)
+    save_mask_data(output_dir, masks, boxes_filt, pred_phrases, expand_amount, file_name)
 
 def unzip_file(zip_path, dest_path):
     """

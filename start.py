@@ -307,16 +307,18 @@ def grounded():
             text_prompt = request.json['text_prompt']
             box_threshold = request.json['box_threshold']
             text_threshold = request.json['text_threshold']
+            expand_amount = request.json['expand_amount']
             print(child_file_name, "正在生成")
             grounded_sam(
                 config_file, 
                 grounded_checkpoint, 
                 sam_checkpoint, 
                 image_path, 
-                text_prompt, 
+                text_prompt,
                 output_dir, 
                 box_threshold, 
                 text_threshold,
+                expand_amount,
                 child_file_name.split(".")[0]
             )
             print(child_file_name, "生成成功")

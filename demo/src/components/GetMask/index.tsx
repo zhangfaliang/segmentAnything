@@ -235,17 +235,17 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
     })
   }
   async function downloadFolder({ maskSrc, maskName }: any) {
-    // let imgData1 = maskSrc
-    // imgData1 = imgData1.replace(
-    //   /data:image\/(jpeg|png|jpg|gif);base64,/,
-    //   ""
-    // ); // 替换为第一个图片的 base64 编码数据
-
-    let imgData1 = await extendMask(maskSrc)
+    let imgData1 = maskSrc
     imgData1 = imgData1.replace(
       /data:image\/(jpeg|png|jpg|gif);base64,/,
       ""
     ); // 替换为第一个图片的 base64 编码数据
+    
+    // let imgData1 = await extendMask(maskSrc)
+    // imgData1 = imgData1.replace(
+    //   /data:image\/(jpeg|png|jpg|gif);base64,/,
+    //   ""
+    // ); // 替换为第一个图片的 base64 编码数据
 
     const imgData2 = downImg; // 替换为第二个图片的 base64 编码数据
 
