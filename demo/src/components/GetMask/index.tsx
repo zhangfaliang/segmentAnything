@@ -224,7 +224,7 @@ const CropImg = ({ handleMouseMove, uploadURL = "/save_image" }: any) => {
         context.drawImage(img, 0, 0, img.width, img.height);
         const imgData = context.getImageData(0, 0, img.width, img.height);
         const grayscaleImg = imageDataToGrayscale(imgData);
-        const dilatedImg = dilate(grayscaleImg, 5);
+        const dilatedImg = dilate(grayscaleImg, 10);
         for(let y = 0; y < dilatedImg.length; y++) {
           for(let x = 0; x < dilatedImg[0].length; x++) {
             let color = 1 * (255 - dilatedImg[y][x]);
