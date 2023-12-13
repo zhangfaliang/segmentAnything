@@ -31,7 +31,7 @@ export default () => {
   const [boxThreshold, setBoxThreshold] = React.useState(0.2);
   const [textThreshold, setTextThreshold] = React.useState(0.3);
   const [expandAmount, setExpandAmount] = React.useState(10);
-  const [textPrompt, setTextPrompt] = React.useState("pants.skirt.tops.clothes.hands");
+  const [textPrompt, setTextPrompt] = React.useState("pants.skirt.tops.clothes.hands.foots.shoes");
 
   useEffect(() => {
     addEvent()

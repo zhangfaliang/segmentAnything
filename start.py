@@ -12,7 +12,6 @@ import asyncio
 from create_npy import process_image
 import subprocess
 import requests
-import requests
 from waitress import serve
 import logging.handlers
 from prometheus_flask_exporter import PrometheusMetrics
